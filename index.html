@@ -1,153 +1,169 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diagnóstico Financeiro | Veritus Capital</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diagnóstico Financeiro - Veritus Capital</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e9f0f4, #ffffff);
+      padding: 20px;
     }
 
     .container {
-      background-color: rgba(0, 0, 0, 0.85);
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
       padding: 30px;
       border-radius: 12px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0px 5px 25px rgba(255, 255, 255, 0.1);
-      border: 2px solid #FFD700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     h1 {
-      color: #FFD700;
       text-align: center;
-      margin-bottom: 20px;
+      color: #1a237e;
     }
 
     label {
       display: block;
-      margin: 15px 0 5px;
+      margin-top: 15px;
       font-weight: bold;
+      color: #333;
     }
 
-    select, input, textarea {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
       width: 100%;
       padding: 10px;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-      margin-bottom: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
+    .checkbox-group {
+      margin-top: 10px;
+      padding-left: 10px;
+    }
+
+    .checkbox-group label {
+      font-weight: normal;
+      display: block;
     }
 
     button {
-      background-color: #FFD700;
-      color: #000;
-      padding: 12px;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      border: none;
-      font-size: 16px;
+      margin-top: 25px;
       width: 100%;
-      transition: background 0.3s;
+      padding: 12px;
+      background-color: #1a237e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
     }
 
     button:hover {
-      background-color: #e6c200;
+      background-color: #0d154a;
     }
 
     .success-message {
       display: none;
-      text-align: center;
-      color: #90ee90;
-      font-weight: bold;
       margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h1>Diagnóstico Financeiro</h1>
-    <form id="financeForm">
-      <label for="name">Nome completo</label>
-      <input type="text" id="name" name="name" required>
+    <form id="diagnosticoForm">
+      <label for="nome">Nome *</label>
+      <input type="text" id="nome" name="nome" required />
 
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" required>
+      <label for="email">E-mail *</label>
+      <input type="email" id="email" name="email" required />
 
-      <label for="phone">Telefone</label>
-      <input type="tel" id="phone" name="phone" required>
+      <label for="telefone">Telefone *</label>
+      <input type="tel" id="telefone" name="telefone" required />
 
-      <label for="pain">Qual sua maior dor financeira hoje?</label>
-      <select id="pain" name="pain" required>
-        <option value="">-- Selecione --</option>
-        <option value="Desorganização com dinheiro">Desorganização com dinheiro</option>
-        <option value="Dívidas e falta de controle">Dívidas e falta de controle</option>
-        <option value="Medo de imprevistos">Medo de imprevistos</option>
-        <option value="Não sabe como realizar sonhos">Não sabe como realizar sonhos</option>
-        <option value="Quer investir com segurança">Quer investir com segurança</option>
-        <option value="Já tem patrimônio e quer organizar">Já tem patrimônio e quer organizar</option>
-        <option value="Tem filhos e se preocupa com herança">Tem filhos e se preocupa com herança</option>
-        <option value="Paga muito imposto ou tem dúvidas no IR">Paga muito imposto ou tem dúvidas no IR</option>
-        <option value="Se sabota, sente culpa, medo, vergonha com dinheiro">Se sabota, sente culpa, medo, vergonha com dinheiro</option>
-      </select>
+      <label>Dores *</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="dores" value="Dívidas acumuladas" /> Dívidas acumuladas</label>
+        <label><input type="checkbox" name="dores" value="Falta de controle financeiro" /> Falta de controle financeiro</label>
+        <label><input type="checkbox" name="dores" value="Medo de imprevistos" /> Medo de imprevistos</label>
+        <label><input type="checkbox" name="dores" value="Gastos sem planejamento" /> Gastos sem planejamento</label>
+      </div>
 
-      <label for="message">Gostaria de deixar algum comentário?</label>
-      <textarea id="message" name="message"></textarea>
+      <label>Metas *</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="metas" value="Quitar dívidas" /> Quitar dívidas</label>
+        <label><input type="checkbox" name="metas" value="Economizar para emergências" /> Economizar para emergências</label>
+        <label><input type="checkbox" name="metas" value="Investir melhor" /> Investir melhor</label>
+        <label><input type="checkbox" name="metas" value="Aposentadoria tranquila" /> Aposentadoria tranquila</label>
+      </div>
 
-      <button type="submit">Enviar diagnóstico</button>
+      <button type="submit">Enviar Diagnóstico</button>
+      <div class="success-message" id="successMessage">Formulário enviado com sucesso!</div>
+      <div class="error-message" id="errorMessage"></div>
     </form>
-
-    <div class="success-message" id="successMessage">
-      Enviado com sucesso! Em breve entraremos em contato.
-    </div>
   </div>
 
   <script>
-    document.getElementById("financeForm").addEventListener("submit", async function(e) {
+    document.getElementById('diagnosticoForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const form = e.target;
-      const formData = new FormData(form);
-      const params = new URLSearchParams();
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value);
+      const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value);
+      const successMsg = document.getElementById('successMessage');
+      const errorMsg = document.getElementById('errorMessage');
 
-      for (const pair of formData.entries()) {
-        params.append(pair[0], pair[1]);
+      if (!nome || !email || !telefone || dores.length === 0 || metas.length === 0) {
+        errorMsg.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+        return;
       }
 
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbzrNY8lwourtXq0xRI1v74IHum0ccuMkBiWpJO4Y4rv5SHl4WkA9ym_rTYKi1wcETuCSQ/exec', {
-          method: 'POST',
-          body: params
-        });
+      const data = {
+        nome,
+        email,
+        telefone,
+        dores: dores.join(', '),
+        metas: metas.join(', ')
+      };
 
-        if (response.ok) {
-          form.reset();
-          document.getElementById("successMessage").style.display = "block";
-        } else {
-          alert("Erro ao enviar. Tente novamente mais tarde.");
-        }
-      } catch (error) {
-        console.error(error);
-        alert("Erro de conexão. Tente novamente.");
-      }
+      // Coloque aqui a URL do seu Google Apps Script
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbydEaMiYuLJFz0r4kHMif1gaEDiVqj2xxVtAoPIOksVDBkZnl8JoHE3BkwsrJy7b-qujw/exec';
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        successMsg.style.display = 'block';
+        errorMsg.textContent = '';
+        document.getElementById('diagnosticoForm').reset();
+      })
+      .catch(error => {
+        errorMsg.textContent = 'Erro ao enviar. Tente novamente.';
+        console.error('Erro!', error.message);
+      });
     });
   </script>
-
 </body>
 </html>
