@@ -8,6 +8,7 @@
 </head>
 <body>
   <form id="multiStepForm">
+    <!-- Etapa 1 -->
     <div class="form-step active">
       <h2>Seus dados</h2>
       <label>Nome completo:
@@ -22,6 +23,7 @@
       <button type="button" class="next">Próximo</button>
     </div>
 
+    <!-- Etapa 2 -->
     <div class="form-step">
       <h2>Dor detalhada</h2>
       <p>Selecione as dores que você sente:</p>
@@ -41,6 +43,7 @@
       <button type="button" class="next">Próximo</button>
     </div>
 
+    <!-- Etapa 3 -->
     <div class="form-step">
       <h2>Desejos ou metas detalhados</h2>
       <p>Selecione suas metas:</p>
@@ -59,6 +62,7 @@
       <button type="button" class="next">Próximo</button>
     </div>
 
+    <!-- Etapa 4 -->
     <div class="form-step">
       <h2>Deixe um comentário (opcional)</h2>
       <textarea name="comentario" rows="4" placeholder="Se quiser, compartilhe algo mais sobre sua situação financeira."></textarea>
@@ -66,12 +70,74 @@
       <button type="submit">Enviar</button>
     </div>
 
+    <!-- Etapa 5 -->
     <div class="form-step">
       <h2>Formulário enviado com sucesso!</h2>
       <p>Obrigado por compartilhar suas informações. Em breve entraremos em contato.</p>
     </div>
   </form>
 
-  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById('multiStepForm');
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const nextBtns = form.querySelectorAll('.next');
+    const prevBtns = form.querySelectorAll('.prev');
+    let currentStep = 0;
+
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.remove('active');
+        if (i === index) {
+          step.classList.add('active');
+        }
+      });
+    }
+
+    nextBtns.forEach(button => {
+      button.addEventListener('click', () => {
+        const currentInputs = steps[currentStep].querySelectorAll('input[required]');
+        let valid = true;
+        currentInputs.forEach(input => {
+          if (!input.checkValidity()) {
+            input.reportValidity();
+            valid = false;
+          }
+        });
+        if (valid) {
+          currentStep++;
+          showStep(currentStep);
+        }
+      });
+    });
+
+    prevBtns.forEach(button => {
+      button.addEventListener('click', () => {
+        currentStep--;
+        showStep(currentStep);
+      });
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(el => el.value).join(', ');
+      const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(el => el.value).join(', ');
+
+      formData.set('dores', dores);
+      formData.set('metas', metas);
+
+      fetch("https://script.google.com/macros/s/AKfycbyu31FAw1-jpw5gUpbZRijzP2kB-oSf3UzZQENXeo59Q0_YRnX0Xv6YBCY41LyQTukw1w/exec", {
+        method: "POST",
+        body: formData
+      }).then(() => {
+        currentStep++;
+        showStep(currentStep);
+        form.reset();
+      }).catch(err => alert("Erro ao enviar: " + err.message));
+    });
+
+    showStep(currentStep);
+  </script>
 </body>
 </html>
