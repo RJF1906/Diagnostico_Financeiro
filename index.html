@@ -27,12 +27,15 @@
       <!-- Step 2 - Dores -->
       <div class="form-step">
         <label>Dores:</label>
-        <!-- (Seus checkboxes de dores...) -->
-        <!-- [Mantive todos os checkboxes como estão] -->
-        <!-- ... -->
-        <div>
-          <label><input type="checkbox" name="dores" value="Me sinto mal quando falo de dinheiro. Às vezes gasto por impulso, depois me arrependo. Tenho uma relação emocional conturbada com ele."> Me sinto mal quando falo de dinheiro. Às vezes gasto por impulso, depois me arrependo. Tenho uma relação emocional conturbada com ele.</label>
-        </div>
+        <div><label><input type="checkbox" name="dores" value="Sinto que o dinheiro some e nunca sei para onde ele vai. Não consigo manter um controle e vivo apagando incêndios."> Sinto que o dinheiro some e nunca sei para onde ele vai...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Já tentei organizar as contas, mas sempre acabo entrando no rotativo ou pedindo empréstimos. Não tenho paz."> Já tentei organizar as contas...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Tenho medo do que pode acontecer. E se perder o emprego? E se alguém da família ficar doente? Não tenho reserva."> Tenho medo do que pode acontecer...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Tenho sonhos, mas não sei como planejar para alcançá-los. Fico travado entre o desejo e a realidade financeira."> Tenho sonhos, mas não sei como planejar...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Quero fazer meu dinheiro render, mas tenho medo de investir errado e perder tudo."> Quero fazer meu dinheiro render...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Tenho alguns bens, mas não sei se estão bem organizados ou se estão realmente me beneficiando financeiramente."> Tenho alguns bens, mas não sei se estão bem organizados...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Quero garantir o futuro dos meus filhos e deixar tudo certo, sem dores de cabeça para eles."> Quero garantir o futuro dos meus filhos...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Todo ano o imposto de renda é uma dor de cabeça. Sinto que pago demais e não sei se estou fazendo certo."> Todo ano o imposto de renda é uma dor de cabeça...</label></div>
+        <div><label><input type="checkbox" name="dores" value="Me sinto mal quando falo de dinheiro. Às vezes gasto por impulso, depois me arrependo. Tenho uma relação emocional conturbada com ele."> Me sinto mal quando falo de dinheiro...</label></div>
 
         <button type="button" class="prev">Anterior</button>
         <button type="button" class="next">Próximo</button>
@@ -41,12 +44,15 @@
       <!-- Step 3 - Metas -->
       <div class="form-step">
         <label>Desejos ou Metas Detalhados:</label>
-        <!-- (Seus checkboxes de metas...) -->
-        <!-- [Mantive todos os checkboxes como estão] -->
-        <!-- ... -->
-        <div>
-          <label><input type="checkbox" name="metas" value="Quero mudar minha relação com o dinheiro, vencer a culpa, o medo e os impulsos. Quero ter controle e leveza ao lidar com minha vida financeira.">Quero mudar minha relação com o dinheiro, vencer a culpa, o medo e os impulsos. Quero ter controle e leveza ao lidar com minha vida financeira.</label>
-        </div>
+        <div><label><input type="checkbox" name="metas" value="Quero saber exatamente por onde vai meu dinheiro, conseguir manter o controle das minhas entradas e saídas e finalmente terei equilíbrio financeiro no dia a dia sem surpresas."> Quero saber exatamente por onde vai meu dinheiro...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero sair do sufoco, me livrar das dívidas e nunca mais cair em ciladas como juros abusivos ou empréstimos mal planejados."> Quero sair do sufoco...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero ter tranquilidade para enfrentar emergências, sem depender de empréstimos ou se desesperar quando algo inesperado acontecer."> Quero ter tranquilidade para enfrentar emergências...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero colocar meus sonhos no papel, saber quanto preciso guardar e como posso realizá-los de forma planejada, sem deixar só na vontade."> Quero colocar meus sonhos no papel...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero investir com segurança e inteligência, entendendo os riscos e fazendo meu dinheiro trabalhar por mim, sem seguir modinhas ou achismos."> Quero investir com segurança e inteligência...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero ter clareza sobre meus bens e saber se estou protegendo e multiplicando meu patrimônio da forma certa."> Quero ter clareza sobre meus bens...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero garantir uma aposentadoria tranquila e também deixar tudo organizado para meus filhos, sem confusão ou brigas por herança."> Quero garantir uma aposentadoria tranquila...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero entender como posso economizar legalmente com impostos, aproveitar isenções e não errar no Imposto de Renda."> Quero entender como posso economizar legalmente...</label></div>
+        <div><label><input type="checkbox" name="metas" value="Quero mudar minha relação com o dinheiro, vencer a culpa, o medo e os impulsos. Quero ter controle e leveza ao lidar com minha vida financeira."> Quero mudar minha relação com o dinheiro...</label></div>
 
         <button type="button" class="prev">Anterior</button>
         <button type="button" class="next">Próximo</button>
@@ -61,14 +67,16 @@
         <button type="submit">Enviar</button>
       </div>
 
-      <!-- Step 5 - Confirmação -->
+      <!-- Step 5 - Enviando -->
+      <div id="loadingMessage" class="form-step hidden">
+        <h3>Aguarde, os dados estão sendo enviados...</h3>
+      </div>
+
+      <!-- Step 6 - Confirmação -->
       <div class="form-step">
         <h3>Formulário enviado com sucesso!</h3>
       </div>
     </form>
-
-    <!-- MENSAGEM DE ENVIO -->
-    <div id="loadingMessage" class="hidden">Aguarde, os dados estão sendo enviados...</div>
   </div>
 
   <script src="script.js"></script>
