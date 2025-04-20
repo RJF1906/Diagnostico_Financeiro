@@ -1,168 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Diagnóstico Financeiro - Veritus Capital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #e9f0f4, #ffffff);
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
       padding: 20px;
+      color: #333;
     }
 
     .container {
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
-      background: #ffffff;
+      background: #fff;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
 
-    h1 {
+    h2 {
+      color: #005a9c;
       text-align: center;
-      color: #1a237e;
+      margin-bottom: 25px;
     }
 
     label {
       display: block;
       margin-top: 15px;
-      font-weight: bold;
-      color: #333;
+      font-weight: 600;
     }
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"] {
+    input, textarea {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      border-radius: 6px;
     }
 
     .checkbox-group {
       margin-top: 10px;
-      padding-left: 10px;
+      padding-left: 15px;
     }
 
     .checkbox-group label {
       font-weight: normal;
+      margin-bottom: 10px;
       display: block;
     }
 
     button {
-      margin-top: 25px;
+      margin-top: 20px;
       width: 100%;
+      background-color: #005a9c;
+      color: white;
       padding: 12px;
-      background-color: #1a237e;
-      color: #fff;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 8px;
       cursor: pointer;
+      font-size: 16px;
     }
 
     button:hover {
-      background-color: #0d154a;
-    }
-
-    .success-message {
-      display: none;
-      margin-top: 20px;
-      color: green;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .error-message {
-      color: red;
-      margin-top: 10px;
-      text-align: center;
+      background-color: #00447a;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Diagnóstico Financeiro</h1>
+    <h2>Diagnóstico Financeiro - Veritus Capital</h2>
     <form id="diagnosticoForm">
-      <label for="nome">Nome *</label>
-      <input type="text" id="nome" name="nome" required />
+      <label for="nome">Nome Completo*</label>
+      <input type="text" id="nome" name="nome" required>
 
-      <label for="email">E-mail *</label>
-      <input type="email" id="email" name="email" required />
+      <label for="email">E-mail*</label>
+      <input type="email" id="email" name="email" required>
 
-      <label for="telefone">Telefone *</label>
-      <input type="tel" id="telefone" name="telefone" required />
+      <label for="telefone">Telefone (com DDD)*</label>
+      <input type="tel" id="telefone" name="telefone" required>
 
-      <label>Dores *</label>
+      <label>Dores detalhadas (selecione as que mais se aplicam)*</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="dores" value="Dívidas acumuladas" /> Dívidas acumuladas</label>
-        <label><input type="checkbox" name="dores" value="Falta de controle financeiro" /> Falta de controle financeiro</label>
-        <label><input type="checkbox" name="dores" value="Medo de imprevistos" /> Medo de imprevistos</label>
-        <label><input type="checkbox" name="dores" value="Gastos sem planejamento" /> Gastos sem planejamento</label>
+        <label><input type="checkbox" name="dores" value="Sinto que o dinheiro some..."> Sinto que o dinheiro some e nunca sei para onde ele vai...</label>
+        <label><input type="checkbox" name="dores" value="Já tentei organizar as contas..."> Já tentei organizar as contas, mas sempre acabo entrando no rotativo...</label>
+        <label><input type="checkbox" name="dores" value="Tenho medo do que pode acontecer..."> Tenho medo do que pode acontecer. E se perder o emprego?...</label>
+        <label><input type="checkbox" name="dores" value="Tenho sonhos, mas não sei como planejar..."> Tenho sonhos, mas não sei como planejar para alcançá-los...</label>
+        <label><input type="checkbox" name="dores" value="Quero fazer meu dinheiro render..."> Quero fazer meu dinheiro render, mas tenho medo de investir errado...</label>
+        <label><input type="checkbox" name="dores" value="Tenho alguns bens, mas não sei se estão organizados..."> Tenho alguns bens, mas não sei se estão bem organizados...</label>
+        <label><input type="checkbox" name="dores" value="Quero garantir o futuro dos meus filhos..."> Quero garantir o futuro dos meus filhos...</label>
+        <label><input type="checkbox" name="dores" value="Todo ano o imposto de renda é uma dor de cabeça..."> Todo ano o imposto de renda é uma dor de cabeça...</label>
+        <label><input type="checkbox" name="dores" value="Me sinto mal quando falo de dinheiro..."> Me sinto mal quando falo de dinheiro...</label>
       </div>
 
-      <label>Metas *</label>
+      <label>Desejos ou metas detalhadas (selecione as que mais representam seus objetivos)*</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="metas" value="Quitar dívidas" /> Quitar dívidas</label>
-        <label><input type="checkbox" name="metas" value="Economizar para emergências" /> Economizar para emergências</label>
-        <label><input type="checkbox" name="metas" value="Investir melhor" /> Investir melhor</label>
-        <label><input type="checkbox" name="metas" value="Aposentadoria tranquila" /> Aposentadoria tranquila</label>
+        <label><input type="checkbox" name="metas" value="Sair das dívidas e ter tranquilidade financeira"> Sair das dívidas e ter tranquilidade financeira</label>
+        <label><input type="checkbox" name="metas" value="Aprender a investir com segurança"> Aprender a investir com segurança</label>
+        <label><input type="checkbox" name="metas" value="Planejar a aposentadoria"> Planejar a aposentadoria</label>
+        <label><input type="checkbox" name="metas" value="Comprar um imóvel ou carro"> Comprar um imóvel ou carro</label>
+        <label><input type="checkbox" name="metas" value="Fazer uma viagem dos sonhos"> Fazer uma viagem dos sonhos</label>
+        <label><input type="checkbox" name="metas" value="Construir patrimônio para os filhos"> Construir patrimônio para os filhos</label>
+        <label><input type="checkbox" name="metas" value="Ter uma reserva de emergência"> Ter uma reserva de emergência</label>
+        <label><input type="checkbox" name="metas" value="Ter um planejamento tributário eficiente"> Ter um planejamento tributário eficiente</label>
       </div>
 
       <button type="submit">Enviar Diagnóstico</button>
-      <div class="success-message" id="successMessage">Formulário enviado com sucesso!</div>
-      <div class="error-message" id="errorMessage"></div>
     </form>
   </div>
 
   <script>
-    document.getElementById('diagnosticoForm').addEventListener('submit', function(e) {
+    document.getElementById("diagnosticoForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const telefone = document.getElementById('telefone').value.trim();
-      const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value);
-      const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value);
-      const successMsg = document.getElementById('successMessage');
-      const errorMsg = document.getElementById('errorMessage');
+      const form = e.target;
+      const doresSelecionadas = [...form.querySelectorAll("input[name='dores']:checked")].map(el => el.value);
+      const metasSelecionadas = [...form.querySelectorAll("input[name='metas']:checked")].map(el => el.value);
 
-      if (!nome || !email || !telefone || dores.length === 0 || metas.length === 0) {
-        errorMsg.textContent = 'Por favor, preencha todos os campos obrigatórios.';
-        return;
-      }
-
-      const data = {
-        nome,
-        email,
-        telefone,
-        dores: dores.join(', '),
-        metas: metas.join(', ')
+      const payload = {
+        nome: form.nome.value,
+        email: form.email.value,
+        telefone: form.telefone.value,
+        dores: doresSelecionadas.join(", "),
+        metas: metasSelecionadas.join(", ")
       };
 
-      // Coloque aqui a URL do seu Google Apps Script
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbydEaMiYuLJFz0r4kHMif1gaEDiVqj2xxVtAoPIOksVDBkZnl8JoHE3BkwsrJy7b-qujw/exec';
-
-      fetch(scriptURL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+      fetch("https://script.google.com/macros/s/SEU_SCRIPT_ID/exec", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json" }
       })
-      .then(() => {
-        successMsg.style.display = 'block';
-        errorMsg.textContent = '';
-        document.getElementById('diagnosticoForm').reset();
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "sucesso") {
+          alert("Diagnóstico enviado com sucesso!");
+          form.reset();
+        } else {
+          alert("Erro ao enviar. Tente novamente.");
+        }
       })
-      .catch(error => {
-        errorMsg.textContent = 'Erro ao enviar. Tente novamente.';
-        console.error('Erro!', error.message);
-      });
+      .catch(() => alert("Erro ao enviar. Verifique sua conexão ou tente mais tarde."));
     });
   </script>
 </body>
