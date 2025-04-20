@@ -1,143 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Diagnóstico Financeiro - Veritus Capital</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Diagnóstico Financeiro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <form id="multiStepForm">
-    <!-- Etapa 1 -->
-    <div class="form-step active">
-      <h2>Seus dados</h2>
-      <label>Nome completo:
-        <input type="text" name="nome" required />
-      </label>
-      <label>Email:
-        <input type="email" name="email" required />
-      </label>
-      <label>Telefone:
-        <input type="tel" name="telefone" required />
-      </label>
-      <button type="button" class="next">Próximo</button>
-    </div>
+  <div class="form-container">
+    <h2>Formulário de Diagnóstico Financeiro</h2>
+    <form id="multiStepForm">
+      <!-- Step 1 - Dados pessoais -->
+      <div class="form-step active">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-    <!-- Etapa 2 -->
-    <div class="form-step">
-      <h2>Dor detalhada</h2>
-      <p>Selecione as dores que você sente:</p>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="dores" value="Sinto que o dinheiro some e nunca sei para onde ele vai." /> Sinto que o dinheiro some e nunca sei para onde ele vai.</label>
-        <label><input type="checkbox" name="dores" value="Não consigo manter um controle e vivo apagando incêndios." /> Não consigo manter um controle e vivo apagando incêndios.</label>
-        <label><input type="checkbox" name="dores" value="Já tentei organizar as contas, mas sempre acabo entrando no rotativo ou pedindo empréstimos." /> Já tentei organizar as contas, mas sempre acabo entrando no rotativo ou pedindo empréstimos.</label>
-        <label><input type="checkbox" name="dores" value="Tenho medo do que pode acontecer. E se perder o emprego? E se alguém da família ficar doente?" /> Tenho medo do que pode acontecer. E se perder o emprego? E se alguém da família ficar doente?</label>
-        <label><input type="checkbox" name="dores" value="Tenho sonhos, mas não sei como planejar para alcançá-los." /> Tenho sonhos, mas não sei como planejar para alcançá-los.</label>
-        <label><input type="checkbox" name="dores" value="Quero fazer meu dinheiro render, mas tenho medo de investir errado." /> Quero fazer meu dinheiro render, mas tenho medo de investir errado.</label>
-        <label><input type="checkbox" name="dores" value="Tenho alguns bens, mas não sei se estão bem organizados." /> Tenho alguns bens, mas não sei se estão bem organizados.</label>
-        <label><input type="checkbox" name="dores" value="Quero garantir o futuro dos meus filhos e deixar tudo certo." /> Quero garantir o futuro dos meus filhos e deixar tudo certo.</label>
-        <label><input type="checkbox" name="dores" value="Imposto de renda é uma dor de cabeça." /> Imposto de renda é uma dor de cabeça.</label>
-        <label><input type="checkbox" name="dores" value="Me sinto mal quando falo de dinheiro. Tenho uma relação emocional conturbada com ele." /> Me sinto mal quando falo de dinheiro. Tenho uma relação emocional conturbada com ele.</label>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+
+        <button type="button" class="next">Próximo</button>
       </div>
-      <button type="button" class="prev">Voltar</button>
-      <button type="button" class="next">Próximo</button>
-    </div>
 
-    <!-- Etapa 3 -->
-    <div class="form-step">
-      <h2>Desejos ou metas detalhados</h2>
-      <p>Selecione suas metas:</p>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="metas" value="Sair das dívidas e dormir tranquilo." /> Sair das dívidas e dormir tranquilo.</label>
-        <label><input type="checkbox" name="metas" value="Ter segurança financeira." /> Ter segurança financeira.</label>
-        <label><input type="checkbox" name="metas" value="Montar uma reserva de emergência." /> Montar uma reserva de emergência.</label>
-        <label><input type="checkbox" name="metas" value="Investir com consciência." /> Investir com consciência.</label>
-        <label><input type="checkbox" name="metas" value="Comprar um imóvel ou carro." /> Comprar um imóvel ou carro.</label>
-        <label><input type="checkbox" name="metas" value="Ter liberdade para viajar ou aproveitar mais a vida." /> Ter liberdade para viajar ou aproveitar mais a vida.</label>
-        <label><input type="checkbox" name="metas" value="Ter um plano para a aposentadoria." /> Ter um plano para a aposentadoria.</label>
-        <label><input type="checkbox" name="metas" value="Planejar a educação dos filhos." /> Planejar a educação dos filhos.</label>
-        <label><input type="checkbox" name="metas" value="Ter controle emocional sobre o dinheiro." /> Ter controle emocional sobre o dinheiro.</label>
+      <!-- Step 2 - Dores -->
+      <div class="form-step">
+        <label>Dores:</label>
+        <div>
+          <label><input type="checkbox" name="dores" value="Sinto que o dinheiro some e nunca sei para onde ele vai. Não consigo manter um controle e vivo apagando incêndios."> Sinto que o dinheiro some e nunca sei para onde ele vai. Não consigo manter um controle e vivo apagando incêndios.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Já tentei organizar as contas, mas sempre acabo entrando no rotativo ou pedindo empréstimos. Não tenho paz."> Já tentei organizar as contas, mas sempre acabo entrando no rotativo ou pedindo empréstimos. Não tenho paz.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Tenho medo do que pode acontecer. E se perder o emprego? E se alguém da família ficar doente? Não tenho reserva."> Tenho medo do que pode acontecer. E se perder o emprego? E se alguém da família ficar doente? Não tenho reserva.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Tenho sonhos, mas não sei como planejar para alcançá-los. Fico travado entre o desejo e a realidade financeira."> Tenho sonhos, mas não sei como planejar para alcançá-los. Fico travado entre o desejo e a realidade financeira.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Quero fazer meu dinheiro render, mas tenho medo de investir errado e perder tudo."> Quero fazer meu dinheiro render, mas tenho medo de investir errado e perder tudo.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Tenho alguns bens, mas não sei se estão bem organizados ou se estão realmente me beneficiando financeiramente."> Tenho alguns bens, mas não sei se estão bem organizados ou se estão realmente me beneficiando financeiramente.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Quero garantir o futuro dos meus filhos e deixar tudo certo, sem dores de cabeça para eles."> Quero garantir o futuro dos meus filhos e deixar tudo certo, sem dores de cabeça para eles.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Todo ano o imposto de renda é uma dor de cabeça. Sinto que pago demais e não sei se estou fazendo certo."> Todo ano o imposto de renda é uma dor de cabeça. Sinto que pago demais e não sei se estou fazendo certo.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="dores" value="Me sinto mal quando falo de dinheiro. Às vezes gasto por impulso, depois me arrependo. Tenho uma relação emocional conturbada com ele."> Me sinto mal quando falo de dinheiro. Às vezes gasto por impulso, depois me arrependo. Tenho uma relação emocional conturbada com ele.</label>
+        </div>
+
+        <button type="button" class="prev">Anterior</button>
+        <button type="button" class="next">Próximo</button>
       </div>
-      <button type="button" class="prev">Voltar</button>
-      <button type="button" class="next">Próximo</button>
-    </div>
 
-    <!-- Etapa 4 -->
-    <div class="form-step">
-      <h2>Deixe um comentário (opcional)</h2>
-      <textarea name="comentario" rows="4" placeholder="Se quiser, compartilhe algo mais sobre sua situação financeira."></textarea>
-      <button type="button" class="prev">Voltar</button>
-      <button type="submit">Enviar</button>
-    </div>
+      <!-- Step 3 - Metas -->
+      <div class="form-step">
+        <label>Desejos ou Metas Detalhados:</label>
+        <div>
+          <label><input type="checkbox" name="metas" value="Atingir a estabilidade financeira e ter mais controle sobre meus gastos."> Atingir a estabilidade financeira e ter mais controle sobre meus gastos.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="metas" value="Investir para o futuro, com foco em aposentadoria e segurança financeira."> Investir para o futuro, com foco em aposentadoria e segurança financeira.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="metas" value="Construir uma reserva de emergência para imprevistos."> Construir uma reserva de emergência para imprevistos.</label>
+        </div>
+        <div>
+          <label><input type="checkbox" name="metas" value="Comprar minha casa própria e pagar minhas dívidas."> Comprar minha casa própria e pagar minhas dívidas.</label>
+        </div>
 
-    <!-- Etapa 5 -->
-    <div class="form-step">
-      <h2>Formulário enviado com sucesso!</h2>
-      <p>Obrigado por compartilhar suas informações. Em breve entraremos em contato.</p>
-    </div>
-  </form>
+        <button type="button" class="prev">Anterior</button>
+        <button type="button" class="next">Próximo</button>
+      </div>
 
-  <script>
-    const form = document.getElementById('multiStepForm');
-    const steps = Array.from(document.querySelectorAll('.form-step'));
-    const nextBtns = form.querySelectorAll('.next');
-    const prevBtns = form.querySelectorAll('.prev');
-    let currentStep = 0;
+      <!-- Step 4 - Comentário -->
+      <div class="form-step">
+        <label for="comentario">Deixe um comentário (opcional):</label>
+        <textarea id="comentario" name="comentario"></textarea>
 
-    function showStep(index) {
-      steps.forEach((step, i) => {
-        step.classList.remove('active');
-        if (i === index) {
-          step.classList.add('active');
-        }
-      });
-    }
+        <button type="button" class="prev">Anterior</button>
+        <button type="submit">Enviar</button>
+      </div>
 
-    nextBtns.forEach(button => {
-      button.addEventListener('click', () => {
-        const currentInputs = steps[currentStep].querySelectorAll('input[required]');
-        let valid = true;
-        currentInputs.forEach(input => {
-          if (!input.checkValidity()) {
-            input.reportValidity();
-            valid = false;
-          }
-        });
-        if (valid) {
-          currentStep++;
-          showStep(currentStep);
-        }
-      });
-    });
+      <!-- Step 5 - Confirmação -->
+      <div class="form-step">
+        <h3>Fórmulario enviado com sucesso!</h3>
+      </div>
+    </form>
+  </div>
 
-    prevBtns.forEach(button => {
-      button.addEventListener('click', () => {
-        currentStep--;
-        showStep(currentStep);
-      });
-    });
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const formData = new FormData(form);
-      const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(el => el.value).join(', ');
-      const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(el => el.value).join(', ');
-
-      formData.set('dores', dores);
-      formData.set('metas', metas);
-
-      fetch("https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec", {
-        method: "POST",
-        body: formData
-      }).then(() => {
-        currentStep++;
-        showStep(currentStep);
-        form.reset();
-      }).catch(err => alert("Erro ao enviar: " + err.message));
-    });
-
-    showStep(currentStep);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
