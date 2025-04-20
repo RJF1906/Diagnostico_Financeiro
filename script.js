@@ -2,6 +2,7 @@ const form = document.getElementById('multiStepForm');
 const steps = Array.from(document.querySelectorAll('.form-step'));
 const nextBtns = document.querySelectorAll('.next');
 const prevBtns = document.querySelectorAll('.prev');
+const loadingMessage = document.getElementById('loadingMessage');
 let currentStep = 0;
 
 function showStep(index) {
@@ -35,6 +36,9 @@ prevBtns.forEach(btn => {
 form.addEventListener('submit', e => {
   e.preventDefault();
 
+  // Mostra mensagem de carregamento
+  loadingMessage.classList.remove('hidden');
+
   const formData = new FormData(form);
   
   // Coleta as respostas múltiplas de dores e metas
@@ -50,10 +54,14 @@ form.addEventListener('submit', e => {
     method: 'POST',
     body: formData
   }).then(() => {
+    loadingMessage.classList.add('hidden'); // Oculta após envio
     currentStep++;
     showStep(currentStep);
     form.reset();
-  }).catch(err => alert("Erro ao enviar os dados. Tente novamente."));
+  }).catch(err => {
+    loadingMessage.classList.add('hidden'); // Oculta se der erro
+    alert("Erro ao enviar os dados. Tente novamente.");
+  });
 });
 
 showStep(currentStep);
