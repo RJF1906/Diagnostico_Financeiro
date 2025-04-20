@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulário de Diagnóstico Financeiro</title>
+  <title>Diagnóstico Financeiro - Veritus Capital</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background-color: #f9f9f9;
       margin: 0;
       padding: 20px;
     }
@@ -16,13 +16,14 @@
       max-width: 700px;
       margin: auto;
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     }
 
     h2 {
       text-align: center;
+      margin-bottom: 20px;
     }
 
     .form-step {
@@ -42,50 +43,61 @@
     input[type="email"],
     textarea {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
 
     textarea {
       height: 100px;
+      resize: vertical;
     }
 
     button {
-      margin: 20px 5px 0 0;
-      padding: 10px 15px;
+      margin-top: 20px;
+      padding: 10px 20px;
       border: none;
-      border-radius: 5px;
-      background-color: #3498db;
+      border-radius: 6px;
+      background-color: #007BFF;
       color: white;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #2980b9;
+      background-color: #0056b3;
     }
 
     .checkbox-group label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
-    .loading-message {
+    .dialog {
       display: none;
       text-align: center;
-      font-weight: bold;
       margin-top: 20px;
+      font-weight: bold;
+      color: #555;
     }
 
-    .loading-message.active {
+    .dialog.active {
       display: block;
+    }
+
+    .success-message {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: green;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>Formulário de Diagnóstico Financeiro</h2>
+    <h2>Diagnóstico Financeiro</h2>
     <form id="multiStepForm">
-      <!-- Etapa 1 -->
+      <!-- Etapa 1: Dados Pessoais -->
       <div class="form-step active">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
@@ -99,60 +111,52 @@
         <button type="button" class="next">Próximo</button>
       </div>
 
-      <!-- Etapa 2 -->
+      <!-- Etapa 2: Dores -->
       <div class="form-step">
-        <label>Dores:</label>
+        <label>Quais são suas dores financeiras?</label>
         <div class="checkbox-group">
-          <label><input type="checkbox" name="dores" value="Sinto que o dinheiro some..."> Sinto que o dinheiro some e nunca sei para onde ele vai. Não consigo manter um controle e vivo apagando incêndios.</label>
-          <label><input type="checkbox" name="dores" value="Já tentei organizar as contas..."> Já tentei organizar as contas, mas sempre acabo entrando no rotativo ou pedindo empréstimos. Não tenho paz.</label>
-          <label><input type="checkbox" name="dores" value="Tenho medo do que pode acontecer..."> Tenho medo do que pode acontecer. E se perder o emprego? E se alguém da família ficar doente? Não tenho reserva.</label>
-          <label><input type="checkbox" name="dores" value="Tenho sonhos, mas não sei como planejar..."> Tenho sonhos, mas não sei como planejar para alcançá-los. Fico travado entre o desejo e a realidade financeira.</label>
-          <label><input type="checkbox" name="dores" value="Quero fazer meu dinheiro render..."> Quero fazer meu dinheiro render, mas tenho medo de investir errado e perder tudo.</label>
-          <label><input type="checkbox" name="dores" value="Tenho alguns bens, mas não sei se estão bem organizados..."> Tenho alguns bens, mas não sei se estão bem organizados ou se estão realmente me beneficiando financeiramente.</label>
-          <label><input type="checkbox" name="dores" value="Quero garantir o futuro dos meus filhos..."> Quero garantir o futuro dos meus filhos e deixar tudo certo, sem dores de cabeça para eles.</label>
-          <label><input type="checkbox" name="dores" value="Todo ano o imposto de renda é uma dor de cabeça..."> Todo ano o imposto de renda é uma dor de cabeça. Sinto que pago demais e não sei se estou fazendo certo.</label>
-          <label><input type="checkbox" name="dores" value="Me sinto mal quando falo de dinheiro..."> Me sinto mal quando falo de dinheiro. Às vezes gasto por impulso, depois me arrependo. Tenho uma relação emocional conturbada com ele.</label>
+          <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> Não sei para onde meu dinheiro vai</label>
+          <label><input type="checkbox" name="dores" value="Sempre endividado"> Sempre endividado</label>
+          <label><input type="checkbox" name="dores" value="Medo de imprevistos"> Medo de imprevistos</label>
+          <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> Dificuldade em realizar sonhos</label>
+          <label><input type="checkbox" name="dores" value="Medo de investir"> Medo de investir</label>
+          <label><input type="checkbox" name="dores" value="Patrimônio desorganizado"> Patrimônio desorganizado</label>
         </div>
-
         <button type="button" class="prev">Anterior</button>
         <button type="button" class="next">Próximo</button>
       </div>
 
-      <!-- Etapa 3 -->
+      <!-- Etapa 3: Metas -->
       <div class="form-step">
-        <label>Metas:</label>
+        <label>Quais são suas metas?</label>
         <div class="checkbox-group">
-          <label><input type="checkbox" name="metas" value="Quero saber exatamente por onde vai meu dinheiro..."> Quero saber exatamente por onde vai meu dinheiro, manter controle e ter equilíbrio financeiro.</label>
-          <label><input type="checkbox" name="metas" value="Quero sair do sufoco e me livrar das dívidas..."> Quero sair do sufoco, me livrar das dívidas e evitar ciladas financeiras.</label>
-          <label><input type="checkbox" name="metas" value="Quero ter tranquilidade para emergências..."> Quero ter tranquilidade para emergências, sem depender de empréstimos.</label>
-          <label><input type="checkbox" name="metas" value="Quero colocar meus sonhos no papel..."> Quero colocar meus sonhos no papel e realizá-los de forma planejada.</label>
-          <label><input type="checkbox" name="metas" value="Quero investir com segurança e inteligência..."> Quero investir com segurança e inteligência, entendendo os riscos.</label>
-          <label><input type="checkbox" name="metas" value="Quero ter clareza sobre meus bens..."> Quero ter clareza sobre meus bens e proteger meu patrimônio.</label>
-          <label><input type="checkbox" name="metas" value="Quero garantir uma aposentadoria tranquila..."> Quero garantir uma aposentadoria tranquila e deixar tudo organizado para meus filhos.</label>
-          <label><input type="checkbox" name="metas" value="Quero economizar legalmente com impostos..."> Quero economizar legalmente com impostos e não errar no IR.</label>
-          <label><input type="checkbox" name="metas" value="Quero mudar minha relação com o dinheiro..."> Quero mudar minha relação com o dinheiro, vencer o medo e ter leveza.</label>
+          <label><input type="checkbox" name="metas" value="Ter controle financeiro"> Ter controle financeiro</label>
+          <label><input type="checkbox" name="metas" value="Quitar dívidas"> Quitar dívidas</label>
+          <label><input type="checkbox" name="metas" value="Criar reserva de emergência"> Criar reserva de emergência</label>
+          <label><input type="checkbox" name="metas" value="Realizar sonhos planejados"> Realizar sonhos planejados</label>
+          <label><input type="checkbox" name="metas" value="Investir com segurança"> Investir com segurança</label>
+          <label><input type="checkbox" name="metas" value="Planejar aposentadoria"> Planejar aposentadoria</label>
         </div>
-
         <button type="button" class="prev">Anterior</button>
         <button type="button" class="next">Próximo</button>
       </div>
 
-      <!-- Etapa 4 -->
+      <!-- Etapa 4: Comentário final + Envio -->
       <div class="form-step">
-        <label for="comentario">Deixe um comentário (opcional):</label>
+        <label for="comentario">Gostaria de nos contar mais alguma coisa?</label>
         <textarea id="comentario" name="comentario"></textarea>
 
         <button type="button" class="prev">Anterior</button>
         <button type="submit">Enviar</button>
       </div>
 
-      <!-- Etapa 5 -->
+      <!-- Etapa 5: Sucesso -->
       <div class="form-step">
-        <h3>Formulário enviado com sucesso!</h3>
+        <p class="success-message">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
       </div>
     </form>
 
-    <div class="loading-message" id="loadingMessage">Enviando dados, aguarde...</div>
+    <div class="dialog" id="sendingMessage">Dados estão sendo enviados...</div>
   </div>
 
   <script>
@@ -160,7 +164,7 @@
     const steps = Array.from(document.querySelectorAll('.form-step'));
     const nextBtns = document.querySelectorAll('.next');
     const prevBtns = document.querySelectorAll('.prev');
-    const loadingMessage = document.getElementById('loadingMessage');
+    const sendingMessage = document.getElementById('sendingMessage');
     let currentStep = 0;
 
     function showStep(index) {
@@ -193,7 +197,7 @@
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      loadingMessage.classList.add('active');
+      sendingMessage.classList.add('active');
 
       const formData = new FormData(form);
       const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
@@ -205,12 +209,12 @@
         method: 'POST',
         body: formData
       }).then(() => {
-        loadingMessage.classList.remove('active');
+        sendingMessage.classList.remove('active');
         currentStep++;
         showStep(currentStep);
         form.reset();
       }).catch(err => {
-        loadingMessage.classList.remove('active');
+        sendingMessage.classList.remove('active');
         alert("Erro ao enviar os dados: " + err.message);
       });
     });
