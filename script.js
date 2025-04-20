@@ -36,11 +36,16 @@ form.addEventListener('submit', e => {
   e.preventDefault();
 
   const formData = new FormData(form);
+  
+  // Coleta as respostas múltiplas de dores e metas
   const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
   const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
+  
+  // Adiciona no formData
   formData.set('dores', dores);
   formData.set('metas', metas);
 
+  // Envia os dados para o Google Apps Script
   fetch('https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec', {
     method: 'POST',
     body: formData
@@ -48,7 +53,7 @@ form.addEventListener('submit', e => {
     currentStep++;
     showStep(currentStep);
     form.reset();
-  }).catch(err => alert("Erro ao enviar: " + err.message));
+  }).catch(err => alert("Erro ao enviar os dados. Tente novamente."));
 });
 
 showStep(currentStep);
