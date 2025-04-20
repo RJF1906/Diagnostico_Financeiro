@@ -1,59 +1,54 @@
-
-let currentStep = 0;
 const form = document.getElementById('multiStepForm');
-const steps = form.querySelectorAll('.form-step');
+const steps = Array.from(document.querySelectorAll('.form-step'));
+const nextBtns = document.querySelectorAll('.next');
+const prevBtns = document.querySelectorAll('.prev');
+let currentStep = 0;
 
-function nextStep() {
-    if (!validateStep()) return;
-    steps[currentStep].classList.remove('active');
-    currentStep++;
-    steps[currentStep].classList.add('active');
+function showStep(index) {
+  steps.forEach((step, i) => step.classList.toggle('active', i === index));
 }
 
-function validateStep() {
-    const inputs = steps[currentStep].querySelectorAll('input[required]');
-    for (let input of inputs) {
-        if (!input.value) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return false;
-        }
-    }
-    return true;
-}
-
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
-        method: 'POST',
-        body: formData
-    }).then(response => {
-        steps[currentStep].classList.remove('active');
-        currentStep++;
-        steps[currentStep].classList.add('active');
-    }).catch(error => {
-        alert('Erro ao enviar. Tente novamente.');
-        console.error(error);
+nextBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const currentInputs = steps[currentStep].querySelectorAll('input[required]');
+    let valid = true;
+    currentInputs.forEach(input => {
+      if (!input.checkValidity()) {
+        input.reportValidity();
+        valid = false;
+      }
     });
+    if (valid) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  });
 });
 
-window.onload = () => {
-    const metas = [
-        "Quitar dívidas e limpar meu nome.",
-        "Montar uma reserva de emergência.",
-        "Organizar meus gastos e começar a economizar.",
-        "Aprender a investir com segurança.",
-        "Comprar um imóvel ou carro.",
-        "Fazer uma viagem dos sonhos.",
-        "Ter um plano para aposentadoria.",
-        "Ajudar meus pais ou filhos financeiramente.",
-        "Mudar de carreira ou abrir um negócio.",
-        "Me sentir seguro e no controle do meu dinheiro."
-    ];
-    const metasContainer = document.getElementById('metasContainer');
-    metas.forEach(meta => {
-        const label = document.createElement('label');
-        label.innerHTML = \`<input type="checkbox" name="metas" value="\${meta}"> \${meta}\`;
-        metasContainer.appendChild(label);
-    });
-};
+prevBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentStep--;
+    showStep(currentStep);
+  });
+});
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+  const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
+  const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
+  formData.set('dores', dores);
+  formData.set('metas', metas);
+
+  fetch('https://script.google.com/macros/s/AKfycbyu31FAw1-jpw5gUpbZRijzP2kB-oSf3UzZQENXeo59Q0_YRnX0Xv6YBCY41LyQTukw1w/exec', {
+    method: 'POST',
+    body: formData
+  }).then(() => {
+    currentStep++;
+    showStep(currentStep);
+    form.reset();
+  }).catch(err => alert("Erro ao enviar: " + err.message));
+});
+
+showStep(currentStep);
