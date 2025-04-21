@@ -139,16 +139,9 @@
       margin-top: 20px; /* Ajuste a distância dos botões para o conteúdo acima */
     }
 
-    /* Estilo do título */
+    /* Estilo do título que será escondido nas etapas subsequentes */
     .step-title {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: white;
-      z-index: 10;
+      display: block;
     }
 
     .step-title.hidden {
@@ -171,9 +164,9 @@
   </div>
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
-    <!-- Título na posição superior esquerda -->
-    <h2 class="step-title">Queremos entender melhor sua vida financeira.</h2>
-
+    <!-- Título que será escondido nas etapas subsequentes -->
+    <h2 class="step-title text-2xl font-bold text-center mb-6">Queremos entender melhor sua vida financeira.</h2>
+    
     <form id="multiStepForm" class="space-y-6">
       <!-- Etapa 1 -->
       <div class="form-step">
@@ -187,6 +180,7 @@
 
       <!-- Etapa 2 - Dores -->
       <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-center mb-6">Selecione suas Dores</h2>
         <p class="mb-2">Selecione suas dificuldades?</p>
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
         <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
@@ -199,6 +193,7 @@
 
       <!-- Etapa 3 - Metas -->
       <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-center mb-6">Selecione suas Metas e Objetivos</h2>
         <p class="mb-2">Selecione suas metas/objetivos financeiros?</p>
         <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
         <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
@@ -243,6 +238,14 @@
           if (i === 0) {
             // Exibe o título na primeira etapa
             document.querySelector('.step-title').classList.remove('hidden');
+          } else if (i === 1) {
+            // Exibe o título "Selecione suas Dores" na etapa 2
+            document.querySelector('.step-title').classList.remove('hidden');
+            document.querySelector('.step-title').innerText = 'Selecione suas Dores';
+          } else if (i === 2) {
+            // Exibe o título "Selecione suas Metas e Objetivos" na etapa 3
+            document.querySelector('.step-title').classList.remove('hidden');
+            document.querySelector('.step-title').innerText = 'Selecione suas Metas e Objetivos';
           } else {
             // Oculta o título nas etapas subsequentes
             document.querySelector('.step-title').classList.add('hidden');
