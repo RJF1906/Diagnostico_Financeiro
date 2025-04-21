@@ -71,8 +71,58 @@
   <div class="w-full max-w-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md rounded-2xl p-8 shadow-[0_0_30px_rgba(255,215,0,0.2)] border border-white/10">
     <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
     <form id="multiStepForm" class="space-y-6">
-      <!-- Etapas do formulário -->
-      <div id="formStepsContainer"></div>
+      <!-- Etapa 1 -->
+      <div class="form-step space-y-4">
+        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
+        <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
+        <input type="text" name="telefone" placeholder="Telefone" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
+        <div class="flex justify-end">
+          <button type="button" class="next w-full py-3 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 text-black font-semibold hover:brightness-110 transition">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 2 -->
+      <div class="form-step hidden">
+        <label class="block text-white font-semibold mb-2">Quais são suas dores financeiras?</label>
+        <div class="flex flex-wrap gap-3">
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> <span>Não sei para onde meu dinheiro vai</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Sempre endividado"> <span>Sempre endividado</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Medo de imprevistos"> <span>Medo de imprevistos</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> <span>Dificuldade em realizar sonhos</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Medo de investir"> <span>Medo de investir</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Patrimônio desorganizado"> <span>Patrimônio desorganizado</span></label>
+        </div>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev text-white font-semibold">Anterior</button>
+          <button type="button" class="next bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="form-step hidden">
+        <label class="block text-white font-semibold mb-2">Quais são suas metas?</label>
+        <div class="flex flex-wrap gap-3">
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Ter controle financeiro"> <span>Ter controle financeiro</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Quitar dívidas"> <span>Quitar dívidas</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Criar reserva de emergência"> <span>Criar reserva de emergência</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Realizar sonhos planejados"> <span>Realizar sonhos planejados</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Investir com segurança"> <span>Investir com segurança</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Planejar aposentadoria"> <span>Planejar aposentadoria</span></label>
+        </div>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev text-white font-semibold">Anterior</button>
+          <button type="button" class="next bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 4 -->
+      <div class="form-step hidden">
+        <textarea name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white"></textarea>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev text-white font-semibold">Anterior</button>
+          <button type="submit" class="bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Enviar</button>
+        </div>
+      </div>
     </form>
   </div>
 
@@ -85,75 +135,6 @@
   </div>
 
   <script>
-    const stepsHtml = [
-      `<!-- Etapa 1 -->
-      <div class="form-step space-y-4">
-        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
-        <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
-        <input type="text" name="telefone" placeholder="Telefone" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
-        <div class="flex justify-end">
-          <button type="button" class="next w-full py-3 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 text-black font-semibold hover:brightness-110 transition">Próximo</button>
-        </div>
-      </div>`,
-
-      `<!-- Etapa 2 -->
-      <div class="form-step hidden">
-        <label class="block text-white font-semibold mb-2">Quais são suas dores financeiras?</label>
-        <div class="flex flex-wrap gap-3">
-          ${[
-            "Não sei para onde meu dinheiro vai",
-            "Sempre endividado",
-            "Medo de imprevistos",
-            "Dificuldade em realizar sonhos",
-            "Medo de investir",
-            "Patrimônio desorganizado"
-          ].map(opcao => `
-            <label class="flex items-center gap-2">
-              <input type="checkbox" name="dores" value="${opcao}">
-              <span>${opcao}</span>
-            </label>`).join('')}
-        </div>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="prev text-white font-semibold">Anterior</button>
-          <button type="button" class="next bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Próximo</button>
-        </div>
-      </div>`,
-
-      `<!-- Etapa 3 -->
-      <div class="form-step hidden">
-        <label class="block text-white font-semibold mb-2">Quais são suas metas?</label>
-        <div class="flex flex-wrap gap-3">
-          ${[
-            "Ter controle financeiro",
-            "Quitar dívidas",
-            "Criar reserva de emergência",
-            "Realizar sonhos planejados",
-            "Investir com segurança",
-            "Planejar aposentadoria"
-          ].map(opcao => `
-            <label class="flex items-center gap-2">
-              <input type="checkbox" name="metas" value="${opcao}">
-              <span>${opcao}</span>
-            </label>`).join('')}
-        </div>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="prev text-white font-semibold">Anterior</button>
-          <button type="button" class="next bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Próximo</button>
-        </div>
-      </div>`,
-
-      `<!-- Etapa 4 -->
-      <div class="form-step hidden">
-        <textarea name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white"></textarea>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="prev text-white font-semibold">Anterior</button>
-          <button type="submit" class="bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Enviar</button>
-        </div>
-      </div>`
-    ];
-
-    document.getElementById('formStepsContainer').innerHTML = stepsHtml.join('');
-
     const steps = document.querySelectorAll('.form-step');
     const nextBtns = document.querySelectorAll('.next');
     const prevBtns = document.querySelectorAll('.prev');
@@ -207,7 +188,7 @@
           showStep(currentStep);
         }, 3000);
       })
-      .catch(() => {
+      .catch((err) => {
         modalText.innerText = 'Erro ao enviar os dados. Tente novamente mais tarde.';
         setTimeout(() => modal.classList.add('hidden'), 2500);
       });
