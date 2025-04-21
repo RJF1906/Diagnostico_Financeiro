@@ -82,6 +82,65 @@
         transform: translateY(-100%);
       }
     }
+
+    /* Estilo da caixa */
+    .form-container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 2xl;
+      background-color: #000;
+      padding: 40px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+      border: 2px solid #fff;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      color: white;
+      font-size: 16px;
+      border-radius: 0;
+    }
+
+    button {
+      padding: 15px;
+      margin-top: 10px;
+      width: 100%;
+      background-color: #FFB800;
+      color: white;
+      font-weight: bold;
+      border: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #F7A500;
+    }
+
+    /* Botões de navegação */
+    .prev, .next {
+      width: 48%;
+      display: inline-block;
+      background-color: #444;
+      border-radius: 0;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: #F7A500;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
@@ -94,8 +153,8 @@
     <div class="line"></div>
   </div>
 
-  <div class="relative z-10 w-full max-w-2xl bg-black/60 backdrop-blur-md rounded-2xl p-8 shadow-[0_0_30px_rgba(255,215,0,0.2)] border border-white/10">
-    <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
+  <div class="form-container">
+    <h2>Vamos entender melhor a sua situação financeira</h2>
     <form id="multiStepForm" class="space-y-6">
 
       <!-- Etapa 1 - Dados Pessoais -->
@@ -103,8 +162,8 @@
         <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 rounded bg-white/20 placeholder-white">
         <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded bg-white/20 placeholder-white">
         <input type="tel" name="telefone" placeholder="Telefone" required class="w-full p-3 rounded bg-white/20 placeholder-white">
-        <div class="flex justify-end mt-4">
-          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-xl">Próximo</button>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="next">Próximo</button>
         </div>
       </div>
 
@@ -118,8 +177,8 @@
           <label><input type="checkbox" name="dores" value="Falta de planejamento" class="mr-2"> Falta de planejamento</label>
         </div>
         <div class="flex justify-between mt-4">
-          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-xl">Anterior</button>
-          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-xl">Próximo</button>
+          <button type="button" class="prev">Anterior</button>
+          <button type="button" class="next">Próximo</button>
         </div>
       </div>
 
@@ -133,8 +192,8 @@
           <label><input type="checkbox" name="metas" value="Aposentadoria" class="mr-2"> Aposentadoria</label>
         </div>
         <div class="flex justify-between mt-4">
-          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-xl">Anterior</button>
-          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-xl">Próximo</button>
+          <button type="button" class="prev">Anterior</button>
+          <button type="button" class="next">Próximo</button>
         </div>
       </div>
 
@@ -142,8 +201,8 @@
       <div class="form-step hidden">
         <textarea name="observacoes" placeholder="Compartilhe algo mais sobre sua situação financeira..." rows="4" class="w-full p-3 rounded bg-white/20 placeholder-white"></textarea>
         <div class="flex justify-between mt-4">
-          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-xl">Anterior</button>
-          <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-xl">Enviar</button>
+          <button type="button" class="prev">Anterior</button>
+          <button type="submit" class="next">Enviar</button>
         </div>
       </div>
 
