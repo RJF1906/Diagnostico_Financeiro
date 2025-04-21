@@ -22,185 +22,36 @@
       color: white;
     }
 
-    /* Efeito dourado sobre a imagem */
-    .golden-lines {
+    .animated-lines::before {
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      background: repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.1) 1px, transparent 2px, transparent 10px);
+      animation: move 4s linear infinite;
       pointer-events: none;
-      z-index: 1;
     }
 
-    .line {
-      position: absolute;
-      width: 2px;
-      height: 100%;
-      background-color: rgba(255, 215, 0, 0.7);
-      animation: moveLines 3s infinite linear;
-    }
-
-    .line:nth-child(1) {
-      left: 10%;
-      animation-duration: 3s;
-      animation-delay: 0s;
-    }
-
-    .line:nth-child(2) {
-      left: 30%;
-      animation-duration: 4s;
-      animation-delay: 1s;
-    }
-
-    .line:nth-child(3) {
-      left: 50%;
-      animation-duration: 5s;
-      animation-delay: 2s;
-    }
-
-    .line:nth-child(4) {
-      left: 70%;
-      animation-duration: 4s;
-      animation-delay: 3s;
-    }
-
-    .line:nth-child(5) {
-      left: 90%;
-      animation-duration: 6s;
-      animation-delay: 4s;
-    }
-
-    @keyframes moveLines {
-      0% {
-        transform: translateY(-100%);
-      }
-      50% {
-        transform: translateY(100%);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
-    }
-
-    /* Estilo da caixa */
-    .form-container {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 2xl;
-      background-color: #000;
-      padding: 40px;
-      box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
-      border: 2px solid #fff;
-    }
-
-    h2 {
-      font-size: 32px;
-      font-weight: bold;
-      text-align: center;
-      color: white;
-      margin-bottom: 20px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 15px;
-      margin-top: 10px;
-      background-color: #2a2a2a;
-      border: 1px solid #444;
-      color: white;
-      font-size: 16px;
-      border-radius: 0;
-    }
-
-    button {
-      padding: 15px;
-      margin-top: 10px;
-      width: 100%;
-      background-color: #FFB800;
-      color: white;
-      font-weight: bold;
-      border: none;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #F7A500;
-    }
-
-    /* Botões de navegação */
-    .prev, .next {
-      width: 48%;
-      display: inline-block;
-      background-color: #444;
-      border-radius: 0;
-    }
-
-    .prev:hover, .next:hover {
-      background-color: #F7A500;
-    }
-
-    /* Estilo da caixa de diálogo */
-    #modalEnvio {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-blur-sm;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-      visibility: hidden;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    #modalEnvio.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    #modalEnvio .modal-content {
-      background-color: white;
-      color: black;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    #modalEnvio .modal-content img {
-      width: 50px;
-      margin-bottom: 20px;
-    }
-
-    #modalEnvio .modal-content p {
-      font-size: 18px;
+    @keyframes move {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
     }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
-  <!-- Animações de linhas douradas sobre a imagem -->
-  <div class="golden-lines">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
-
-  <div class="form-container">
-    <h2>Vamos entender melhor a sua situação financeira</h2>
+  <div class="relative z-10 w-full max-w-2xl bg-black animated-lines p-8 shadow-xl border border-white/10">
+    <h2 class="text-3xl font-bold text-center mb-6 text-white">Vamos entender melhor a sua situação financeira.</h2>
     <form id="multiStepForm" class="space-y-6">
 
       <!-- Etapa 1 - Dados Pessoais -->
       <div class="form-step">
-        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 rounded bg-white/20 placeholder-white">
-        <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded bg-white/20 placeholder-white">
-        <input type="tel" name="telefone" placeholder="Telefone" required class="w-full p-3 rounded bg-white/20 placeholder-white">
-        <div class="flex justify-between mt-4">
-          <button type="button" class="next">Próximo</button>
+        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 bg-white/20 placeholder-white">
+        <input type="text" name="email" placeholder="E-mail" required class="w-full p-3 bg-white/20 placeholder-white">
+        <input type="tel" name="telefone" placeholder="Telefone" required class="w-full p-3 bg-white/20 placeholder-white">
+        <div class="flex justify-end mt-4">
+          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6">Próximo</button>
         </div>
       </div>
 
@@ -214,8 +65,8 @@
           <label><input type="checkbox" name="dores" value="Falta de planejamento" class="mr-2"> Falta de planejamento</label>
         </div>
         <div class="flex justify-between mt-4">
-          <button type="button" class="prev">Anterior</button>
-          <button type="button" class="next">Próximo</button>
+          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6">Anterior</button>
+          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6">Próximo</button>
         </div>
       </div>
 
@@ -229,17 +80,17 @@
           <label><input type="checkbox" name="metas" value="Aposentadoria" class="mr-2"> Aposentadoria</label>
         </div>
         <div class="flex justify-between mt-4">
-          <button type="button" class="prev">Anterior</button>
-          <button type="button" class="next">Próximo</button>
+          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6">Anterior</button>
+          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6">Próximo</button>
         </div>
       </div>
 
       <!-- Etapa 4 - Observações Finais -->
       <div class="form-step hidden">
-        <textarea name="observacoes" placeholder="Compartilhe algo mais sobre sua situação financeira..." rows="4" class="w-full p-3 rounded bg-white/20 placeholder-white"></textarea>
+        <textarea name="observacoes" placeholder="Compartilhe algo mais sobre sua situação financeira..." rows="4" class="w-full p-3 bg-white/20 placeholder-white"></textarea>
         <div class="flex justify-between mt-4">
-          <button type="button" class="prev">Anterior</button>
-          <button type="submit" class="next">Enviar</button>
+          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6">Anterior</button>
+          <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6">Enviar</button>
         </div>
       </div>
 
@@ -247,11 +98,16 @@
   </div>
 
   <!-- Modal -->
-  <div id="modalEnvio" class="fixed inset-0 flex items-center justify-center hidden z-50">
-    <div class="modal-content">
-      <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="mx-auto w-12 h-12" alt="Carregando">
-      <p id="modalText">Por favor, aguarde, seus dados estão sendo enviados...</p>
+  <div id="modalEnvio" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50">
+    <div class="bg-white text-black p-6 rounded-xl shadow-lg text-center space-y-4">
+      <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-yellow-500 border-solid mx-auto"></div>
+      <p id="modalText">Por favor, aguarde, seus dados estão sendo enviados.</p>
     </div>
+  </div>
+
+  <!-- Agradecimento -->
+  <div id="agradecimento" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden z-50">
+    <div class="text-white text-xl text-center">Muito obrigado, logo nossa equipe entrará em contato com você.</div>
   </div>
 
   <script>
@@ -260,6 +116,7 @@
     const prevBtns = document.querySelectorAll('.prev');
     const modal = document.getElementById('modalEnvio');
     const modalText = document.getElementById('modalText');
+    const agradecimento = document.getElementById('agradecimento');
     let currentStep = 0;
 
     function showStep(index) {
@@ -269,18 +126,6 @@
     }
 
     nextBtns.forEach(btn => btn.addEventListener('click', () => {
-      // Validando o primeiro passo (nome, e-mail, telefone)
-      if (currentStep === 0) {
-        const nome = document.querySelector('input[name="nome"]').value;
-        const email = document.querySelector('input[name="email"]').value;
-        const telefone = document.querySelector('input[name="telefone"]').value;
-        if (!nome || !email || !telefone) {
-          alert("Todos os campos de dados pessoais são obrigatórios.");
-          return;
-        }
-      }
-
-      // Passar para a próxima etapa
       if (currentStep < steps.length - 1) {
         currentStep++;
         showStep(currentStep);
@@ -299,7 +144,6 @@
     document.getElementById('multiStepForm').addEventListener('submit', (e) => {
       e.preventDefault();
       modal.classList.remove('hidden');
-      modal.classList.add('active');
 
       const form = e.target;
       const formData = new FormData(form);
@@ -315,14 +159,15 @@
         body: formData,
       })
       .then(() => {
-        modalText.innerText = 'Muito obrigado, logo nossa equipe entrará em contato com você.';
+        modal.classList.add('hidden');
+        agradecimento.classList.remove('hidden');
         setTimeout(() => {
-          modal.classList.remove('active');
+          agradecimento.classList.add('hidden');
           form.reset();
           currentStep = 0;
           showStep(currentStep);
           window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 3000);
+        }, 4000);
       })
       .catch((err) => {
         modalText.innerText = 'Erro ao enviar os dados. Tente novamente mais tarde.';
