@@ -141,6 +141,43 @@
     .prev:hover, .next:hover {
       background-color: #F7A500;
     }
+
+    /* Estilo da caixa de diálogo */
+    #modalEnvio {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-blur-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    #modalEnvio.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #modalEnvio .modal-content {
+      background-color: white;
+      color: black;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    #modalEnvio .modal-content img {
+      width: 50px;
+      margin-bottom: 20px;
+    }
+
+    #modalEnvio .modal-content p {
+      font-size: 18px;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
@@ -210,10 +247,10 @@
   </div>
 
   <!-- Modal -->
-  <div id="modalEnvio" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50">
-    <div class="bg-white text-black p-6 rounded-xl shadow-lg text-center space-y-4">
+  <div id="modalEnvio" class="fixed inset-0 flex items-center justify-center hidden z-50">
+    <div class="modal-content">
       <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="mx-auto w-12 h-12" alt="Carregando">
-      <p id="modalText">Suas informações estão sendo enviadas. Por favor, aguarde.</p>
+      <p id="modalText">Por favor, aguarde, seus dados estão sendo enviados...</p>
     </div>
   </div>
 
@@ -250,6 +287,7 @@
     document.getElementById('multiStepForm').addEventListener('submit', (e) => {
       e.preventDefault();
       modal.classList.remove('hidden');
+      modal.classList.add('active');
 
       const form = e.target;
       const formData = new FormData(form);
@@ -265,9 +303,9 @@
         body: formData,
       })
       .then(() => {
-        modalText.innerText = 'Formulário enviado com sucesso! Aguarde que entraremos em contato com você.';
+        modalText.innerText = 'Muito obrigado, logo nossa equipe entrará em contato com você.';
         setTimeout(() => {
-          modal.classList.add('hidden');
+          modal.classList.remove('active');
           form.reset();
           currentStep = 0;
           showStep(currentStep);
