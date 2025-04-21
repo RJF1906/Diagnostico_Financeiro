@@ -269,6 +269,18 @@
     }
 
     nextBtns.forEach(btn => btn.addEventListener('click', () => {
+      // Validando o primeiro passo (nome, e-mail, telefone)
+      if (currentStep === 0) {
+        const nome = document.querySelector('input[name="nome"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const telefone = document.querySelector('input[name="telefone"]').value;
+        if (!nome || !email || !telefone) {
+          alert("Todos os campos de dados pessoais são obrigatórios.");
+          return;
+        }
+      }
+
+      // Passar para a próxima etapa
       if (currentStep < steps.length - 1) {
         currentStep++;
         showStep(currentStep);
