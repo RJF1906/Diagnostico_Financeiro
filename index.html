@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnóstico Financeiro - Veritus Capital</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
   <style>
     html, body {
       height: 100%;
@@ -20,6 +21,10 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow-x: hidden;
       color: white;
+    }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
     }
 
     .animated-lines {
@@ -125,10 +130,6 @@
       margin-top: 20px;
     }
 
-    .step-title {
-      display: block;
-    }
-
     .step-title.hidden {
       display: none;
     }
@@ -162,7 +163,7 @@
         </div>
       </div>
 
-      <!-- Etapa 2 - Dores -->
+      <!-- Etapa 2 -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-left mt-2 mb-3">Selecione suas dificuldades:</h2>
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
@@ -174,7 +175,7 @@
         </div>
       </div>
 
-      <!-- Etapa 3 - Metas -->
+      <!-- Etapa 3 -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-left mt-2 mb-3">Selecione suas metas/objetivos:</h2>
         <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
@@ -186,7 +187,7 @@
         </div>
       </div>
 
-      <!-- Etapa 4 - Comentário -->
+      <!-- Etapa 4 -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-left mt-2 mb-3">Deseja escrever algo a mais sobre suas metas e dificuldades financeiras?</h2>
         <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
