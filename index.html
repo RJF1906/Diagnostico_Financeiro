@@ -35,23 +35,17 @@
     .animated-lines span {
       position: absolute;
       top: -100%;
-      width: 3px; /* Linha mais fina */
+      width: 3px;
       height: 200%;
       background: gold;
-      animation: moveLine 12s linear infinite; /* Animação mais lenta */
+      animation: moveLine 12s linear infinite;
       opacity: 0.25;
     }
 
     @keyframes moveLine {
-      0% {
-        top: -100%;
-      }
-      50% {
-        top: 100%;
-      }
-      100% {
-        top: -100%;
-      }
+      0% { top: -100%; }
+      50% { top: 100%; }
+      100% { top: -100%; }
     }
 
     .animated-lines span:nth-child(odd) {
@@ -59,15 +53,9 @@
     }
 
     @keyframes moveUp {
-      0% {
-        top: 100%;
-      }
-      50% {
-        top: -100%;
-      }
-      100% {
-        top: 100%;
-      }
+      0% { top: 100%; }
+      50% { top: -100%; }
+      100% { top: 100%; }
     }
 
     .form-step {
@@ -81,7 +69,6 @@
       transform: translateY(0);
     }
 
-    /* Estilo dos botões */
     .btn {
       display: inline-block;
       padding: 12px 24px;
@@ -131,15 +118,13 @@
       border-color: #218838;
     }
 
-    /* Container para centralizar os botões */
     .button-container {
       display: flex;
       justify-content: center;
-      gap: 20px; /* Espaçamento entre os botões */
-      margin-top: 20px; /* Ajuste a distância dos botões para o conteúdo acima */
+      gap: 20px;
+      margin-top: 20px;
     }
 
-    /* Estilo do título que será escondido nas etapas subsequentes */
     .step-title {
       display: block;
     }
@@ -164,8 +149,7 @@
   </div>
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
-    <!-- Título que será escondido nas etapas subsequentes -->
-    <h2 class="step-title text-2xl font-bold text-center mb-6">Queremos entender melhor sua vida financeira.</h2>
+    <h2 class="step-title text-2xl font-bold mb-6">Queremos entender melhor sua vida financeira.</h2>
     
     <form id="multiStepForm" class="space-y-6">
       <!-- Etapa 1 -->
@@ -180,8 +164,7 @@
 
       <!-- Etapa 2 - Dores -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left mb-6">Selecione suas Dificuldades:</h2>
-        <p class="mb-2">Selecione suas dificuldades financeiras:</p>
+        <h2 class="step-title text-2xl font-bold text-left mb-4">Selecione suas dificuldades:</h2>
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
         <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
         <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
@@ -193,8 +176,8 @@
 
       <!-- Etapa 3 - Metas -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left mb-6">Selecione suas Metas e Objetivos:</h2>
-        <p class="mb-2">Selecione suas metas/objetivos financeiros:</p>
+        <h2 class="step-title text-2xl font-bold text-center mb-6">Selecione suas Metas e Objetivos</h2>
+        <p class="mb-2">Selecione suas metas/objetivos financeiros?</p>
         <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
         <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
         <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
@@ -206,8 +189,7 @@
 
       <!-- Etapa 4 - Comentário -->
       <div class="form-step hidden">
-        <h2 class="text-xl font-bold mb-4 text-left">Deseja escrever algo a mais sobre metas e suas dificuldades financeiras?</h2>
-        <textarea name="mensagem" placeholder="Escreva aqui..." class="w-full p-2 bg-black border border-white text-white"></textarea>
+        <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
           <button type="submit" class="btn btn-submit submit">Enviar</button>
@@ -236,16 +218,24 @@
       steps.forEach((step, i) => {
         if (i === index) {
           step.classList.remove('hidden');
+          const title = document.querySelector('.step-title');
           if (i === 0) {
-            document.querySelector('.step-title').classList.remove('hidden');
+            title.classList.remove('hidden');
+            title.innerText = 'Queremos entender melhor sua vida financeira.';
+            title.classList.remove('text-left');
+            title.classList.add('text-center');
           } else if (i === 1) {
-            document.querySelector('.step-title').classList.remove('hidden');
-            document.querySelector('.step-title').innerText = 'Selecione suas Dificuldades:';
+            title.classList.remove('hidden');
+            title.innerText = 'Selecione suas dificuldades:';
+            title.classList.remove('text-center');
+            title.classList.add('text-left');
           } else if (i === 2) {
-            document.querySelector('.step-title').classList.remove('hidden');
-            document.querySelector('.step-title').innerText = 'Selecione suas Metas e Objetivos:';
+            title.classList.remove('hidden');
+            title.innerText = 'Selecione suas Metas e Objetivos';
+            title.classList.remove('text-left');
+            title.classList.add('text-center');
           } else {
-            document.querySelector('.step-title').classList.add('hidden');
+            title.classList.add('hidden');
           }
         } else {
           step.classList.add('hidden');
@@ -265,7 +255,7 @@
       }
       if (index === 1) {
         if (form.querySelectorAll('input[name="dores"]:checked').length === 0) {
-          alert("Selecione pelo menos uma dor.");
+          alert("Selecione pelo menos uma dificuldade.");
           return false;
         }
       }
