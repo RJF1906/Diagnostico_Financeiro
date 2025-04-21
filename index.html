@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnóstico Financeiro - Veritus Capital</title>
-  <script src="https://cdn.tailwindcss.com"></script>Gostaria que você retirasse os dois títulos Suas Dores, que está na segunda etapa, e colocasse um título apenas.Gostaria que na etapa 2 você retirasse os dois títulos que tá duplicando suas dores por suas dificuldades e coloque ele no canto superior esquerdo, por favor.Faça essa modificação sem mexer nas demais estruturas do código.
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     html, body {
       height: 100%;
@@ -35,23 +35,17 @@
     .animated-lines span {
       position: absolute;
       top: -100%;
-      width: 3px; /* Linha mais fina */
+      width: 3px;
       height: 200%;
       background: gold;
-      animation: moveLine 12s linear infinite; /* Animação mais lenta */
+      animation: moveLine 12s linear infinite;
       opacity: 0.25;
     }
 
     @keyframes moveLine {
-      0% {
-        top: -100%;
-      }
-      50% {
-        top: 100%;
-      }
-      100% {
-        top: -100%;
-      }
+      0% { top: -100%; }
+      50% { top: 100%; }
+      100% { top: -100%; }
     }
 
     .animated-lines span:nth-child(odd) {
@@ -59,15 +53,9 @@
     }
 
     @keyframes moveUp {
-      0% {
-        top: 100%;
-      }
-      50% {
-        top: -100%;
-      }
-      100% {
-        top: 100%;
-      }
+      0% { top: 100%; }
+      50% { top: -100%; }
+      100% { top: 100%; }
     }
 
     .form-step {
@@ -81,7 +69,6 @@
       transform: translateY(0);
     }
 
-    /* Estilo dos botões */
     .btn {
       display: inline-block;
       padding: 12px 24px;
@@ -105,48 +92,21 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .btn:focus {
-      outline: none;
-    }
+    .btn:focus { outline: none; }
+    .btn-prev { background-color: white; color: black; border-color: white; }
+    .btn-prev:hover { background-color: #ddd; color: #222; }
+    .btn-submit { background-color: #28a745; color: white; border-color: #28a745; }
+    .btn-submit:hover { background-color: #218838; border-color: #218838; }
 
-    .btn-prev {
-      background-color: white;
-      color: black;
-      border-color: white;
-    }
-
-    .btn-prev:hover {
-      background-color: #ddd;
-      color: #222;
-    }
-
-    .btn-submit {
-      background-color: #28a745;
-      color: white;
-      border-color: #28a745;
-    }
-
-    .btn-submit:hover {
-      background-color: #218838;
-      border-color: #218838;
-    }
-
-    /* Container para centralizar os botões */
     .button-container {
       display: flex;
       justify-content: center;
-      gap: 20px; /* Espaçamento entre os botões */
-      margin-top: 20px; /* Ajuste a distância dos botões para o conteúdo acima */
+      gap: 20px;
+      margin-top: 20px;
     }
 
-    /* Estilo do título que será escondido nas etapas subsequentes */
-    .step-title {
-      display: block;
-    }
-
-    .step-title.hidden {
-      display: none;
-    }
+    .step-title { display: block; }
+    .step-title.hidden { display: none; }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
@@ -164,9 +124,8 @@
   </div>
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
-    <!-- Título que será escondido nas etapas subsequentes -->
     <h2 class="step-title text-2xl font-bold text-center mb-6">Queremos entender melhor sua vida financeira.</h2>
-    
+
     <form id="multiStepForm" class="space-y-6">
       <!-- Etapa 1 -->
       <div class="form-step">
@@ -180,8 +139,7 @@
 
       <!-- Etapa 2 - Dores -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-center mb-6">Selecione suas Dores</h2>
-        <p class="mb-2">Selecione suas dificuldades?</p>
+        <h2 class="step-title text-2xl font-bold text-left mb-6">Selecione suas Dores</h2>
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
         <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
         <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
@@ -235,20 +193,24 @@
       steps.forEach((step, i) => {
         if (i === index) {
           step.classList.remove('hidden');
+          const stepTitle = document.querySelector('.step-title');
           if (i === 0) {
-            // Exibe o título na primeira etapa
-            document.querySelector('.step-title').classList.remove('hidden');
+            stepTitle.classList.remove('hidden');
+            stepTitle.innerText = 'Queremos entender melhor sua vida financeira.';
+            stepTitle.classList.add('text-center');
+            stepTitle.classList.remove('text-left');
           } else if (i === 1) {
-            // Exibe o título "Selecione suas Dores" na etapa 2
-            document.querySelector('.step-title').classList.remove('hidden');
-            document.querySelector('.step-title').innerText = 'Selecione suas Dores';
+            stepTitle.classList.remove('hidden');
+            stepTitle.innerText = 'Selecione suas Dores';
+            stepTitle.classList.add('text-left');
+            stepTitle.classList.remove('text-center');
           } else if (i === 2) {
-            // Exibe o título "Selecione suas Metas e Objetivos" na etapa 3
-            document.querySelector('.step-title').classList.remove('hidden');
-            document.querySelector('.step-title').innerText = 'Selecione suas Metas e Objetivos';
+            stepTitle.classList.remove('hidden');
+            stepTitle.innerText = 'Selecione suas Metas e Objetivos';
+            stepTitle.classList.add('text-center');
+            stepTitle.classList.remove('text-left');
           } else {
-            // Oculta o título nas etapas subsequentes
-            document.querySelector('.step-title').classList.add('hidden');
+            stepTitle.classList.add('hidden');
           }
         } else {
           step.classList.add('hidden');
