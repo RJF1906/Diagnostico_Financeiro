@@ -10,7 +10,6 @@
       height: 100%;
       margin: 0;
     }
-
     body {
       background-image: url('https://raw.githubusercontent.com/RJF1906/Diagnostico_Financeiro/main/veritus.JPG');
       background-repeat: no-repeat;
@@ -21,7 +20,6 @@
       overflow-x: hidden;
       color: white;
     }
-
     .animated-lines {
       position: fixed;
       top: 0;
@@ -31,7 +29,6 @@
       pointer-events: none;
       z-index: 1;
     }
-
     .animated-lines span {
       position: absolute;
       top: -100%;
@@ -41,34 +38,28 @@
       animation: moveLine 12s linear infinite;
       opacity: 0.25;
     }
-
     @keyframes moveLine {
       0% { top: -100%; }
       50% { top: 100%; }
       100% { top: -100%; }
     }
-
     .animated-lines span:nth-child(odd) {
       animation-name: moveUp;
     }
-
     @keyframes moveUp {
       0% { top: 100%; }
       50% { top: -100%; }
       100% { top: 100%; }
     }
-
     .form-step {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
-
     .form-step:not(.hidden) {
       opacity: 1;
       transform: translateY(0);
     }
-
     .btn {
       display: inline-block;
       padding: 12px 24px;
@@ -84,51 +75,42 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
-
     .btn:hover {
       transform: scale(1.05);
       background-color: #f8a200;
       color: #fff;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
     }
-
     .btn:focus {
       outline: none;
     }
-
     .btn-prev {
       background-color: white;
       color: black;
       border-color: white;
     }
-
     .btn-prev:hover {
       background-color: #ddd;
       color: #222;
     }
-
     .btn-submit {
       background-color: #28a745;
       color: white;
       border-color: #28a745;
     }
-
     .btn-submit:hover {
       background-color: #218838;
       border-color: #218838;
     }
-
     .button-container {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin-top: 20px;
     }
-
     .step-title {
       display: block;
     }
-
     .step-title.hidden {
       display: none;
     }
@@ -149,7 +131,8 @@
   </div>
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
-    <h2 class="step-title text-2xl font-bold mb-6">Queremos entender melhor sua vida financeira.</h2>
+    <!-- Título dinâmico -->
+    <h2 class="step-title text-2xl font-bold text-left mb-6">Queremos entender melhor sua vida financeira.</h2>
     
     <form id="multiStepForm" class="space-y-6">
       <!-- Etapa 1 -->
@@ -162,9 +145,8 @@
         </div>
       </div>
 
-      <!-- Etapa 2 - Dores -->
+      <!-- Etapa 2 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left mb-4">Selecione suas dificuldades:</h2>
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
         <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
         <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
@@ -174,10 +156,8 @@
         </div>
       </div>
 
-      <!-- Etapa 3 - Metas -->
+      <!-- Etapa 3 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-center mb-6">Selecione suas Metas e Objetivos</h2>
-        <p class="mb-2">Selecione suas metas/objetivos financeiros?</p>
         <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
         <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
         <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
@@ -187,7 +167,7 @@
         </div>
       </div>
 
-      <!-- Etapa 4 - Comentário -->
+      <!-- Etapa 4 -->
       <div class="form-step hidden">
         <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
         <div class="button-container">
@@ -216,31 +196,20 @@
 
     function showStep(index) {
       steps.forEach((step, i) => {
-        if (i === index) {
-          step.classList.remove('hidden');
-          const title = document.querySelector('.step-title');
-          if (i === 0) {
-            title.classList.remove('hidden');
-            title.innerText = 'Queremos entender melhor sua vida financeira.';
-            title.classList.remove('text-left');
-            title.classList.add('text-center');
-          } else if (i === 1) {
-            title.classList.remove('hidden');
-            title.innerText = 'Selecione suas dificuldades:';
-            title.classList.remove('text-center');
-            title.classList.add('text-left');
-          } else if (i === 2) {
-            title.classList.remove('hidden');
-            title.innerText = 'Selecione suas Metas e Objetivos';
-            title.classList.remove('text-left');
-            title.classList.add('text-center');
-          } else {
-            title.classList.add('hidden');
-          }
-        } else {
-          step.classList.add('hidden');
-        }
+        step.classList.toggle('hidden', i !== index);
       });
+
+      const title = document.querySelector('.step-title');
+      title.classList.remove('hidden');
+      if (index === 0) {
+        title.textContent = 'Queremos entender melhor sua vida financeira.';
+      } else if (index === 1) {
+        title.textContent = 'Selecione suas dificuldades:';
+      } else if (index === 2) {
+        title.textContent = 'Selecione suas metas e objetivos:';
+      } else {
+        title.classList.add('hidden');
+      }
     }
 
     function validateStep(index) {
@@ -268,7 +237,7 @@
       return true;
     }
 
-    nextBtns.forEach((btn) => {
+    nextBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         if (validateStep(currentStep)) {
           currentStep++;
