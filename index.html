@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnóstico Financeiro - Veritus Capital</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     html, body {
       height: 100%;
       margin: 0;
+      font-family: 'Lato', sans-serif;
     }
 
     body {
@@ -18,13 +19,8 @@
       background-position: center center;
       background-attachment: fixed;
       background-size: cover;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow-x: hidden;
       color: white;
-    }
-
-    .step-title {
-      font-family: 'Playfair Display', serif;
     }
 
     .animated-lines {
@@ -130,8 +126,22 @@
       margin-top: 20px;
     }
 
+    .step-title {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      margin-top: -1.5rem;
+    }
+
     .step-title.hidden {
       display: none;
+    }
+
+    input, textarea {
+      font-family: 'Lato', sans-serif;
+    }
+
+    label {
+      font-family: 'Lato', sans-serif;
     }
   </style>
 </head>
@@ -165,7 +175,7 @@
 
       <!-- Etapa 2 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left mt-2 mb-3">Selecione suas dificuldades:</h2>
+        <h2 class="step-title text-2xl font-bold text-left mb-4">Selecione suas dificuldades:</h2>
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
         <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
         <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
@@ -177,7 +187,7 @@
 
       <!-- Etapa 3 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left mt-2 mb-3">Selecione suas metas/objetivos:</h2>
+        <h2 class="step-title text-2xl font-bold text-left mb-4">Selecione suas metas/objetivos:</h2>
         <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
         <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
         <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
@@ -189,7 +199,7 @@
 
       <!-- Etapa 4 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left mt-2 mb-3">Deseja escrever algo a mais sobre suas metas e dificuldades financeiras?</h2>
+        <h2 class="step-title text-2xl font-bold text-left mb-4">Deseja escrever algo a mais sobre suas metas e dificuldades financeiras?</h2>
         <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
@@ -217,19 +227,11 @@
 
     function showStep(index) {
       steps.forEach((step, i) => {
-        if (i === index) {
-          step.classList.remove('hidden');
-        } else {
-          step.classList.add('hidden');
-        }
+        step.classList.toggle('hidden', i !== index);
       });
 
       const firstStepTitle = document.querySelector('.first-step-title');
-      if (index > 0) {
-        firstStepTitle.classList.add('hidden');
-      } else {
-        firstStepTitle.classList.remove('hidden');
-      }
+      firstStepTitle.classList.toggle('hidden', index > 0);
     }
 
     function validateStep(index) {
@@ -242,36 +244,28 @@
           return false;
         }
       }
-      if (index === 1) {
-        if (form.querySelectorAll('input[name="dores"]:checked').length === 0) {
-          alert("Selecione pelo menos uma dificuldade.");
-          return false;
-        }
+      if (index === 1 && form.querySelectorAll('input[name="dores"]:checked').length === 0) {
+        alert("Selecione pelo menos uma dificuldade.");
+        return false;
       }
-      if (index === 2) {
-        if (form.querySelectorAll('input[name="metas"]:checked').length === 0) {
-          alert("Selecione pelo menos uma meta.");
-          return false;
-        }
+      if (index === 2 && form.querySelectorAll('input[name="metas"]:checked').length === 0) {
+        alert("Selecione pelo menos uma meta.");
+        return false;
       }
       return true;
     }
 
-    nextBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (validateStep(currentStep)) {
-          currentStep++;
-          showStep(currentStep);
-        }
-      });
-    });
-
-    prevBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentStep--;
+    nextBtns.forEach(btn => btn.addEventListener('click', () => {
+      if (validateStep(currentStep)) {
+        currentStep++;
         showStep(currentStep);
-      });
-    });
+      }
+    }));
+
+    prevBtns.forEach(btn => btn.addEventListener('click', () => {
+      currentStep--;
+      showStep(currentStep);
+    }));
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
