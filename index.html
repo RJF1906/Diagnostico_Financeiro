@@ -1,42 +1,279 @@
-<!-- Etapa 2: Dores -->
-<div class="form-step hidden">
-  <label class="block text-white font-semibold mb-2 flex items-center gap-2">
-    Quais são suas dores financeiras?
-    <span class="relative group">
-      <span class="text-yellow-400 cursor-pointer text-lg">ℹ️</span>
-      <span class="absolute w-64 text-sm text-white bg-black bg-opacity-80 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -top-1 left-6 z-10">
-        Marque os problemas que você mais sente no dia a dia com sua vida financeira.
-      </span>
-    </span>
-  </label>
-  <!-- ...checkboxes continuam iguais... -->
-</div>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnóstico Financeiro - Veritus Capital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: linear-gradient(120deg, #0d0d0d, #1a1a1a);
+        overflow-x: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-<!-- Etapa 3: Metas -->
-<div class="form-step hidden">
-  <label class="block text-white font-semibold mb-2 flex items-center gap-2">
-    Quais são suas metas?
-    <span class="relative group">
-      <span class="text-yellow-400 cursor-pointer text-lg">ℹ️</span>
-      <span class="absolute w-64 text-sm text-white bg-black bg-opacity-80 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -top-1 left-6 z-10">
-        O que você gostaria de conquistar ou melhorar com sua vida financeira?
-      </span>
-    </span>
-  </label>
-  <!-- ...checkboxes continuam iguais... -->
-</div>
+      .animated-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
 
-<!-- Etapa 4: Comentário -->
-<div class="form-step hidden">
-  <label class="block text-white font-semibold mb-2 flex items-center gap-2">
-    Gostaria de nos contar mais alguma coisa?
-    <span class="relative group">
-      <span class="text-yellow-400 cursor-pointer text-lg">ℹ️</span>
-      <span class="absolute w-64 text-sm text-white bg-black bg-opacity-80 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -top-1 left-6 z-10">
-        Aqui você pode nos contar detalhes que acha importantes ou que não foram abordados nas perguntas anteriores.
-      </span>
-    </span>
-  </label>
-  <textarea name="comentario" placeholder="Digite aqui..." class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70"></textarea>
-  <!-- ...botões continuam iguais... -->
-</div>
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
+        animation: float 10s infinite ease-in-out;
+      }
+
+      .circle:nth-child(1) {
+        width: 220px;
+        height: 220px;
+        top: 15%;
+        left: 25%;
+        animation-delay: 0s;
+      }
+      .circle:nth-child(2) {
+        width: 280px;
+        height: 280px;
+        top: 60%;
+        left: 70%;
+        animation-delay: 2s;
+      }
+      .circle:nth-child(3) {
+        width: 180px;
+        height: 180px;
+        top: 40%;
+        left: 40%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+        }
+      }
+
+      .form-step {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .form-step.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      .btn {
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(90deg, #FFB800, #F0A500);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: linear-gradient(90deg, #F0A500, #FFB800);
+      }
+
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+      }
+
+      /* Estilos para a caixa de diálogo */
+      #loadingModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      #loadingContent {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      #loadingContent img {
+        width: 50px;
+        height: 50px;
+      }
+
+      #loadingContent p {
+        font-size: 1.2rem;
+        color: #333;
+      }
+
+      #okButton {
+        display: none;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="animated-bg">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+
+    <div class="form-container">
+      <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
+      <form id="multiStepForm">
+        <!-- Etapa 1: Dados Pessoais -->
+        <div class="form-step active">
+          <input type="text" id="nome" name="nome" required placeholder="Nome completo" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
+          <input type="email" id="email" name="email" required placeholder="E-mail" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
+          <input type="text" id="telefone" name="telefone" required placeholder="Telefone" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+
+        <!-- Etapa 2: Dores -->
+        <div class="form-step">
+          <h3 class="text-xl font-semibold text-center text-white mb-4">Quais são suas dores financeiras?</h3>
+          <div class="space-y-3">
+            <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> Não sei para onde meu dinheiro vai</label>
+            <label><input type="checkbox" name="dores" value="Sempre endividado"> Sempre endividado</label>
+            <label><input type="checkbox" name="dores" value="Medo de imprevistos"> Medo de imprevistos</label>
+            <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> Dificuldade em realizar sonhos</label>
+            <label><input type="checkbox" name="dores" value="Medo de investir"> Medo de investir</label>
+            <label><input type="checkbox" name="dores" value="Patrimônio desorganizado"> Patrimônio desorganizado</label>
+          </div>
+          <button type="button" class="btn prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+
+        <!-- Etapa 3: Metas -->
+        <div class="form-step">
+          <h3 class="text-xl font-semibold text-center text-white mb-4">Quais são suas metas?</h3>
+          <div class="space-y-3">
+            <label><input type="checkbox" name="metas" value="Ter controle financeiro"> Ter controle financeiro</label>
+            <label><input type="checkbox" name="metas" value="Quitar dívidas"> Quitar dívidas</label>
+            <label><input type="checkbox" name="metas" value="Criar reserva de emergência"> Criar reserva de emergência</label>
+            <label><input type="checkbox" name="metas" value="Realizar sonhos planejados"> Realizar sonhos planejados</label>
+            <label><input type="checkbox" name="metas" value="Investir com segurança"> Investir com segurança</label>
+            <label><input type="checkbox" name="metas" value="Planejar aposentadoria"> Planejar aposentadoria</label>
+          </div>
+          <button type="button" class="btn prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+
+        <!-- Etapa 4: Comentário final + Envio -->
+        <div class="form-step">
+          <textarea name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70"></textarea>
+          <button type="button" class="btn prev">Anterior</button>
+          <button type="submit" class="btn">Enviar</button>
+        </div>
+
+        <!-- Etapa 5: Sucesso -->
+        <div class="form-step">
+          <p class="text-lg font-semibold text-center text-white">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
+        </div>
+      </form>
+    </div>
+
+    <!-- Caixa de Diálogo para Carregamento -->
+    <div id="loadingModal" class="flex">
+      <div id="loadingContent">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Loading_icon.gif" alt="Carregando..." />
+        <p>Seus dados estão sendo enviados...</p>
+        <button id="okButton" class="btn">OK</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const steps = document.querySelectorAll('.form-step');
+        const nextBtns = document.querySelectorAll('.next');
+        const prevBtns = document.querySelectorAll('.prev');
+        const loadingModal = document.getElementById('loadingModal');
+        const okButton = document.getElementById('okButton');
+        let currentStep = 0;
+
+        function showStep(index) {
+          steps.forEach((step, i) => {
+            step.classList.toggle('active', i === index);
+          });
+        }
+
+        nextBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const currentInputs = steps[currentStep].querySelectorAll('input[required]');
+            let valid = true;
+            currentInputs.forEach(input => {
+              if (!input.checkValidity()) {
+                input.reportValidity();
+                valid = false;
+              }
+            });
+            if (valid) {
+              currentStep++;
+              showStep(currentStep);
+            }
+          });
+        });
+
+        prevBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentStep--;
+            showStep(currentStep);
+          });
+        });
+
+        document.getElementById('multiStepForm').addEventListener('submit', e => {
+          e.preventDefault();
+          loadingModal.style.display = 'flex'; // Exibe a caixa de diálogo de envio
+
+          // Simulate sending data to a server
+          setTimeout(() => {
+            loadingModal.style.display = 'none'; // Esconde a caixa de diálogo
+            okButton.style.display = 'block'; // Exibe o botão OK
+
+            // Após o envio bem-sucedido, exibimos a mensagem de sucesso
+            alert("Formulário enviado com sucesso!");
+            showStep(currentStep + 1); // Exibe a tela de sucesso
+          }, 2000); // Simula o envio com delay
+        });
+
+        okButton.addEventListener('click', () => {
+          window.location.reload(); // Fecha o modal após clicar no OK
+        });
+
+        showStep(currentStep);
+      });
+    </script>
+  </body>
+</html>
