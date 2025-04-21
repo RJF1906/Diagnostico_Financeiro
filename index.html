@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: url('https://github.com/RJF1906/Diagnostico_Financeiro/blob/main/veritus.JPG') no-repeat center center fixed;
+      background: url('https://raw.githubusercontent.com/RJF1906/Diagnostico_Financeiro/main/veritus.JPG') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow-x: hidden;
@@ -73,8 +73,56 @@
   <div class="w-full max-w-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md rounded-2xl p-8 shadow-[0_0_30px_rgba(255,215,0,0.2)] border border-white/10">
     <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
     <form id="multiStepForm" class="space-y-6">
-      <!-- Etapas mantidas -->
-      <!-- ... (o restante do conteúdo permanece inalterado, mantendo etapas e funcionalidade existentes) -->
+
+      <!-- Etapa 1 - Dados Pessoais -->
+      <div class="form-step">
+        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 rounded bg-white/20 placeholder-white">
+        <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded bg-white/20 placeholder-white">
+        <input type="tel" name="telefone" placeholder="Telefone" required class="w-full p-3 rounded bg-white/20 placeholder-white">
+        <div class="flex justify-end mt-4">
+          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-xl">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 2 - Dores Financeiras -->
+      <div class="form-step hidden">
+        <p class="text-lg font-semibold mb-4">Quais são suas principais dores financeiras?</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label><input type="checkbox" name="dores" value="Dívidas" class="mr-2"> Dívidas</label>
+          <label><input type="checkbox" name="dores" value="Falta de controle" class="mr-2"> Falta de controle</label>
+          <label><input type="checkbox" name="dores" value="Gastos excessivos" class="mr-2"> Gastos excessivos</label>
+          <label><input type="checkbox" name="dores" value="Falta de planejamento" class="mr-2"> Falta de planejamento</label>
+        </div>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-xl">Anterior</button>
+          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-xl">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3 - Metas Financeiras -->
+      <div class="form-step hidden">
+        <p class="text-lg font-semibold mb-4">Quais são suas metas financeiras?</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label><input type="checkbox" name="metas" value="Investir" class="mr-2"> Investir</label>
+          <label><input type="checkbox" name="metas" value="Quitar dívidas" class="mr-2"> Quitar dívidas</label>
+          <label><input type="checkbox" name="metas" value="Reservar emergência" class="mr-2"> Reservar emergência</label>
+          <label><input type="checkbox" name="metas" value="Aposentadoria" class="mr-2"> Aposentadoria</label>
+        </div>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-xl">Anterior</button>
+          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-xl">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 4 - Observações Finais -->
+      <div class="form-step hidden">
+        <textarea name="observacoes" placeholder="Compartilhe algo mais sobre sua situação financeira..." rows="4" class="w-full p-3 rounded bg-white/20 placeholder-white"></textarea>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-xl">Anterior</button>
+          <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-xl">Enviar</button>
+        </div>
+      </div>
+
     </form>
   </div>
 
