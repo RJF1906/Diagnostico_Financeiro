@@ -2,161 +2,92 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diagnóstico Financeiro - Veritus Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .form-container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .form-step {
-      display: none;
-    }
-
-    .form-step.active {
-      display: block;
-    }
-
-    label {
-      display: block;
-      margin: 15px 0 5px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    textarea {
-      height: 100px;
-      resize: vertical;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      background-color: #007BFF;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
-
-    .checkbox-group label {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .dialog {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-      font-weight: bold;
-      color: #555;
-    }
-
-    .dialog.active {
-      display: block;
-    }
-
-    .success-message {
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: green;
+      font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
-<body>
-  <div class="form-container">
-    <h2>Diagnóstico Financeiro</h2>
-    <form id="multiStepForm">
-      <!-- Etapa 1: Dados Pessoais -->
-      <div class="form-step active">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+<body class="bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] min-h-screen flex items-center justify-center p-4">
 
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" name="telefone" required>
-
-        <button type="button" class="next">Próximo</button>
-      </div>
-
-      <!-- Etapa 2: Dores -->
-      <div class="form-step">
-        <label>Quais são suas dores financeiras?</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> Não sei para onde meu dinheiro vai</label>
-          <label><input type="checkbox" name="dores" value="Sempre endividado"> Sempre endividado</label>
-          <label><input type="checkbox" name="dores" value="Medo de imprevistos"> Medo de imprevistos</label>
-          <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> Dificuldade em realizar sonhos</label>
-          <label><input type="checkbox" name="dores" value="Medo de investir"> Medo de investir</label>
-          <label><input type="checkbox" name="dores" value="Patrimônio desorganizado"> Patrimônio desorganizado</label>
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 space-y-6">
+    <h2 class="text-2xl font-semibold text-center text-[#1e293b]">Diagnóstico Financeiro</h2>
+    
+    <form id="multiStepForm" class="space-y-6">
+      <!-- Step 1 -->
+      <div class="form-step space-y-4 active">
+        <div>
+          <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+          <input type="text" id="nome" name="nome" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
         </div>
-        <button type="button" class="prev">Anterior</button>
-        <button type="button" class="next">Próximo</button>
-      </div>
-
-      <!-- Etapa 3: Metas -->
-      <div class="form-step">
-        <label>Quais são suas metas?</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="metas" value="Ter controle financeiro"> Ter controle financeiro</label>
-          <label><input type="checkbox" name="metas" value="Quitar dívidas"> Quitar dívidas</label>
-          <label><input type="checkbox" name="metas" value="Criar reserva de emergência"> Criar reserva de emergência</label>
-          <label><input type="checkbox" name="metas" value="Realizar sonhos planejados"> Realizar sonhos planejados</label>
-          <label><input type="checkbox" name="metas" value="Investir com segurança"> Investir com segurança</label>
-          <label><input type="checkbox" name="metas" value="Planejar aposentadoria"> Planejar aposentadoria</label>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+          <input type="email" id="email" name="email" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
         </div>
-        <button type="button" class="prev">Anterior</button>
-        <button type="button" class="next">Próximo</button>
+        <div>
+          <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone</label>
+          <input type="text" id="telefone" name="telefone" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        </div>
+        <div class="flex justify-end">
+          <button type="button" class="next bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Próximo</button>
+        </div>
       </div>
 
-      <!-- Etapa 4: Comentário final + Envio -->
-      <div class="form-step">
-        <label for="comentario">Gostaria de nos contar mais alguma coisa?</label>
-        <textarea id="comentario" name="comentario"></textarea>
-
-        <button type="button" class="prev">Anterior</button>
-        <button type="submit">Enviar</button>
+      <!-- Step 2 -->
+      <div class="form-step space-y-4 hidden">
+        <label class="block text-sm font-medium text-gray-700">Quais são suas dores financeiras?</label>
+        <div class="space-y-2 text-sm text-gray-800">
+          <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai" class="mr-2"> Não sei para onde meu dinheiro vai</label>
+          <label><input type="checkbox" name="dores" value="Sempre endividado" class="mr-2"> Sempre endividado</label>
+          <label><input type="checkbox" name="dores" value="Medo de imprevistos" class="mr-2"> Medo de imprevistos</label>
+          <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos" class="mr-2"> Dificuldade em realizar sonhos</label>
+          <label><input type="checkbox" name="dores" value="Medo de investir" class="mr-2"> Medo de investir</label>
+          <label><input type="checkbox" name="dores" value="Patrimônio desorganizado" class="mr-2"> Patrimônio desorganizado</label>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" class="prev text-gray-600 hover:text-gray-800">Anterior</button>
+          <button type="button" class="next bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Próximo</button>
+        </div>
       </div>
 
-      <!-- Etapa 5: Sucesso -->
-      <div class="form-step">
-        <p class="success-message">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
+      <!-- Step 3 -->
+      <div class="form-step space-y-4 hidden">
+        <label class="block text-sm font-medium text-gray-700">Quais são suas metas?</label>
+        <div class="space-y-2 text-sm text-gray-800">
+          <label><input type="checkbox" name="metas" value="Ter controle financeiro" class="mr-2"> Ter controle financeiro</label>
+          <label><input type="checkbox" name="metas" value="Quitar dívidas" class="mr-2"> Quitar dívidas</label>
+          <label><input type="checkbox" name="metas" value="Criar reserva de emergência" class="mr-2"> Criar reserva de emergência</label>
+          <label><input type="checkbox" name="metas" value="Realizar sonhos planejados" class="mr-2"> Realizar sonhos planejados</label>
+          <label><input type="checkbox" name="metas" value="Investir com segurança" class="mr-2"> Investir com segurança</label>
+          <label><input type="checkbox" name="metas" value="Planejar aposentadoria" class="mr-2"> Planejar aposentadoria</label>
+        </div>
+        <div class="flex justify-between">
+          <button type="button" class="prev text-gray-600 hover:text-gray-800">Anterior</button>
+          <button type="button" class="next bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="form-step space-y-4 hidden">
+        <label for="comentario" class="block text-sm font-medium text-gray-700">Gostaria de nos contar mais alguma coisa?</label>
+        <textarea id="comentario" name="comentario" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" rows="4"></textarea>
+        <div class="flex justify-between">
+          <button type="button" class="prev text-gray-600 hover:text-gray-800">Anterior</button>
+          <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Enviar</button>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="form-step text-center hidden">
+        <p class="text-green-600 font-semibold text-lg">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
       </div>
     </form>
 
-    <div class="dialog" id="sendingMessage">Dados estão sendo enviados...</div>
+    <div id="sendingMessage" class="text-center text-sm text-gray-500 hidden">Dados estão sendo enviados...</div>
   </div>
 
   <script>
@@ -168,7 +99,10 @@
     let currentStep = 0;
 
     function showStep(index) {
-      steps.forEach((step, i) => step.classList.toggle('active', i === index));
+      steps.forEach((step, i) => {
+        step.classList.toggle('hidden', i !== index);
+        step.classList.toggle('active', i === index);
+      });
     }
 
     nextBtns.forEach(btn => {
@@ -197,7 +131,7 @@
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      sendingMessage.classList.add('active');
+      sendingMessage.classList.remove('hidden');
 
       const formData = new FormData(form);
       const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
@@ -209,12 +143,12 @@
         method: 'POST',
         body: formData
       }).then(() => {
-        sendingMessage.classList.remove('active');
+        sendingMessage.classList.add('hidden');
         currentStep++;
         showStep(currentStep);
         form.reset();
       }).catch(err => {
-        sendingMessage.classList.remove('active');
+        sendingMessage.classList.add('hidden');
         alert("Erro ao enviar os dados: " + err.message);
       });
     });
