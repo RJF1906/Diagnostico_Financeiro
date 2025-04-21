@@ -38,7 +38,7 @@
       width: 3px; /* Linha mais fina */
       height: 200%;
       background: gold;
-      animation: moveLine 6s linear infinite;
+      animation: moveLine 12s linear infinite; /* Animação mais lenta */
       opacity: 0.25;
     }
 
@@ -51,6 +51,22 @@
       }
       100% {
         top: -100%;
+      }
+    }
+
+    .animated-lines span:nth-child(odd) {
+      animation-name: moveUp;
+    }
+
+    @keyframes moveUp {
+      0% {
+        top: 100%;
+      }
+      50% {
+        top: -100%;
+      }
+      100% {
+        top: 100%;
       }
     }
 
