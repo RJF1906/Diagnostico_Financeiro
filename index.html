@@ -187,7 +187,7 @@
         </div>
       </div>
 
-      <!-- Etapa 4 - Comentário -->
+      <!-- Etapa 4 - Comentário (modificada) -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-center mb-6">Deseja escrever algo a mais sobre suas metas e dificuldades financeiras?</h2>
         <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
@@ -219,25 +219,6 @@
       steps.forEach((step, i) => {
         if (i === index) {
           step.classList.remove('hidden');
-          const title = document.querySelector('.step-title');
-          if (i === 0) {
-            title.classList.remove('hidden');
-            title.innerText = 'Queremos entender melhor sua vida financeira.';
-            title.classList.remove('text-left');
-            title.classList.add('text-center');
-          } else if (i === 1) {
-            title.classList.remove('hidden');
-            title.innerText = 'Selecione suas dificuldades:';
-            title.classList.remove('text-center');
-            title.classList.add('text-left');
-          } else if (i === 2) {
-            title.classList.remove('hidden');
-            title.innerText = 'Selecione suas Metas e Objetivos';
-            title.classList.remove('text-left');
-            title.classList.add('text-center');
-          } else {
-            title.classList.add('hidden');
-          }
         } else {
           step.classList.add('hidden');
         }
