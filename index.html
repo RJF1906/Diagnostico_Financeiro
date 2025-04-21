@@ -98,6 +98,49 @@
         border-radius: 20px;
         box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
       }
+
+      /* Estilos para a caixa de diálogo */
+      #loadingModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      #loadingContent {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      #loadingContent img {
+        width: 50px;
+        height: 50px;
+      }
+
+      #loadingContent p {
+        font-size: 1.2rem;
+        color: #333;
+      }
+
+      #okButton {
+        display: none;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -162,11 +205,22 @@
       </form>
     </div>
 
+    <!-- Caixa de Diálogo para Carregamento -->
+    <div id="loadingModal" class="flex">
+      <div id="loadingContent">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Loading_icon.gif" alt="Carregando..." />
+        <p>Seus dados estão sendo enviados...</p>
+        <button id="okButton" class="btn">OK</button>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const steps = document.querySelectorAll('.form-step');
         const nextBtns = document.querySelectorAll('.next');
         const prevBtns = document.querySelectorAll('.prev');
+        const loadingModal = document.getElementById('loadingModal');
+        const okButton = document.getElementById('okButton');
         let currentStep = 0;
 
         function showStep(index) {
@@ -201,12 +255,21 @@
 
         document.getElementById('multiStepForm').addEventListener('submit', e => {
           e.preventDefault();
-          alert("Dados estão sendo enviados...");
+          loadingModal.style.display = 'flex'; // Exibe a caixa de diálogo de envio
+
           // Simulate sending data to a server
           setTimeout(() => {
+            loadingModal.style.display = 'none'; // Esconde a caixa de diálogo
+            okButton.style.display = 'block'; // Exibe o botão OK
+
+            // Após o envio bem-sucedido, exibimos a mensagem de sucesso
             alert("Formulário enviado com sucesso!");
-            showStep(currentStep + 1);
-          }, 2000); // Simulate a delay for sending
+            showStep(currentStep + 1); // Exibe a tela de sucesso
+          }, 2000); // Simula o envio com delay
+        });
+
+        okButton.addEventListener('click', () => {
+          window.location.reload(); // Fecha o modal após clicar no OK
         });
 
         showStep(currentStep);
