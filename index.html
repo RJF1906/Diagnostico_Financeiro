@@ -1,279 +1,200 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diagnóstico Financeiro - Veritus Capital</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      body {
-        background: linear-gradient(120deg, #0d0d0d, #1a1a1a);
-        overflow-x: hidden;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Financeiro - Veritus Capital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(120deg, #0d0d0d, #1a1a1a);
+      overflow-x: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-      .animated-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        overflow: hidden;
-      }
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
 
-      .circle {
-        position: absolute;
-        border-radius: 50%;
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
-        animation: float 10s infinite ease-in-out;
-      }
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
+      animation: float 10s infinite ease-in-out;
+    }
 
-      .circle:nth-child(1) {
-        width: 220px;
-        height: 220px;
-        top: 15%;
-        left: 25%;
-        animation-delay: 0s;
-      }
-      .circle:nth-child(2) {
-        width: 280px;
-        height: 280px;
-        top: 60%;
-        left: 70%;
-        animation-delay: 2s;
-      }
-      .circle:nth-child(3) {
-        width: 180px;
-        height: 180px;
-        top: 40%;
-        left: 40%;
-        animation-delay: 4s;
-      }
+    .circle:nth-child(1) {
+      width: 220px;
+      height: 220px;
+      top: 15%;
+      left: 25%;
+      animation-delay: 0s;
+    }
+    .circle:nth-child(2) {
+      width: 280px;
+      height: 280px;
+      top: 60%;
+      left: 70%;
+      animation-delay: 2s;
+    }
+    .circle:nth-child(3) {
+      width: 180px;
+      height: 180px;
+      top: 40%;
+      left: 40%;
+      animation-delay: 4s;
+    }
 
-      @keyframes float {
-        0%, 100% {
-          transform: translateY(0) scale(1);
-        }
-        50% {
-          transform: translateY(-20px) scale(1.1);
-        }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) scale(1);
       }
-
-      .form-step {
-        display: none;
-        animation: fadeIn 0.5s ease-in-out;
+      50% {
+        transform: translateY(-20px) scale(1.1);
       }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
+  <div class="animated-bg">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
 
-      .form-step.active {
-        display: block;
-      }
-
-      @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-      }
-
-      .btn {
-        width: 100%;
-        padding: 10px;
-        background: linear-gradient(90deg, #FFB800, #F0A500);
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .btn:hover {
-        background: linear-gradient(90deg, #F0A500, #FFB800);
-      }
-
-      .form-container {
-        max-width: 600px;
-        margin: 0 auto;
-        background: rgba(0, 0, 0, 0.6);
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-      }
-
-      /* Estilos para a caixa de diálogo */
-      #loadingModal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-      }
-
-      #loadingContent {
-        background: rgba(255, 255, 255, 0.8);
-        padding: 30px;
-        border-radius: 10px;
-        text-align: center;
-      }
-
-      #loadingContent img {
-        width: 50px;
-        height: 50px;
-      }
-
-      #loadingContent p {
-        font-size: 1.2rem;
-        color: #333;
-      }
-
-      #okButton {
-        display: none;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        font-size: 1rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="animated-bg">
-      <div class="circle"></div>
-      <div class="circle"></div>
-      <div class="circle"></div>
-    </div>
-
-    <div class="form-container">
-      <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
-      <form id="multiStepForm">
-        <!-- Etapa 1: Dados Pessoais -->
-        <div class="form-step active">
-          <input type="text" id="nome" name="nome" required placeholder="Nome completo" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
-          <input type="email" id="email" name="email" required placeholder="E-mail" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
-          <input type="text" id="telefone" name="telefone" required placeholder="Telefone" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
-          <button type="button" class="btn next">Próximo</button>
+  <div class="w-full max-w-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md rounded-2xl p-8 shadow-[0_0_30px_rgba(255,215,0,0.2)] border border-white/10">
+    <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
+    <form id="multiStepForm" class="space-y-6">
+      <!-- Etapa 1 -->
+      <div class="form-step space-y-4">
+        <input type="text" name="nome" placeholder="Nome completo" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
+        <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
+        <input type="text" name="telefone" placeholder="Telefone" required class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white" />
+        <div class="flex justify-end">
+          <button type="button" class="next w-full py-3 rounded-xl bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-300 text-black font-semibold hover:brightness-110 transition">Próximo</button>
         </div>
-
-        <!-- Etapa 2: Dores -->
-        <div class="form-step">
-          <h3 class="text-xl font-semibold text-center text-white mb-4">Quais são suas dores financeiras?</h3>
-          <div class="space-y-3">
-            <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> Não sei para onde meu dinheiro vai</label>
-            <label><input type="checkbox" name="dores" value="Sempre endividado"> Sempre endividado</label>
-            <label><input type="checkbox" name="dores" value="Medo de imprevistos"> Medo de imprevistos</label>
-            <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> Dificuldade em realizar sonhos</label>
-            <label><input type="checkbox" name="dores" value="Medo de investir"> Medo de investir</label>
-            <label><input type="checkbox" name="dores" value="Patrimônio desorganizado"> Patrimônio desorganizado</label>
-          </div>
-          <button type="button" class="btn prev">Anterior</button>
-          <button type="button" class="btn next">Próximo</button>
-        </div>
-
-        <!-- Etapa 3: Metas -->
-        <div class="form-step">
-          <h3 class="text-xl font-semibold text-center text-white mb-4">Quais são suas metas?</h3>
-          <div class="space-y-3">
-            <label><input type="checkbox" name="metas" value="Ter controle financeiro"> Ter controle financeiro</label>
-            <label><input type="checkbox" name="metas" value="Quitar dívidas"> Quitar dívidas</label>
-            <label><input type="checkbox" name="metas" value="Criar reserva de emergência"> Criar reserva de emergência</label>
-            <label><input type="checkbox" name="metas" value="Realizar sonhos planejados"> Realizar sonhos planejados</label>
-            <label><input type="checkbox" name="metas" value="Investir com segurança"> Investir com segurança</label>
-            <label><input type="checkbox" name="metas" value="Planejar aposentadoria"> Planejar aposentadoria</label>
-          </div>
-          <button type="button" class="btn prev">Anterior</button>
-          <button type="button" class="btn next">Próximo</button>
-        </div>
-
-        <!-- Etapa 4: Comentário final + Envio -->
-        <div class="form-step">
-          <textarea name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70"></textarea>
-          <button type="button" class="btn prev">Anterior</button>
-          <button type="submit" class="btn">Enviar</button>
-        </div>
-
-        <!-- Etapa 5: Sucesso -->
-        <div class="form-step">
-          <p class="text-lg font-semibold text-center text-white">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
-        </div>
-      </form>
-    </div>
-
-    <!-- Caixa de Diálogo para Carregamento -->
-    <div id="loadingModal" class="flex">
-      <div id="loadingContent">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Loading_icon.gif" alt="Carregando..." />
-        <p>Seus dados estão sendo enviados...</p>
-        <button id="okButton" class="btn">OK</button>
       </div>
+
+      <!-- Etapa 2 -->
+      <div class="form-step hidden">
+        <label class="block text-white font-semibold mb-2">Quais são suas dores financeiras?</label>
+        <div class="flex flex-wrap gap-3">
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> <span>Não sei para onde meu dinheiro vai</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Sempre endividado"> <span>Sempre endividado</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Medo de imprevistos"> <span>Medo de imprevistos</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> <span>Dificuldade em realizar sonhos</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Medo de investir"> <span>Medo de investir</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="dores" value="Patrimônio desorganizado"> <span>Patrimônio desorganizado</span></label>
+        </div>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev text-white font-semibold">Anterior</button>
+          <button type="button" class="next bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="form-step hidden">
+        <label class="block text-white font-semibold mb-2">Quais são suas metas?</label>
+        <div class="flex flex-wrap gap-3">
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Ter controle financeiro"> <span>Ter controle financeiro</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Quitar dívidas"> <span>Quitar dívidas</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Criar reserva de emergência"> <span>Criar reserva de emergência</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Realizar sonhos planejados"> <span>Realizar sonhos planejados</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Investir com segurança"> <span>Investir com segurança</span></label>
+          <label class="flex items-center gap-2"><input type="checkbox" name="metas" value="Planejar aposentadoria"> <span>Planejar aposentadoria</span></label>
+        </div>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev text-white font-semibold">Anterior</button>
+          <button type="button" class="next bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 4 -->
+      <div class="form-step hidden">
+        <textarea name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70 text-white"></textarea>
+        <div class="flex justify-between mt-4">
+          <button type="button" class="prev text-white font-semibold">Anterior</button>
+          <button type="submit" class="bg-yellow-400 text-black px-6 py-2 rounded-lg font-semibold">Enviar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalEnvio" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50">
+    <div class="bg-white text-black p-6 rounded-xl shadow-lg text-center space-y-4">
+      <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" class="mx-auto w-12 h-12" alt="Carregando">
+      <p id="modalText">Suas informações estão sendo enviadas. Por favor, aguarde.</p>
     </div>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const steps = document.querySelectorAll('.form-step');
-        const nextBtns = document.querySelectorAll('.next');
-        const prevBtns = document.querySelectorAll('.prev');
-        const loadingModal = document.getElementById('loadingModal');
-        const okButton = document.getElementById('okButton');
-        let currentStep = 0;
+  <script>
+    const steps = document.querySelectorAll('.form-step');
+    const nextBtns = document.querySelectorAll('.next');
+    const prevBtns = document.querySelectorAll('.prev');
+    const modal = document.getElementById('modalEnvio');
+    const modalText = document.getElementById('modalText');
+    let currentStep = 0;
 
-        function showStep(index) {
-          steps.forEach((step, i) => {
-            step.classList.toggle('active', i === index);
-          });
-        }
-
-        nextBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            const currentInputs = steps[currentStep].querySelectorAll('input[required]');
-            let valid = true;
-            currentInputs.forEach(input => {
-              if (!input.checkValidity()) {
-                input.reportValidity();
-                valid = false;
-              }
-            });
-            if (valid) {
-              currentStep++;
-              showStep(currentStep);
-            }
-          });
-        });
-
-        prevBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            currentStep--;
-            showStep(currentStep);
-          });
-        });
-
-        document.getElementById('multiStepForm').addEventListener('submit', e => {
-          e.preventDefault();
-          loadingModal.style.display = 'flex'; // Exibe a caixa de diálogo de envio
-
-          // Simulate sending data to a server
-          setTimeout(() => {
-            loadingModal.style.display = 'none'; // Esconde a caixa de diálogo
-            okButton.style.display = 'block'; // Exibe o botão OK
-
-            // Após o envio bem-sucedido, exibimos a mensagem de sucesso
-            alert("Formulário enviado com sucesso!");
-            showStep(currentStep + 1); // Exibe a tela de sucesso
-          }, 2000); // Simula o envio com delay
-        });
-
-        okButton.addEventListener('click', () => {
-          window.location.reload(); // Fecha o modal após clicar no OK
-        });
-
-        showStep(currentStep);
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.toggle('hidden', i !== index);
       });
-    </script>
-  </body>
+    }
+
+    nextBtns.forEach(btn => btn.addEventListener('click', () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }));
+
+    prevBtns.forEach(btn => btn.addEventListener('click', () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }));
+
+    document.getElementById('multiStepForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      modal.classList.remove('hidden');
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
+      const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
+
+      formData.set('dores', dores);
+      formData.set('metas', metas);
+
+      fetch('https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(() => {
+        modalText.innerText = 'Formulário enviado com sucesso! Aguarde que entraremos em contato com você.';
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          form.reset();
+          currentStep = 0;
+          showStep(currentStep);
+        }, 3000);
+      })
+      .catch((err) => {
+        modalText.innerText = 'Erro ao enviar os dados. Tente novamente mais tarde.';
+        setTimeout(() => modal.classList.add('hidden'), 2500);
+      });
+    });
+
+    showStep(currentStep);
+  </script>
+</body>
 </html>
