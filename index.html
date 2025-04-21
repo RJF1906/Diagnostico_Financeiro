@@ -6,71 +6,25 @@
   <title>Diagnóstico Financeiro - Veritus Capital</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
     body {
-      background: url('https://github.com/RJF1906/Diagnostico_Financeiro/blob/main/veritus.JPG?raw=true') no-repeat center center fixed;
+      background-image: url('https://raw.githubusercontent.com/RJF1906/Diagnostico_Financeiro/main/veritus.JPG');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
       background-size: cover;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow-x: hidden;
       color: white;
     }
-
-    .animated-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
-      animation: float 10s infinite ease-in-out;
-    }
-
-    .circle:nth-child(1) {
-      width: 220px;
-      height: 220px;
-      top: 15%;
-      left: 25%;
-      animation-delay: 0s;
-    }
-    .circle:nth-child(2) {
-      width: 280px;
-      height: 280px;
-      top: 60%;
-      left: 70%;
-      animation-delay: 2s;
-    }
-    .circle:nth-child(3) {
-      width: 180px;
-      height: 180px;
-      top: 40%;
-      left: 40%;
-      animation-delay: 4s;
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-20px) scale(1.1);
-      }
-    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
-  <div class="animated-bg">
-    <div class="circle"></div>
-    <div class="circle"></div>
-    <div class="circle"></div>
-  </div>
-
-  <div class="w-full max-w-2xl bg-gradient-to-br from-white/10 via-white/5 to-white/10 backdrop-blur-md rounded-2xl p-8 shadow-[0_0_30px_rgba(255,215,0,0.2)] border border-white/10">
+  <div class="relative z-10 w-full max-w-2xl bg-black/60 backdrop-blur-md rounded-2xl p-8 shadow-[0_0_30px_rgba(255,215,0,0.2)] border border-white/10">
     <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
     <form id="multiStepForm" class="space-y-6">
 
@@ -152,6 +106,7 @@
       if (currentStep < steps.length - 1) {
         currentStep++;
         showStep(currentStep);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }));
 
@@ -159,6 +114,7 @@
       if (currentStep > 0) {
         currentStep--;
         showStep(currentStep);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }));
 
@@ -186,6 +142,7 @@
           form.reset();
           currentStep = 0;
           showStep(currentStep);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 3000);
       })
       .catch((err) => {
