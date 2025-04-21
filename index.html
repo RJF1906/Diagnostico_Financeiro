@@ -22,93 +22,104 @@
       color: white;
     }
 
-    .golden-lines::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: 50%;
-      width: 2px;
-      height: 200%;
-      background: linear-gradient(to bottom, rgba(255, 215, 0, 0) 0%, rgba(255, 215, 0, 0.5) 50%, rgba(255, 215, 0, 0) 100%);
-      animation: shimmer 5s infinite;
+    .animated-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    @keyframes shimmer {
+    .animated-lines span {
+      position: absolute;
+      top: -100%;
+      width: 6px;
+      height: 200%;
+      background: gold;
+      animation: moveDown 6s linear infinite;
+      opacity: 0.25;
+    }
+
+    @keyframes moveDown {
       0% {
-        transform: translateY(-100%);
-      }
-      50% {
-        transform: translateY(100%);
+        top: -100%;
       }
       100% {
-        transform: translateY(-100%);
+        top: 100%;
       }
+    }
+
+    .form-step {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .form-step:not(.hidden) {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white golden-lines">
-  <div class="relative z-10 w-full max-w-2xl bg-black p-8 shadow-xl border border-white">
-    <h2 class="text-3xl font-bold text-center mb-6 text-white">Vamos entender melhor a sua situação financeira.</h2>
+<body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
+  <div class="animated-lines">
+    <span style="left: 5%"></span>
+    <span style="left: 15%"></span>
+    <span style="left: 25%"></span>
+    <span style="left: 35%"></span>
+    <span style="left: 45%"></span>
+    <span style="left: 55%"></span>
+    <span style="left: 65%"></span>
+    <span style="left: 75%"></span>
+    <span style="left: 85%"></span>
+    <span style="left: 95%"></span>
+  </div>
+
+  <div class="relative z-10 w-full max-w-2xl bg-black p-8 shadow-lg">
+    <h2 class="text-2xl font-bold text-center mb-6">Vamos entender melhor a sua situação financeira.</h2>
     <form id="multiStepForm" class="space-y-6">
-
-      <!-- Etapa 1 - Dados Pessoais -->
+      <!-- Etapa 1 -->
       <div class="form-step">
-        <input type="text" name="nome" placeholder="Nome completo" required pattern="^[A-Za-zÀ-ú\s]+$" class="w-full p-3 rounded-none bg-white/20 placeholder-white">
-        <input type="email" name="email" placeholder="E-mail" required class="w-full p-3 rounded-none bg-white/20 placeholder-white">
-        <input type="tel" name="telefone" placeholder="Telefone" required pattern="^\d+$" class="w-full p-3 rounded-none bg-white/20 placeholder-white">
-        <div class="flex justify-end mt-4">
-          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-none">Próximo</button>
-        </div>
+        <input type="text" name="nome" placeholder="Nome completo" required pattern="^[A-Za-zÀ-ÿ\s]+$" class="w-full p-2 bg-black border border-white text-white">
+        <input type="email" name="email" placeholder="E-mail" required class="w-full p-2 bg-black border border-white text-white">
+        <input type="tel" name="telefone" placeholder="Telefone" required pattern="\d+" class="w-full p-2 bg-black border border-white text-white">
+        <button type="button" class="next bg-yellow-400 text-black px-4 py-2 hover:bg-yellow-300 transition">Próximo</button>
       </div>
 
-      <!-- Etapa 2 - Dores Financeiras -->
+      <!-- Etapa 2 - Dores -->
       <div class="form-step hidden">
-        <p class="text-lg font-semibold mb-4">Quais são suas principais dores financeiras?</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label><input type="checkbox" name="dores" value="Dívidas" class="mr-2"> Dívidas</label>
-          <label><input type="checkbox" name="dores" value="Falta de controle" class="mr-2"> Falta de controle</label>
-          <label><input type="checkbox" name="dores" value="Gastos excessivos" class="mr-2"> Gastos excessivos</label>
-          <label><input type="checkbox" name="dores" value="Falta de planejamento" class="mr-2"> Falta de planejamento</label>
-        </div>
-        <p class="text-red-400 hidden mt-2" id="erro-dores">Por favor, selecione pelo menos uma opção.</p>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-none">Anterior</button>
-          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-none">Próximo</button>
-        </div>
+        <p class="mb-2">Quais dessas dores você sente?</p>
+        <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
+        <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
+        <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
+        <button type="button" class="prev bg-white text-black px-4 py-2 mr-2">Anterior</button>
+        <button type="button" class="next bg-yellow-400 text-black px-4 py-2 hover:bg-yellow-300 transition">Próximo</button>
       </div>
 
-      <!-- Etapa 3 - Metas Financeiras -->
+      <!-- Etapa 3 - Metas -->
       <div class="form-step hidden">
-        <p class="text-lg font-semibold mb-4">Quais são suas metas financeiras?</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label><input type="checkbox" name="metas" value="Investir" class="mr-2"> Investir</label>
-          <label><input type="checkbox" name="metas" value="Quitar dívidas" class="mr-2"> Quitar dívidas</label>
-          <label><input type="checkbox" name="metas" value="Reservar emergência" class="mr-2"> Reservar emergência</label>
-          <label><input type="checkbox" name="metas" value="Aposentadoria" class="mr-2"> Aposentadoria</label>
-        </div>
-        <p class="text-red-400 hidden mt-2" id="erro-metas">Por favor, selecione pelo menos uma opção.</p>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-none">Anterior</button>
-          <button type="button" class="next bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-none">Próximo</button>
-        </div>
+        <p class="mb-2">Quais são suas metas financeiras?</p>
+        <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
+        <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
+        <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
+        <button type="button" class="prev bg-white text-black px-4 py-2 mr-2">Anterior</button>
+        <button type="button" class="next bg-yellow-400 text-black px-4 py-2 hover:bg-yellow-300 transition">Próximo</button>
       </div>
 
-      <!-- Etapa 4 - Observações Finais -->
+      <!-- Etapa 4 - Comentário -->
       <div class="form-step hidden">
-        <textarea name="observacoes" placeholder="Compartilhe algo mais sobre sua situação financeira..." rows="4" class="w-full p-3 rounded-none bg-white/20 placeholder-white"></textarea>
-        <div class="flex justify-between mt-4">
-          <button type="button" class="prev bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-none">Anterior</button>
-          <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-none">Enviar</button>
-        </div>
+        <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
+        <button type="button" class="prev bg-white text-black px-4 py-2 mr-2">Anterior</button>
+        <button type="submit" class="submit bg-yellow-400 text-black px-4 py-2 hover:bg-yellow-300 transition">Enviar</button>
       </div>
-
     </form>
   </div>
 
-  <!-- Modal -->
   <div id="modalEnvio" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50">
     <div class="bg-white text-black p-6 rounded-xl shadow-lg text-center space-y-4">
-      <div class="w-12 h-12 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <div class="w-12 h-12 border-4 border-t-transparent rounded-full animate-spin mx-auto" style="border-color: gold; border-top-color: transparent;"></div>
       <p id="modalText">Por favor, aguarde, seus dados estão sendo enviados.</p>
     </div>
   </div>
@@ -117,71 +128,67 @@
     const steps = document.querySelectorAll('.form-step');
     const nextBtns = document.querySelectorAll('.next');
     const prevBtns = document.querySelectorAll('.prev');
+    const form = document.getElementById('multiStepForm');
     const modal = document.getElementById('modalEnvio');
     const modalText = document.getElementById('modalText');
     let currentStep = 0;
 
     function showStep(index) {
       steps.forEach((step, i) => {
-        step.classList.toggle('hidden', i !== index);
+        if (i === index) {
+          step.classList.remove('hidden');
+        } else {
+          step.classList.add('hidden');
+        }
       });
     }
 
-    nextBtns.forEach(btn => btn.addEventListener('click', () => {
-      const step = steps[currentStep];
-      const inputs = step.querySelectorAll('input[required], textarea[required]');
-      let valid = true;
-
-      for (let input of inputs) {
-        if (!input.checkValidity()) {
-          input.reportValidity();
-          valid = false;
-          return;
+    function validateStep(index) {
+      if (index === 0) {
+        const nome = form.nome;
+        const email = form.email;
+        const telefone = form.telefone;
+        if (!nome.checkValidity() || !email.checkValidity() || !telefone.checkValidity()) {
+          alert("Preencha os campos corretamente.");
+          return false;
         }
       }
-
-      if (currentStep === 1) {
-        const dores = document.querySelectorAll('input[name="dores"]:checked');
-        if (dores.length === 0) {
-          document.getElementById('erro-dores').classList.remove('hidden');
-          return;
-        } else {
-          document.getElementById('erro-dores').classList.add('hidden');
+      if (index === 1) {
+        if (form.querySelectorAll('input[name="dores"]:checked').length === 0) {
+          alert("Selecione pelo menos uma dor.");
+          return false;
         }
       }
-
-      if (currentStep === 2) {
-        const metas = document.querySelectorAll('input[name="metas"]:checked');
-        if (metas.length === 0) {
-          document.getElementById('erro-metas').classList.remove('hidden');
-          return;
-        } else {
-          document.getElementById('erro-metas').classList.add('hidden');
+      if (index === 2) {
+        if (form.querySelectorAll('input[name="metas"]:checked').length === 0) {
+          alert("Selecione pelo menos uma meta.");
+          return false;
         }
       }
+      return true;
+    }
 
-      if (valid && currentStep < steps.length - 1) {
-        currentStep++;
-        showStep(currentStep);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }));
+    nextBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (validateStep(currentStep)) {
+          currentStep++;
+          showStep(currentStep);
+        }
+      });
+    });
 
-    prevBtns.forEach(btn => btn.addEventListener('click', () => {
-      if (currentStep > 0) {
+    prevBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
         currentStep--;
         showStep(currentStep);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }));
+      });
+    });
 
-    document.getElementById('multiStepForm').addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       modal.classList.remove('hidden');
 
-      const form = e.target;
       const formData = new FormData(form);
-
       const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
       const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
 
@@ -194,14 +201,13 @@
       })
       .then(() => {
         modal.classList.add('hidden');
-        alert('Muito obrigado, logo nossa equipe entrará em contato com você.');
+        alert("Muito obrigado, logo nossa equipe entrará em contato com você.");
         form.reset();
         currentStep = 0;
         showStep(currentStep);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       })
-      .catch((err) => {
-        modalText.innerText = 'Erro ao enviar os dados. Tente novamente mais tarde.';
+      .catch(() => {
+        modalText.innerText = "Erro ao enviar. Tente novamente.";
         setTimeout(() => modal.classList.add('hidden'), 2500);
       });
     });
