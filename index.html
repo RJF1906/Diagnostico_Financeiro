@@ -138,6 +138,15 @@
       gap: 20px; /* Espaçamento entre os botões */
       margin-top: 20px; /* Ajuste a distância dos botões para o conteúdo acima */
     }
+
+    /* Estilo do título que será escondido nas etapas subsequentes */
+    .step-title {
+      display: block;
+    }
+
+    .step-title.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
@@ -155,7 +164,9 @@
   </div>
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
-    <h2 class="text-2xl font-bold text-center mb-6">Queremos entender melhor sua vida financeira.</h2>
+    <!-- Título que será escondido nas etapas subsequentes -->
+    <h2 class="step-title text-2xl font-bold text-center mb-6">Queremos entender melhor sua vida financeira.</h2>
+    
     <form id="multiStepForm" class="space-y-6">
       <!-- Etapa 1 -->
       <div class="form-step">
@@ -222,6 +233,13 @@
       steps.forEach((step, i) => {
         if (i === index) {
           step.classList.remove('hidden');
+          if (i === 0) {
+            // Exibe o título na primeira etapa
+            document.querySelector('.step-title').classList.remove('hidden');
+          } else {
+            // Oculta o título nas etapas subsequentes
+            document.querySelector('.step-title').classList.add('hidden');
+          }
         } else {
           step.classList.add('hidden');
         }
