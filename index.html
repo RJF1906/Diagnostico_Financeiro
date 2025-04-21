@@ -1,173 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diagnóstico Financeiro - Veritus Capital</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .form-step {
-      transition: all 0.4s ease-in-out;
-      opacity: 0;
-      transform: translateX(30px);
-      position: absolute;
-      width: 100%;
-      left: 0;
-      top: 0;
-    }
-    .form-step.active {
-      position: relative;
-      opacity: 1;
-      transform: translateX(0);
-    }
-  </style>
-</head>
-<body class="bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] min-h-screen flex items-center justify-center p-4">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnóstico Financeiro - Veritus Capital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .fade-enter {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      .fade-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .fade-exit {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .fade-exit-active {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 min-h-screen flex items-center justify-center px-4 py-10">
+    <div class="w-full max-w-2xl bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl text-white">
+      <h2 class="text-3xl font-bold text-center mb-6">Diagnóstico Financeiro</h2>
+      <form id="multiStepForm" class="space-y-6">
+        <div class="form-step space-y-4 fade-enter-active">
+          <input type="text" id="nome" name="nome" required placeholder="Nome completo" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
+          <input type="email" id="email" name="email" required placeholder="E-mail" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
+          <input type="text" id="telefone" name="telefone" required placeholder="Telefone" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
+          <button type="button" class="next w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 transition">Próximo</button>
+        </div>
 
-  <div class="relative w-full max-w-2xl bg-white rounded-2xl shadow-xl p-6 sm:p-8 overflow-hidden">
-    <h2 class="text-2xl font-semibold text-center text-[#1e293b] mb-4">Diagnóstico Financeiro</h2>
-    
-    <form id="multiStepForm" class="relative h-[500px] sm:h-auto overflow-hidden">
-      <!-- Etapas do formulário -->
-      <div class="form-step active">
-        <div class="space-y-4">
-          <div>
-            <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
-            <input type="text" id="nome" name="nome" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+        <div class="form-step hidden space-y-4">
+          <p class="text-lg">Quais são suas dores financeiras?</p>
+          <div class="space-y-2">
+            <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai" /> Não sei para onde meu dinheiro vai</label>
+            <label><input type="checkbox" name="dores" value="Sempre endividado" /> Sempre endividado</label>
+            <label><input type="checkbox" name="dores" value="Medo de imprevistos" /> Medo de imprevistos</label>
+            <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos" /> Dificuldade em realizar sonhos</label>
+            <label><input type="checkbox" name="dores" value="Medo de investir" /> Medo de investir</label>
+            <label><input type="checkbox" name="dores" value="Patrimônio desorganizado" /> Patrimônio desorganizado</label>
           </div>
-          <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-            <input type="email" id="email" name="email" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
-          </div>
-          <div>
-            <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone</label>
-            <input type="text" id="telefone" name="telefone" required class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+          <div class="flex justify-between">
+            <button type="button" class="prev px-4 py-2 rounded-xl bg-gray-500 hover:bg-gray-600">Anterior</button>
+            <button type="button" class="next px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700">Próximo</button>
           </div>
         </div>
-        <div class="flex justify-end mt-6">
-          <button type="button" class="next bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Próximo</button>
+
+        <div class="form-step hidden space-y-4">
+          <p class="text-lg">Quais são suas metas?</p>
+          <div class="space-y-2">
+            <label><input type="checkbox" name="metas" value="Ter controle financeiro" /> Ter controle financeiro</label>
+            <label><input type="checkbox" name="metas" value="Quitar dívidas" /> Quitar dívidas</label>
+            <label><input type="checkbox" name="metas" value="Criar reserva de emergência" /> Criar reserva de emergência</label>
+            <label><input type="checkbox" name="metas" value="Realizar sonhos planejados" /> Realizar sonhos planejados</label>
+            <label><input type="checkbox" name="metas" value="Investir com segurança" /> Investir com segurança</label>
+            <label><input type="checkbox" name="metas" value="Planejar aposentadoria" /> Planejar aposentadoria</label>
+          </div>
+          <div class="flex justify-between">
+            <button type="button" class="prev px-4 py-2 rounded-xl bg-gray-500 hover:bg-gray-600">Anterior</button>
+            <button type="button" class="next px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700">Próximo</button>
+          </div>
         </div>
-      </div>
 
-      <div class="form-step hidden">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Quais são suas dores financeiras?</label>
-        <div class="space-y-2 text-sm text-gray-800">
-          <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai" class="mr-2"> Não sei para onde meu dinheiro vai</label>
-          <label><input type="checkbox" name="dores" value="Sempre endividado" class="mr-2"> Sempre endividado</label>
-          <label><input type="checkbox" name="dores" value="Medo de imprevistos" class="mr-2"> Medo de imprevistos</label>
-          <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos" class="mr-2"> Dificuldade em realizar sonhos</label>
-          <label><input type="checkbox" name="dores" value="Medo de investir" class="mr-2"> Medo de investir</label>
-          <label><input type="checkbox" name="dores" value="Patrimônio desorganizado" class="mr-2"> Patrimônio desorganizado</label>
+        <div class="form-step hidden space-y-4">
+          <textarea id="comentario" name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70"></textarea>
+          <div class="flex justify-between">
+            <button type="button" class="prev px-4 py-2 rounded-xl bg-gray-500 hover:bg-gray-600">Anterior</button>
+            <button type="submit" class="px-4 py-2 rounded-xl bg-green-600 hover:bg-green-700">Enviar</button>
+          </div>
         </div>
-        <div class="flex justify-between mt-6">
-          <button type="button" class="prev text-gray-600 hover:text-gray-800">Anterior</button>
-          <button type="button" class="next bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Próximo</button>
+
+        <div class="form-step hidden">
+          <p class="text-center text-xl font-semibold text-green-300">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
         </div>
-      </div>
+      </form>
+    </div>
 
-      <div class="form-step hidden">
-        <label class="block text-sm font-medium text-gray-700 mb-2">Quais são suas metas?</label>
-        <div class="space-y-2 text-sm text-gray-800">
-          <label><input type="checkbox" name="metas" value="Ter controle financeiro" class="mr-2"> Ter controle financeiro</label>
-          <label><input type="checkbox" name="metas" value="Quitar dívidas" class="mr-2"> Quitar dívidas</label>
-          <label><input type="checkbox" name="metas" value="Criar reserva de emergência" class="mr-2"> Criar reserva de emergência</label>
-          <label><input type="checkbox" name="metas" value="Realizar sonhos planejados" class="mr-2"> Realizar sonhos planejados</label>
-          <label><input type="checkbox" name="metas" value="Investir com segurança" class="mr-2"> Investir com segurança</label>
-          <label><input type="checkbox" name="metas" value="Planejar aposentadoria" class="mr-2"> Planejar aposentadoria</label>
-        </div>
-        <div class="flex justify-between mt-6">
-          <button type="button" class="prev text-gray-600 hover:text-gray-800">Anterior</button>
-          <button type="button" class="next bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Próximo</button>
-        </div>
-      </div>
+    <script>
+      const form = document.getElementById('multiStepForm');
+      const steps = Array.from(document.querySelectorAll('.form-step'));
+      const nextBtns = document.querySelectorAll('.next');
+      const prevBtns = document.querySelectorAll('.prev');
+      let currentStep = 0;
 
-      <div class="form-step hidden">
-        <label for="comentario" class="block text-sm font-medium text-gray-700 mb-2">Gostaria de nos contar mais alguma coisa?</label>
-        <textarea id="comentario" name="comentario" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none" rows="4"></textarea>
-        <div class="flex justify-between mt-6">
-          <button type="button" class="prev text-gray-600 hover:text-gray-800">Anterior</button>
-          <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition">Enviar</button>
-        </div>
-      </div>
+      function showStep(index) {
+        steps.forEach((step, i) => {
+          step.classList.add('hidden');
+          step.classList.remove('fade-enter-active');
+        });
+        steps[index].classList.remove('hidden');
+        steps[index].classList.add('fade-enter-active');
+      }
 
-      <div class="form-step hidden text-center">
-        <p class="text-green-600 font-semibold text-lg">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
-      </div>
-    </form>
-
-    <div id="sendingMessage" class="text-center text-sm text-gray-500 hidden mt-4">Dados estão sendo enviados...</div>
-  </div>
-
-  <script>
-    const form = document.getElementById('multiStepForm');
-    const steps = Array.from(document.querySelectorAll('.form-step'));
-    const nextBtns = document.querySelectorAll('.next');
-    const prevBtns = document.querySelectorAll('.prev');
-    const sendingMessage = document.getElementById('sendingMessage');
-    let currentStep = 0;
-
-    function showStep(index) {
-      steps.forEach((step, i) => {
-        step.classList.remove('active');
-        step.classList.add('hidden');
-      });
-      steps[index].classList.add('active');
-      steps[index].classList.remove('hidden');
-    }
-
-    nextBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const currentInputs = steps[currentStep].querySelectorAll('input[required]');
-        let valid = true;
-        currentInputs.forEach(input => {
-          if (!input.checkValidity()) {
-            input.reportValidity();
-            valid = false;
+      nextBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const currentInputs = steps[currentStep].querySelectorAll('input[required]');
+          let valid = true;
+          currentInputs.forEach((input) => {
+            if (!input.checkValidity()) {
+              input.reportValidity();
+              valid = false;
+            }
+          });
+          if (valid) {
+            currentStep++;
+            showStep(currentStep);
           }
         });
-        if (valid) {
-          currentStep++;
+      });
+
+      prevBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentStep--;
           showStep(currentStep);
-        }
+        });
       });
-    });
 
-    prevBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentStep--;
-        showStep(currentStep);
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
+        const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
+        formData.set('dores', dores);
+        formData.set('metas', metas);
+
+        fetch('https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec', {
+          method: 'POST',
+          body: formData,
+        })
+          .then(() => {
+            currentStep++;
+            showStep(currentStep);
+            form.reset();
+          })
+          .catch((err) => {
+            alert('Erro ao enviar os dados: ' + err.message);
+          });
       });
-    });
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      sendingMessage.classList.remove('hidden');
-
-      const formData = new FormData(form);
-      const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
-      const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
-      formData.set('dores', dores);
-      formData.set('metas', metas);
-
-      fetch('https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec', {
-        method: 'POST',
-        body: formData
-      }).then(() => {
-        sendingMessage.classList.add('hidden');
-        currentStep++;
-        showStep(currentStep);
-        form.reset();
-      }).catch(err => {
-        sendingMessage.classList.add('hidden');
-        alert("Erro ao enviar os dados: " + err.message);
-      });
-    });
-
-    showStep(currentStep);
-  </script>
-</body>
+      showStep(currentStep);
+    </script>
+  </body>
 </html>
