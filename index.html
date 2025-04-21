@@ -6,146 +6,211 @@
     <title>Diagnóstico Financeiro - Veritus Capital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-      .fade-enter {
-        opacity: 0;
-        transform: translateX(50px);
+      body {
+        background: linear-gradient(120deg, #0d0d0d, #1a1a1a);
+        overflow-x: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
-      .fade-enter-active {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+
+      .animated-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
       }
-      .fade-exit {
-        opacity: 1;
-        transform: translateX(0);
+
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
+        animation: float 10s infinite ease-in-out;
       }
-      .fade-exit-active {
-        opacity: 0;
-        transform: translateX(-50px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+
+      .circle:nth-child(1) {
+        width: 220px;
+        height: 220px;
+        top: 15%;
+        left: 25%;
+        animation-delay: 0s;
+      }
+      .circle:nth-child(2) {
+        width: 280px;
+        height: 280px;
+        top: 60%;
+        left: 70%;
+        animation-delay: 2s;
+      }
+      .circle:nth-child(3) {
+        width: 180px;
+        height: 180px;
+        top: 40%;
+        left: 40%;
+        animation-delay: 4s;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.1);
+        }
+      }
+
+      .form-step {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .form-step.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      .btn {
+        width: 100%;
+        padding: 10px;
+        background: linear-gradient(90deg, #FFB800, #F0A500);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: linear-gradient(90deg, #F0A500, #FFB800);
+      }
+
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
       }
     </style>
   </head>
-  <body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 min-h-screen flex items-center justify-center px-4 py-10">
-    <div class="w-full max-w-2xl bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl text-white">
-      <h2 class="text-3xl font-bold text-center mb-6">Diagnóstico Financeiro</h2>
-      <form id="multiStepForm" class="space-y-6">
-        <div class="form-step space-y-4 fade-enter-active">
+  <body>
+    <div class="animated-bg">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+
+    <div class="form-container">
+      <h2 class="text-3xl font-bold text-center mb-6 text-white">Diagnóstico Financeiro</h2>
+      <form id="multiStepForm">
+        <!-- Etapa 1: Dados Pessoais -->
+        <div class="form-step active">
           <input type="text" id="nome" name="nome" required placeholder="Nome completo" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
           <input type="email" id="email" name="email" required placeholder="E-mail" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
           <input type="text" id="telefone" name="telefone" required placeholder="Telefone" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70" />
-          <button type="button" class="next w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 transition">Próximo</button>
+          <button type="button" class="btn next">Próximo</button>
         </div>
 
-        <div class="form-step hidden space-y-4">
-          <p class="text-lg">Quais são suas dores financeiras?</p>
-          <div class="space-y-2">
-            <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai" /> Não sei para onde meu dinheiro vai</label>
-            <label><input type="checkbox" name="dores" value="Sempre endividado" /> Sempre endividado</label>
-            <label><input type="checkbox" name="dores" value="Medo de imprevistos" /> Medo de imprevistos</label>
-            <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos" /> Dificuldade em realizar sonhos</label>
-            <label><input type="checkbox" name="dores" value="Medo de investir" /> Medo de investir</label>
-            <label><input type="checkbox" name="dores" value="Patrimônio desorganizado" /> Patrimônio desorganizado</label>
+        <!-- Etapa 2: Dores -->
+        <div class="form-step">
+          <h3 class="text-xl font-semibold text-center text-white mb-4">Quais são suas dores financeiras?</h3>
+          <div class="space-y-3">
+            <label><input type="checkbox" name="dores" value="Não sei para onde meu dinheiro vai"> Não sei para onde meu dinheiro vai</label>
+            <label><input type="checkbox" name="dores" value="Sempre endividado"> Sempre endividado</label>
+            <label><input type="checkbox" name="dores" value="Medo de imprevistos"> Medo de imprevistos</label>
+            <label><input type="checkbox" name="dores" value="Dificuldade em realizar sonhos"> Dificuldade em realizar sonhos</label>
+            <label><input type="checkbox" name="dores" value="Medo de investir"> Medo de investir</label>
+            <label><input type="checkbox" name="dores" value="Patrimônio desorganizado"> Patrimônio desorganizado</label>
           </div>
-          <div class="flex justify-between">
-            <button type="button" class="prev px-4 py-2 rounded-xl bg-gray-500 hover:bg-gray-600">Anterior</button>
-            <button type="button" class="next px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700">Próximo</button>
-          </div>
+          <button type="button" class="btn prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
         </div>
 
-        <div class="form-step hidden space-y-4">
-          <p class="text-lg">Quais são suas metas?</p>
-          <div class="space-y-2">
-            <label><input type="checkbox" name="metas" value="Ter controle financeiro" /> Ter controle financeiro</label>
-            <label><input type="checkbox" name="metas" value="Quitar dívidas" /> Quitar dívidas</label>
-            <label><input type="checkbox" name="metas" value="Criar reserva de emergência" /> Criar reserva de emergência</label>
-            <label><input type="checkbox" name="metas" value="Realizar sonhos planejados" /> Realizar sonhos planejados</label>
-            <label><input type="checkbox" name="metas" value="Investir com segurança" /> Investir com segurança</label>
-            <label><input type="checkbox" name="metas" value="Planejar aposentadoria" /> Planejar aposentadoria</label>
+        <!-- Etapa 3: Metas -->
+        <div class="form-step">
+          <h3 class="text-xl font-semibold text-center text-white mb-4">Quais são suas metas?</h3>
+          <div class="space-y-3">
+            <label><input type="checkbox" name="metas" value="Ter controle financeiro"> Ter controle financeiro</label>
+            <label><input type="checkbox" name="metas" value="Quitar dívidas"> Quitar dívidas</label>
+            <label><input type="checkbox" name="metas" value="Criar reserva de emergência"> Criar reserva de emergência</label>
+            <label><input type="checkbox" name="metas" value="Realizar sonhos planejados"> Realizar sonhos planejados</label>
+            <label><input type="checkbox" name="metas" value="Investir com segurança"> Investir com segurança</label>
+            <label><input type="checkbox" name="metas" value="Planejar aposentadoria"> Planejar aposentadoria</label>
           </div>
-          <div class="flex justify-between">
-            <button type="button" class="prev px-4 py-2 rounded-xl bg-gray-500 hover:bg-gray-600">Anterior</button>
-            <button type="button" class="next px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700">Próximo</button>
-          </div>
+          <button type="button" class="btn prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
         </div>
 
-        <div class="form-step hidden space-y-4">
-          <textarea id="comentario" name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70"></textarea>
-          <div class="flex justify-between">
-            <button type="button" class="prev px-4 py-2 rounded-xl bg-gray-500 hover:bg-gray-600">Anterior</button>
-            <button type="submit" class="px-4 py-2 rounded-xl bg-green-600 hover:bg-green-700">Enviar</button>
-          </div>
+        <!-- Etapa 4: Comentário final + Envio -->
+        <div class="form-step">
+          <textarea name="comentario" placeholder="Gostaria de nos contar mais alguma coisa?" class="w-full p-3 rounded-lg bg-white/10 backdrop-blur border border-white/20 placeholder-white/70"></textarea>
+          <button type="button" class="btn prev">Anterior</button>
+          <button type="submit" class="btn">Enviar</button>
         </div>
 
-        <div class="form-step hidden">
-          <p class="text-center text-xl font-semibold text-green-300">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
+        <!-- Etapa 5: Sucesso -->
+        <div class="form-step">
+          <p class="text-lg font-semibold text-center text-white">Formulário enviado com sucesso! Em breve entraremos em contato.</p>
         </div>
       </form>
     </div>
 
     <script>
-      const form = document.getElementById('multiStepForm');
-      const steps = Array.from(document.querySelectorAll('.form-step'));
-      const nextBtns = document.querySelectorAll('.next');
-      const prevBtns = document.querySelectorAll('.prev');
-      let currentStep = 0;
+      document.addEventListener("DOMContentLoaded", () => {
+        const steps = document.querySelectorAll('.form-step');
+        const nextBtns = document.querySelectorAll('.next');
+        const prevBtns = document.querySelectorAll('.prev');
+        let currentStep = 0;
 
-      function showStep(index) {
-        steps.forEach((step, i) => {
-          step.classList.add('hidden');
-          step.classList.remove('fade-enter-active');
-        });
-        steps[index].classList.remove('hidden');
-        steps[index].classList.add('fade-enter-active');
-      }
+        function showStep(index) {
+          steps.forEach((step, i) => {
+            step.classList.toggle('active', i === index);
+          });
+        }
 
-      nextBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const currentInputs = steps[currentStep].querySelectorAll('input[required]');
-          let valid = true;
-          currentInputs.forEach((input) => {
-            if (!input.checkValidity()) {
-              input.reportValidity();
-              valid = false;
+        nextBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const currentInputs = steps[currentStep].querySelectorAll('input[required]');
+            let valid = true;
+            currentInputs.forEach(input => {
+              if (!input.checkValidity()) {
+                input.reportValidity();
+                valid = false;
+              }
+            });
+            if (valid) {
+              currentStep++;
+              showStep(currentStep);
             }
           });
-          if (valid) {
-            currentStep++;
-            showStep(currentStep);
-          }
         });
-      });
 
-      prevBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          currentStep--;
-          showStep(currentStep);
-        });
-      });
-
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
-        const metas = Array.from(document.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
-        formData.set('dores', dores);
-        formData.set('metas', metas);
-
-        fetch('https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec', {
-          method: 'POST',
-          body: formData,
-        })
-          .then(() => {
-            currentStep++;
+        prevBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentStep--;
             showStep(currentStep);
-            form.reset();
-          })
-          .catch((err) => {
-            alert('Erro ao enviar os dados: ' + err.message);
           });
-      });
+        });
 
-      showStep(currentStep);
+        document.getElementById('multiStepForm').addEventListener('submit', e => {
+          e.preventDefault();
+          alert("Dados estão sendo enviados...");
+          // Simulate sending data to a server
+          setTimeout(() => {
+            alert("Formulário enviado com sucesso!");
+            showStep(currentStep + 1);
+          }, 2000); // Simulate a delay for sending
+        });
+
+        showStep(currentStep);
+      });
     </script>
   </body>
 </html>
