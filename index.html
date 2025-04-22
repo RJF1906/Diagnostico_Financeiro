@@ -234,7 +234,7 @@
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
     <!-- O título só aparece na primeira etapa -->
-    <h2 class="step-title text-2xl font-bold mb-6 first-step-title">Queremos entender melhor sua vida financeira</h2>
+    <h2 id="titulo-primeira-etapa" class="step-title text-2xl font-bold mb-6">Queremos entender melhor sua vida financeira</h2>
 
     <form id="multiStepForm" class="space-y-6">
       <!-- Etapa 1 -->
@@ -337,6 +337,10 @@
         formSteps[currentStep].classList.add('hidden');
         currentStep++;
         formSteps[currentStep].classList.remove('hidden');
+        // Esconde o título na primeira etapa, após avançar
+        if (currentStep > 0) {
+          document.getElementById("titulo-primeira-etapa").classList.add("hidden");
+        }
       });
     });
 
@@ -345,6 +349,10 @@
         formSteps[currentStep].classList.add('hidden');
         currentStep--;
         formSteps[currentStep].classList.remove('hidden');
+        // Exibe o título na primeira etapa, se voltar para ela
+        if (currentStep === 0) {
+          document.getElementById("titulo-primeira-etapa").classList.remove("hidden");
+        }
       });
     });
   </script>
