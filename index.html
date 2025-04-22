@@ -170,7 +170,7 @@
         </div>
         <div>
           <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="telefoneErro" class="error-message">Informe um telefone válido, usando apenas números, parênteses, traços ou espaços.</div>
+          <div id="telefoneErro" class="error-message">Informe um telefone válido.</div>
         </div>
         <div class="button-container">
           <button type="button" class="btn next">Próximo</button>
@@ -183,7 +183,8 @@
         <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
         <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
         <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
-        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade.</div>
+         <label><input type="checkbox" name="dores" value="Tenho outras"> Tenho outras</label><br>
+        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade ou clique em tenho outras.</div>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
           <button type="button" class="btn next">Próximo</button>
@@ -195,8 +196,9 @@
         <h2 class="step-title text-2xl font-bold text-left">Selecione suas metas/objetivos:</h2>
         <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
         <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
+        <label><input type="checkbox" name="metas" value="Tenho outras"> Tenho outras</label><br>
         <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
-        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta.</div>
+        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta ou tenho outras.</div>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
           <button type="button" class="btn next">Próximo</button>
