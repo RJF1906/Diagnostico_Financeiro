@@ -211,38 +211,18 @@
       padding: 10px;
     }
 
-    /* Caixa de diálogo de envio */
-    .loading-dialog {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 2;
-    }
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .meta-item {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-    .loading-box {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .loading-box img {
-      width: 50px;
-      animation: rotate 2s linear infinite;
-    }
-
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      .meta-text {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
     }
   </style>
 </head>
@@ -257,26 +237,91 @@
     <h2 id="titulo-primeira-etapa" class="step-title text-2xl font-bold mb-6">Queremos entender melhor sua vida financeira</h2>
 
     <form id="multiStepForm" class="space-y-6">
-      <!-- Etapas do formulário (como no código original) -->
+      <!-- Etapa 1 -->
+      <div class="form-step">
+        <div>
+          <input type="text" name="nome" id="nome" placeholder="Nome completo" required pattern="^[A-Za-zÀ-ÿ\s]+$" class="w-full p-2 bg-black border border-white text-white">
+          <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente.</div>
+        </div>
+        <div>
+          <input type="email" name="email" id="email" placeholder="E-mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full p-2 bg-black border border-white text-white">
+          <div id="emailErro" class="error-message">Informe um e-mail válido (se preenchido).</div>
+        </div>
+        <div>
+          <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\s]+$" class="w-full p-2 bg-black border border-white text-white">
+          <div id="telefoneErro" class="error-message">Informe um telefone válido.</div>
+        </div>
+        <div class="button-container">
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+      </div>
 
-      <!-- Etapa 4 com botão Enviar -->
+      <!-- Etapa 2 -->
+      <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-left">Selecione suas dificuldades:</h2>
+        <div class="dificuldades-list">
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Alta carga tributária">
+            <span class="dificuldade-text">Alta carga tributária: Descrição detalhada sobre essa dificuldade financeira e como ela afeta o dia a dia.</span>
+          </label>
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Falta de planejamento">
+            <span class="dificuldade-text">Falta de planejamento: Muitos acabam não conseguindo administrar seu orçamento devido à falta de um bom planejamento financeiro.</span>
+          </label>
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Baixa rentabilidade">
+            <span class="dificuldade-text">Baixa rentabilidade: Uma dificuldade comum entre investidores e empresas que buscam aumentar seus lucros.</span>
+          </label>
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Tenho outras">
+            <span class="dificuldade-text">Tenho outras: Caso você tenha alguma outra dificuldade financeira que não foi mencionada, sinta-se à vontade para selecionar.</span>
+          </label>
+        </div>
+        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade ou esccolha a opção tenho outras.</div>
+        <div class="button-container">
+          <button type="button" class="btn btn-prev prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-left">Selecione suas metas/objetivos:</h2>
+        <div class="metas-list">
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Aposentadoria">
+            <span class="meta-text">Aposentadoria: Comece a planejar sua aposentadoria de maneira mais eficiente para garantir seu futuro financeiro.</span>
+          </label>
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Compra de imóvel">
+            <span class="meta-text">Compra de imóvel: Realize o sonho da casa própria com planejamento e estratégias financeiras adequadas.</span>
+          </label>
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Tenho outras">
+            <span class="meta-text">Tenho outras: Caso você tenha outras metas que não foram mencionadas, selecione essa opção.</span>
+          </label>
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Viagem internacional">
+            <span class="meta-text">Viagem internacional: Planeje suas finanças para viajar para destinos internacionais com conforto e segurança financeira.</span>
+          </label>
+        </div>
+        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta ou escolha a opção tenho outras.</div>
+        <div class="button-container">
+          <button type="button" class="btn btn-prev prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 4 -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-left">Se houver, escreva suas dificuldades e metas que não foram citadas:</h2>
         <textarea name="comentarios" placeholder="Escreva aqui..." class="w-full p-2 bg-black border border-white text-white"></textarea>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
-          <button type="button" id="submitBtn" class="btn btn-submit">Enviar</button>
+          <button type="submit" class="btn btn-submit">Enviar</button>
         </div>
       </div>
     </form>
-  </div>
-
-  <!-- Caixa de diálogo de carregamento -->
-  <div id="loadingDialog" class="loading-dialog hidden">
-    <div class="loading-box">
-      <img src="https://i.gifer.com/1zZu.gif" alt="Loading"> <!-- Pode usar qualquer animação de carregamento -->
-      <p>Por favor, aguarde enquanto seus dados estão sendo enviados...</p>
-    </div>
   </div>
 
   <script>
@@ -284,16 +329,56 @@
     const nextButtons = document.querySelectorAll('.next');
     const prevButtons = document.querySelectorAll('.prev');
     const formSteps = document.querySelectorAll('.form-step');
-    const submitBtn = document.getElementById('submitBtn');
-    const loadingDialog = document.getElementById('loadingDialog');
     let currentStep = 0;
 
     nextButtons.forEach(button => {
       button.addEventListener('click', () => {
         const currentStepForm = formSteps[currentStep];
+        // Validação de dados na etapa atual
+        if (currentStep === 0) {
+          const nome = document.getElementById("nome");
+          const telefone = document.getElementById("telefone");
+          let isValid = true;
+
+          if (!nome.value.match(/^[A-Za-zÀ-ÿ\s]+$/)) {
+            document.getElementById("nomeErro").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("nomeErro").style.display = "none";
+          }
+
+          if (!telefone.value.match(/^[\d\(\)\-\s]+$/)) {
+            document.getElementById("telefoneErro").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("telefoneErro").style.display = "none";
+          }
+
+          if (!isValid) return; // Se não for válido, não avança
+
+        } else if (currentStep === 1) {
+          const dores = document.querySelectorAll("input[name='dores']:checked");
+          if (dores.length === 0) {
+            document.getElementById("erroDores").style.display = "block";
+            return;
+          } else {
+            document.getElementById("erroDores").style.display = "none";
+          }
+
+        } else if (currentStep === 2) {
+          const metas = document.querySelectorAll("input[name='metas']:checked");
+          if (metas.length === 0) {
+            document.getElementById("erroMetas").style.display = "block";
+            return;
+          } else {
+            document.getElementById("erroMetas").style.display = "none";
+          }
+        }
+
         formSteps[currentStep].classList.add('hidden');
         currentStep++;
         formSteps[currentStep].classList.remove('hidden');
+        // Esconde o título na primeira etapa, após avançar
         if (currentStep > 0) {
           document.getElementById("titulo-primeira-etapa").classList.add("hidden");
         }
@@ -305,32 +390,10 @@
         formSteps[currentStep].classList.add('hidden');
         currentStep--;
         formSteps[currentStep].classList.remove('hidden');
+        // Exibe o título na primeira etapa, se voltar para ela
         if (currentStep === 0) {
           document.getElementById("titulo-primeira-etapa").classList.remove("hidden");
         }
-      });
-    });
-
-    submitBtn.addEventListener('click', function() {
-      const formData = new FormData(document.getElementById('multiStepForm'));
-
-      // Exibe o loading dialog
-      loadingDialog.classList.remove('hidden');
-      
-      // Envia os dados para o Google Script API
-      fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        loadingDialog.classList.add('hidden');
-        alert('Dados enviados com sucesso!');
-        window.location.reload(); // Recarrega a página para voltar à primeira etapa
-      })
-      .catch(error => {
-        loadingDialog.classList.add('hidden');
-        alert('Houve um erro no envio dos dados. Tente novamente.');
       });
     });
   </script>
