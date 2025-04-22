@@ -1,133 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diagnóstico Financeiro | Veritus Capital</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico Financeiro - Veritus Capital</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans">
-  <div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
-    <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Diagnóstico Financeiro</h1>
-    <form id="multiStepForm" class="space-y-6">
-      
-      <!-- Etapa 1: Contato -->
-      <div class="step" id="step1">
-        <label class="block mb-2 font-semibold">Nome completo</label>
-        <input type="text" name="nome" required class="w-full p-3 border rounded-xl" />
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-        <label class="block mt-4 mb-2 font-semibold">E-mail</label>
-        <input type="email" name="email" required class="w-full p-3 border rounded-xl" />
+  <div class="max-w-xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center text-indigo-600">Diagnóstico Financeiro</h1>
 
-        <label class="block mt-4 mb-2 font-semibold">Telefone</label>
-        <input type="tel" name="telefone" required class="w-full p-3 border rounded-xl" />
-
-        <button type="button" onclick="nextStep()" class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Próximo</button>
-      </div>
-
-      <!-- Etapa 2: Dores -->
-      <div class="step hidden" id="step2">
-        <label class="block mb-4 font-semibold text-lg">Quais dessas situações mais se aproximam da sua realidade hoje?</label>
-        <div class="space-y-2">
-          <label><input type="checkbox" name="dores" value="Ganho dinheiro mas não vejo para onde vai" class="mr-2">Ganho dinheiro mas não vejo para onde vai</label><br>
-          <label><input type="checkbox" name="dores" value="Me sinto estagnado financeiramente" class="mr-2">Me sinto estagnado financeiramente</label><br>
-          <label><input type="checkbox" name="dores" value="Já tentei planilhas, apps e não funcionou" class="mr-2">Já tentei planilhas, apps e não funcionou</label><br>
-          <label><input type="checkbox" name="dores" value="Tenho dificuldade em guardar dinheiro" class="mr-2">Tenho dificuldade em guardar dinheiro</label><br>
-          <label><input type="checkbox" name="dores" value="Quero começar a investir e não sei como" class="mr-2">Quero começar a investir e não sei como</label><br>
-          <label><input type="checkbox" name="dores" value="Sou autônomo e não tenho salário fixo" class="mr-2">Sou autônomo e não tenho salário fixo</label>
+    <form id="diagnosticoForm" class="space-y-6">
+      <!-- Etapa 1 -->
+      <div class="form-step block">
+        <div>
+          <label class="block mb-1 font-medium">Nome completo *</label>
+          <input type="text" name="nome" required class="w-full border p-2 rounded-md" />
         </div>
-        <div class="flex justify-between mt-6">
-          <button type="button" onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl hover:bg-gray-400">Voltar</button>
-          <button type="button" onclick="nextStep()" class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Próximo</button>
+        <div>
+          <label class="block mb-1 font-medium">E-mail *</label>
+          <input type="email" name="email" required class="w-full border p-2 rounded-md" />
+        </div>
+        <div>
+          <label class="block mb-1 font-medium">Telefone *</label>
+          <input type="tel" name="telefone" required class="w-full border p-2 rounded-md" />
         </div>
       </div>
 
-      <!-- Etapa 3: Metas -->
-      <div class="step hidden" id="step3">
-        <label class="block mb-4 font-semibold text-lg">Quais dessas metas você deseja alcançar?</label>
-        <div class="space-y-2">
-          <label><input type="checkbox" name="metas" value="Ter liberdade financeira" class="mr-2">Ter liberdade financeira</label><br>
-          <label><input type="checkbox" name="metas" value="Ter clareza e controle sobre meu dinheiro" class="mr-2">Ter clareza e controle sobre meu dinheiro</label><br>
-          <label><input type="checkbox" name="metas" value="Montar uma reserva de emergência" class="mr-2">Montar uma reserva de emergência</label><br>
-          <label><input type="checkbox" name="metas" value="Quitar dívidas e sair do vermelho" class="mr-2">Quitar dívidas e sair do vermelho</label><br>
-          <label><input type="checkbox" name="metas" value="Investir para realizar sonhos" class="mr-2">Investir para realizar sonhos</label><br>
-          <label><input type="checkbox" name="metas" value="Construir patrimônio" class="mr-2">Construir patrimônio</label>
-        </div>
-        <div class="flex justify-between mt-6">
-          <button type="button" onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl hover:bg-gray-400">Voltar</button>
-          <button type="button" onclick="nextStep()" class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Próximo</button>
-        </div>
+      <!-- Etapa 2 -->
+      <div class="form-step hidden">
+        <label class="block mb-1 font-medium">Quais dessas dores você enfrenta atualmente? *</label>
+        <textarea name="dores" required rows="5" class="w-full border p-2 rounded-md"></textarea>
       </div>
 
-      <!-- Etapa 4: Comentários -->
-      <div class="step hidden" id="step4">
-        <label class="block mb-2 font-semibold">Se quiser, deixe um comentário final:</label>
-        <textarea name="comentarios" rows="4" class="w-full p-3 border rounded-xl"></textarea>
-        <div class="flex justify-between mt-6">
-          <button type="button" onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl hover:bg-gray-400">Voltar</button>
-          <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700">Enviar</button>
-        </div>
+      <!-- Etapa 3 -->
+      <div class="form-step hidden">
+        <label class="block mb-1 font-medium">Quais são seus principais objetivos financeiros? *</label>
+        <textarea name="metas" required rows="5" class="w-full border p-2 rounded-md"></textarea>
+      </div>
+
+      <!-- Etapa 4 -->
+      <div class="form-step hidden">
+        <label class="block mb-1 font-medium">Deseja nos contar algo mais?</label>
+        <textarea name="comentario" rows="4" class="w-full border p-2 rounded-md"></textarea>
+      </div>
+
+      <!-- Botões de navegação -->
+      <div class="flex justify-between">
+        <button type="button" id="voltarBtn" class="bg-gray-300 px-4 py-2 rounded-md text-sm hidden">Voltar</button>
+        <button type="button" id="proximoBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm">Próximo</button>
+        <button type="submit" id="enviarBtn" class="bg-green-600 text-white px-4 py-2 rounded-md text-sm hidden">Enviar</button>
       </div>
     </form>
+
+    <div id="mensagem" class="text-center mt-4 font-medium"></div>
   </div>
 
   <script>
-    const steps = document.querySelectorAll(".step");
+    const form = document.getElementById('diagnosticoForm');
+    const steps = document.querySelectorAll('.form-step');
+    const btnProximo = document.getElementById('proximoBtn');
+    const btnVoltar = document.getElementById('voltarBtn');
+    const btnEnviar = document.getElementById('enviarBtn');
+    const mensagem = document.getElementById('mensagem');
     let currentStep = 0;
 
-    function showStep(index) {
+    function mostrarEtapa(index) {
       steps.forEach((step, i) => {
-        step.classList.toggle("hidden", i !== index);
+        step.classList.toggle('hidden', i !== index);
       });
+      btnVoltar.classList.toggle('hidden', index === 0);
+      btnProximo.classList.toggle('hidden', index === steps.length - 1);
+      btnEnviar.classList.toggle('hidden', index !== steps.length - 1);
     }
 
-    function nextStep() {
-      if (currentStep < steps.length - 1) {
-        currentStep++;
-        showStep(currentStep);
+    btnProximo.addEventListener('click', () => {
+      const inputs = steps[currentStep].querySelectorAll('input, textarea');
+      for (const input of inputs) {
+        if (!input.checkValidity()) {
+          input.reportValidity();
+          return;
+        }
       }
-    }
+      currentStep++;
+      mostrarEtapa(currentStep);
+    });
 
-    function prevStep() {
-      if (currentStep > 0) {
-        currentStep--;
-        showStep(currentStep);
-      }
-    }
+    btnVoltar.addEventListener('click', () => {
+      currentStep--;
+      mostrarEtapa(currentStep);
+    });
 
-    showStep(currentStep); // Inicializa com o primeiro passo
-
-    document.getElementById("multiStepForm").addEventListener("submit", function(e) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const dados = Object.fromEntries(new FormData(form).entries());
 
-      const form = e.target;
+      // Substitua pela sua URL do Google Apps Script
+      const endpoint = "https://script.google.com/macros/s/AKfycbzzBh24qqPxFNSixnnZcXHFNogM89glRXHQeZeh_VFx-Lcuv5q1l2kSe97JCVlJHFf5Ww/exec";
 
-      const dados = {
-        nome: form.nome.value.trim(),
-        email: form.email.value.trim(),
-        telefone: form.telefone.value.trim(),
-        dores: Array.from(form.querySelectorAll('input[name="dores"]:checked')).map(el => el.value),
-        metas: Array.from(form.querySelectorAll('input[name="metas"]:checked')).map(el => el.value),
-        comentarios: form.comentarios.value.trim()
-      };
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        });
 
-      fetch("https://script.google.com/macros/s/AKfycby-fPcYIk_A6E5orwKvvPtExXDm8YjI76WMoVoZ-AUCTiBHkJpzgqPMUUgaIZEoOpBvqg/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados)
-      })
-      .then(res => res.json())
-      .then(response => {
-        alert("Formulário enviado com sucesso!");
         form.reset();
         currentStep = 0;
-        showStep(currentStep);
-      })
-      .catch(error => {
-        alert("Erro ao enviar. Tente novamente.");
-        console.error(error);
-      });
+        mostrarEtapa(currentStep);
+        mensagem.textContent = "Diagnóstico enviado com sucesso!";
+        mensagem.className = "text-green-600";
+      } catch (error) {
+        mensagem.textContent = "Erro ao enviar. Tente novamente.";
+        mensagem.className = "text-red-600";
+      }
     });
+
+    mostrarEtapa(currentStep);
   </script>
 </body>
 </html>
