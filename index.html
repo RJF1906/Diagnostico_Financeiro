@@ -1,399 +1,131 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diagnóstico Financeiro - Veritus Capital</title>
+  <title>Diagnóstico Financeiro | Veritus Capital</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-    }
-
-    h2 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    body {
-      background-image: url('https://raw.githubusercontent.com/RJF1906/Diagnostico_Financeiro/main/veritus.JPG');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
-      background-size: cover;
-      overflow-x: hidden;
-      color: white;
-    }
-
-    .animated-lines {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .animated-lines span {
-      position: absolute;
-      top: -100%;
-      width: 3px;
-      height: 200%;
-      background: gold;
-      animation: moveLine 12s linear infinite;
-      opacity: 0.25;
-    }
-
-    @keyframes moveLine {
-      0% { top: -100%; }
-      50% { top: 100%; }
-      100% { top: -100%; }
-    }
-
-    .animated-lines span:nth-child(odd) {
-      animation-name: moveUp;
-    }
-
-    @keyframes moveUp {
-      0% { top: 100%; }
-      50% { top: -100%; }
-      100% { top: 100%; }
-    }
-
-    .form-step {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .form-step:not(.hidden) {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 16px;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-radius: 50px;
-      border: 2px solid transparent;
-      background-color: #FFB800;
-      color: #222;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      background-color: #f8a200;
-      color: #fff;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn:focus {
-      outline: none;
-    }
-
-    .btn-prev {
-      background-color: white;
-      color: black;
-      border-color: white;
-    }
-
-    .btn-prev:hover {
-      background-color: #ddd;
-      color: #222;
-    }
-
-    .btn-submit {
-      background-color: #28a745;
-      color: white;
-      border-color: #28a745;
-    }
-
-    .btn-submit:hover {
-      background-color: #218838;
-      border-color: #218838;
-    }
-
-    .button-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .step-title {
-      display: block;
-      margin-bottom: 2rem;
-      margin-top: -1rem;
-    }
-
-    .step-title.hidden {
-      display: none;
-    }
-
-    .error-message {
-      color: #f87171;
-      font-size: 0.875rem;
-      margin-top: 0.25rem;
-      display: none;
-    }
-
-    /* Estilo para a Etapa 2 */
-    .dificuldades-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding-left: 20px;
-    }
-
-    .dificuldade-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2rem;
-      line-height: 1.5;
-      color: white;
-    }
-
-    .dificuldade-item input {
-      accent-color: gold;
-    }
-
-    .dificuldade-text {
-      max-width: 100%;
-      word-wrap: break-word;
-    }
-
-    .dificuldade-item:hover {
-      background-color: rgba(255, 184, 0, 0.2);
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    /* Estilo para a Etapa 3 */
-    .metas-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding-left: 20px;
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.2rem;
-      line-height: 1.5;
-      color: white;
-    }
-
-    .meta-item input {
-      accent-color: gold;
-    }
-
-    .meta-text {
-      max-width: 100%;
-      word-wrap: break-word;
-    }
-
-    .meta-item:hover {
-      background-color: rgba(255, 184, 0, 0.2);
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-      .meta-item {
-        font-size: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .meta-text {
-        font-size: 1rem;
-        line-height: 1.4;
-      }
-    }
-  </style>
 </head>
-<body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
-  <div class="animated-lines">
-    <span style="left: 5%"></span><span style="left: 15%"></span><span style="left: 25%"></span><span style="left: 35%"></span><span style="left: 45%"></span>
-    <span style="left: 55%"></span><span style="left: 65%"></span><span style="left: 75%"></span><span style="left: 85%"></span><span style="left: 95%"></span>
-  </div>
-
-  <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
-    <!-- O título só aparece na primeira etapa -->
-    <h2 id="titulo-primeira-etapa" class="step-title text-2xl font-bold mb-6">Queremos entender melhor sua vida financeira</h2>
-
+<body class="bg-gray-50 font-sans">
+  <div class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
+    <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Diagnóstico Financeiro</h1>
     <form id="multiStepForm" class="space-y-6">
-      <!-- Etapa 1 -->
-      <div class="form-step">
-        <div>
-          <input type="text" name="nome" id="nome" placeholder="Nome completo" required pattern="^[A-Za-zÀ-ÿ\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente.</div>
+      
+      <!-- Etapa 1: Contato -->
+      <div class="step" id="step1">
+        <label class="block mb-2 font-semibold">Nome completo</label>
+        <input type="text" name="nome" required class="w-full p-3 border rounded-xl" />
+
+        <label class="block mt-4 mb-2 font-semibold">E-mail</label>
+        <input type="email" name="email" required class="w-full p-3 border rounded-xl" />
+
+        <label class="block mt-4 mb-2 font-semibold">Telefone</label>
+        <input type="tel" name="telefone" required class="w-full p-3 border rounded-xl" />
+
+        <button type="button" onclick="nextStep()" class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Próximo</button>
+      </div>
+
+      <!-- Etapa 2: Dores -->
+      <div class="step hidden" id="step2">
+        <label class="block mb-4 font-semibold text-lg">Quais dessas situações mais se aproximam da sua realidade hoje?</label>
+        <div class="space-y-2">
+          <label><input type="checkbox" name="dores" value="Ganho dinheiro mas não vejo para onde vai" class="mr-2">Ganho dinheiro mas não vejo para onde vai</label><br>
+          <label><input type="checkbox" name="dores" value="Me sinto estagnado financeiramente" class="mr-2">Me sinto estagnado financeiramente</label><br>
+          <label><input type="checkbox" name="dores" value="Já tentei planilhas, apps e não funcionou" class="mr-2">Já tentei planilhas, apps e não funcionou</label><br>
+          <label><input type="checkbox" name="dores" value="Tenho dificuldade em guardar dinheiro" class="mr-2">Tenho dificuldade em guardar dinheiro</label><br>
+          <label><input type="checkbox" name="dores" value="Quero começar a investir e não sei como" class="mr-2">Quero começar a investir e não sei como</label><br>
+          <label><input type="checkbox" name="dores" value="Sou autônomo e não tenho salário fixo" class="mr-2">Sou autônomo e não tenho salário fixo</label>
         </div>
-        <div>
-          <input type="email" name="email" id="email" placeholder="E-mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="emailErro" class="error-message">Informe um e-mail válido (se preenchido).</div>
-        </div>
-        <div>
-          <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="telefoneErro" class="error-message">Informe um telefone válido.</div>
-        </div>
-        <div class="button-container">
-          <button type="button" class="btn next">Próximo</button>
+        <div class="flex justify-between mt-6">
+          <button type="button" onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl hover:bg-gray-400">Voltar</button>
+          <button type="button" onclick="nextStep()" class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Próximo</button>
         </div>
       </div>
 
-      <!-- Etapa 2 -->
-      <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left">Selecione suas dificuldades:</h2>
-        <div class="dificuldades-list">
-          <label class="dificuldade-item">
-            <input type="checkbox" name="dores" value="Alta carga tributária">
-            <span class="dificuldade-text">Alta carga tributária: Descrição detalhada sobre essa dificuldade financeira e como ela afeta o dia a dia.</span>
-          </label>
-          <label class="dificuldade-item">
-            <input type="checkbox" name="dores" value="Falta de planejamento">
-            <span class="dificuldade-text">Falta de planejamento: Muitos acabam não conseguindo administrar seu orçamento devido à falta de um bom planejamento financeiro.</span>
-          </label>
-          <label class="dificuldade-item">
-            <input type="checkbox" name="dores" value="Baixa rentabilidade">
-            <span class="dificuldade-text">Baixa rentabilidade: Uma dificuldade comum entre investidores e empresas que buscam aumentar seus lucros.</span>
-          </label>
-          <label class="dificuldade-item">
-            <input type="checkbox" name="dores" value="Tenho outras">
-            <span class="dificuldade-text">Tenho outras: Caso você tenha alguma outra dificuldade financeira que não foi mencionada, sinta-se à vontade para selecionar.</span>
-          </label>
+      <!-- Etapa 3: Metas -->
+      <div class="step hidden" id="step3">
+        <label class="block mb-4 font-semibold text-lg">Quais dessas metas você deseja alcançar?</label>
+        <div class="space-y-2">
+          <label><input type="checkbox" name="metas" value="Ter liberdade financeira" class="mr-2">Ter liberdade financeira</label><br>
+          <label><input type="checkbox" name="metas" value="Ter clareza e controle sobre meu dinheiro" class="mr-2">Ter clareza e controle sobre meu dinheiro</label><br>
+          <label><input type="checkbox" name="metas" value="Montar uma reserva de emergência" class="mr-2">Montar uma reserva de emergência</label><br>
+          <label><input type="checkbox" name="metas" value="Quitar dívidas e sair do vermelho" class="mr-2">Quitar dívidas e sair do vermelho</label><br>
+          <label><input type="checkbox" name="metas" value="Investir para realizar sonhos" class="mr-2">Investir para realizar sonhos</label><br>
+          <label><input type="checkbox" name="metas" value="Construir patrimônio" class="mr-2">Construir patrimônio</label>
         </div>
-        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade ou esccolha a opção tenho outras.</div>
-        <div class="button-container">
-          <button type="button" class="btn btn-prev prev">Anterior</button>
-          <button type="button" class="btn next">Próximo</button>
+        <div class="flex justify-between mt-6">
+          <button type="button" onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl hover:bg-gray-400">Voltar</button>
+          <button type="button" onclick="nextStep()" class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Próximo</button>
         </div>
       </div>
 
-      <!-- Etapa 3 -->
-      <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left">Selecione suas metas/objetivos:</h2>
-        <div class="metas-list">
-          <label class="meta-item">
-            <input type="checkbox" name="metas" value="Aposentadoria">
-            <span class="meta-text">Aposentadoria: Comece a planejar sua aposentadoria de maneira mais eficiente para garantir seu futuro financeiro.</span>
-          </label>
-          <label class="meta-item">
-            <input type="checkbox" name="metas" value="Compra de imóvel">
-            <span class="meta-text">Compra de imóvel: Realize o sonho da casa própria com planejamento e estratégias financeiras adequadas.</span>
-          </label>
-          <label class="meta-item">
-            <input type="checkbox" name="metas" value="Tenho outras">
-            <span class="meta-text">Tenho outras: Caso você tenha outras metas que não foram mencionadas, selecione essa opção.</span>
-          </label>
-          <label class="meta-item">
-            <input type="checkbox" name="metas" value="Viagem internacional">
-            <span class="meta-text">Viagem internacional: Planeje suas finanças para viajar para destinos internacionais com conforto e segurança financeira.</span>
-          </label>
-        </div>
-        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta ou escolha a opção tenho outras.</div>
-        <div class="button-container">
-          <button type="button" class="btn btn-prev prev">Anterior</button>
-          <button type="button" class="btn next">Próximo</button>
-        </div>
-      </div>
-
-      <!-- Etapa 4 -->
-      <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left">Se houver, escreva suas dificuldades e metas que não foram citadas:</h2>
-        <textarea name="comentarios" placeholder="Escreva aqui..." class="w-full p-2 bg-black border border-white text-white"></textarea>
-        <div class="button-container">
-          <button type="button" class="btn btn-prev prev">Anterior</button>
-          <button type="submit" class="btn btn-submit">Enviar</button>
+      <!-- Etapa 4: Comentários -->
+      <div class="step hidden" id="step4">
+        <label class="block mb-2 font-semibold">Se quiser, deixe um comentário final:</label>
+        <textarea name="comentarios" rows="4" class="w-full p-3 border rounded-xl"></textarea>
+        <div class="flex justify-between mt-6">
+          <button type="button" onclick="prevStep()" class="px-6 py-2 bg-gray-300 text-gray-800 rounded-xl hover:bg-gray-400">Voltar</button>
+          <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700">Enviar</button>
         </div>
       </div>
     </form>
   </div>
 
   <script>
-    // O script de navegação entre as etapas do formulário
-    const nextButtons = document.querySelectorAll('.next');
-    const prevButtons = document.querySelectorAll('.prev');
-    const formSteps = document.querySelectorAll('.form-step');
+    const steps = document.querySelectorAll(".step");
     let currentStep = 0;
 
-    nextButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const currentStepForm = formSteps[currentStep];
-        // Validação de dados na etapa atual
-        if (currentStep === 0) {
-          const nome = document.getElementById("nome");
-          const telefone = document.getElementById("telefone");
-          let isValid = true;
-
-          if (!nome.value.match(/^[A-Za-zÀ-ÿ\s]+$/)) {
-            document.getElementById("nomeErro").style.display = "block";
-            isValid = false;
-          } else {
-            document.getElementById("nomeErro").style.display = "none";
-          }
-
-          if (!telefone.value.match(/^[\d\(\)\-\s]+$/)) {
-            document.getElementById("telefoneErro").style.display = "block";
-            isValid = false;
-          } else {
-            document.getElementById("telefoneErro").style.display = "none";
-          }
-
-          if (!isValid) return; // Se não for válido, não avança
-
-        } else if (currentStep === 1) {
-          const dores = document.querySelectorAll("input[name='dores']:checked");
-          if (dores.length === 0) {
-            document.getElementById("erroDores").style.display = "block";
-            return;
-          } else {
-            document.getElementById("erroDores").style.display = "none";
-          }
-
-        } else if (currentStep === 2) {
-          const metas = document.querySelectorAll("input[name='metas']:checked");
-          if (metas.length === 0) {
-            document.getElementById("erroMetas").style.display = "block";
-            return;
-          } else {
-            document.getElementById("erroMetas").style.display = "none";
-          }
-        }
-
-        formSteps[currentStep].classList.add('hidden');
-        currentStep++;
-        formSteps[currentStep].classList.remove('hidden');
-        // Esconde o título na primeira etapa, após avançar
-        if (currentStep > 0) {
-          document.getElementById("titulo-primeira-etapa").classList.add("hidden");
-        }
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.toggle("hidden", i !== index);
       });
-    });
+    }
 
-    prevButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        formSteps[currentStep].classList.add('hidden');
+    function nextStep() {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
         currentStep--;
-        formSteps[currentStep].classList.remove('hidden');
-        // Exibe o título na primeira etapa, se voltar para ela
-        if (currentStep === 0) {
-          document.getElementById("titulo-primeira-etapa").classList.remove("hidden");
-        }
+        showStep(currentStep);
+      }
+    }
+
+    showStep(currentStep); // Inicializa com o primeiro passo
+
+    document.getElementById("multiStepForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+
+      const dados = {
+        nome: form.nome.value.trim(),
+        email: form.email.value.trim(),
+        telefone: form.telefone.value.trim(),
+        dores: Array.from(form.querySelectorAll('input[name="dores"]:checked')).map(el => el.value),
+        metas: Array.from(form.querySelectorAll('input[name="metas"]:checked')).map(el => el.value),
+        comentarios: form.comentarios.value.trim()
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycby-fPcYIk_A6E5orwKvvPtExXDm8YjI76WMoVoZ-AUCTiBHkJpzgqPMUUgaIZEoOpBvqg/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert("Formulário enviado com sucesso!");
+        form.reset();
+        currentStep = 0;
+        showStep(currentStep);
+      })
+      .catch(error => {
+        alert("Erro ao enviar. Tente novamente.");
+        console.error(error);
       });
     });
   </script>
