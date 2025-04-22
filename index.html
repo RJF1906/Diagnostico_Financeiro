@@ -235,12 +235,12 @@
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
     <h2 class="step-title text-2xl font-bold mb-6 first-step-title">Queremos entender melhor sua vida financeira</h2>
 
-    <form id="multiStepForm" class="space-y-6">
+    <form id="multiStepForm" class="space-y-6" onsubmit="return validateForm()">
       <!-- Etapa 1 -->
       <div class="form-step">
         <div>
           <input type="text" name="nome" id="nome" placeholder="Nome completo" required pattern="^[A-Za-zÀ-ÿ\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente.</div>
+          <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente (apenas letras e acentos).</div>
         </div>
         <div>
           <input type="email" name="email" id="email" placeholder="E-mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full p-2 bg-black border border-white text-white">
@@ -248,7 +248,7 @@
         </div>
         <div>
           <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="telefoneErro" class="error-message">Informe um telefone válido.</div>
+          <div id="telefoneErro" class="error-message">Informe um telefone válido (apenas números, parênteses, espaço e traço).</div>
         </div>
         <div class="button-container">
           <button type="button" class="btn next">Próximo</button>
@@ -324,28 +324,58 @@
   </div>
 
   <script>
-    // O script de navegação entre as etapas do formulário
-    const nextButtons = document.querySelectorAll('.next');
-    const prevButtons = document.querySelectorAll('.prev');
-    const formSteps = document.querySelectorAll('.form-step');
+    // Função de validação
+    function validateForm() {
+      const nome = document.getElementById("nome").value;
+      const email = document.getElementById("email").value;
+      const telefone = document.getElementById("telefone").value;
+      const dores = document.querySelectorAll("input[name='dores']:checked");
+      const metas = document.querySelectorAll("input[name='metas']:checked");
 
-    let currentStep = 0;
+      // Validar nome
+      const nomeRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+      if (!nome.match(nomeRegex)) {
+        document.getElementById("nomeErro").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("nomeErro").style.display = "none";
+      }
 
-    nextButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        formSteps[currentStep].classList.add('hidden');
-        currentStep++;
-        formSteps[currentStep].classList.remove('hidden');
-      });
-    });
+      // Validar telefone
+      const telefoneRegex = /^[\d\(\)\-\s]+$/;
+      if (!telefone.match(telefoneRegex)) {
+        document.getElementById("telefoneErro").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("telefoneErro").style.display = "none";
+      }
 
-    prevButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        formSteps[currentStep].classList.add('hidden');
-        currentStep--;
-        formSteps[currentStep].classList.remove('hidden');
-      });
-    });
+      // Validar email
+      if (email && !email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+        document.getElementById("emailErro").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("emailErro").style.display = "none";
+      }
+
+      // Validar seleção de dores
+      if (document.querySelectorAll("input[name='dores']:checked").length === 0) {
+        document.getElementById("erroDores").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("erroDores").style.display = "none";
+      }
+
+      // Validar seleção de metas
+      if (document.querySelectorAll("input[name='metas']:checked").length === 0) {
+        document.getElementById("erroMetas").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("erroMetas").style.display = "none";
+      }
+
+      return true;
+    }
   </script>
 </body>
 </html>
