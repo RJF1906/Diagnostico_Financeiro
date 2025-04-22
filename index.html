@@ -396,6 +396,49 @@
         }
       });
     });
+    form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const telefone = document.getElementById("telefone").value;
+
+    const doresSelecionadas = Array.from(document.querySelectorAll("input[name='dores']:checked")).map(cb => cb.value);
+    const metasSelecionadas = Array.from(document.querySelectorAll("input[name='metas']:checked")).map(cb => cb.value);
+
+    const comentarios = document.getElementById("comentarios")?.value || "";
+
+    const payload = {
+      nome,
+      email,
+      telefone,
+      dores: doresSelecionadas,
+      metas: metasSelecionadas,
+      comentarios
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycby0BNGKuOFQFL3K35gPgLy6JDQunUtIFXJVPRMlC1yXZNusv1e43aWhFzeAGb_neEMG9w/exec", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
+        alert("Formulário enviado com sucesso!");
+        form.reset();
+        location.reload();
+      } else {
+        alert("Erro ao enviar. Tente novamente.");
+      }
+    })
+    .catch(error => {
+      alert("Erro ao conectar com o servidor.");
+      console.error("Erro:", error);
+    });
+  });
   </script>
 </body>
 </html>
