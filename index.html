@@ -250,8 +250,12 @@
       font-size: 1.2rem;
     }
 
-    .loading-message img {
+    .loading-message .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #ffb800;
+      border-radius: 50%;
       width: 40px;
+      height: 40px;
       animation: spin 2s linear infinite;
     }
 
@@ -349,21 +353,21 @@
 
       <!-- Etapa 4 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left">Se houver, escreva suas dificuldades e metas que não foram citadas:</h2>
-        <textarea name="comentarios" placeholder="Escreva aqui..." class="w-full p-2 bg-black border border-white text-white"></textarea>
+        <h2 class="step-title text-2xl font-bold text-left">Se houver, escreva algo mais sobre suas metas e dificuldades financeiras:</h2>
+        <textarea name="comentarios" class="w-full p-2 bg-black border border-white text-white" rows="4"></textarea>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
           <button type="submit" class="btn btn-submit">Enviar</button>
         </div>
       </div>
+
     </form>
   </div>
 
-  <!-- Caixa de diálogo de carregamento -->
-  <div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-overlay">
     <div class="loading-message">
-      <img src="https://media.giphy.com/media/5xaOcL5Xyk1P9h8Vs5y/giphy.gif" alt="Carregando">
-      <span>Por favor, aguarde, seus dados estão sendo enviados...</span>
+      <div class="loader"></div>
+      Enviando dados...
     </div>
   </div>
 
@@ -371,42 +375,15 @@
     const nextButtons = document.querySelectorAll('.next');
     const prevButtons = document.querySelectorAll('.prev');
     const formSteps = document.querySelectorAll('.form-step');
-    const loadingOverlay = document.getElementById('loadingOverlay');
     let currentStep = 0;
 
+    const loadingOverlay = document.querySelector('.loading-overlay');
     nextButtons.forEach(button => {
       button.addEventListener('click', () => {
         const currentStepForm = formSteps[currentStep];
-        // Validação de dados nas etapas
-        if (currentStep === 0) {
-          const nome = document.getElementById("nome");
-          const telefone = document.getElementById("telefone");
-          let isValid = true;
-
-          if (!nome.value.match(/^[A-Za-zÀ-ÿ\s]+$/)) {
-            isValid = false;
-            document.getElementById("nomeErro").style.display = "block";
-          } else {
-            document.getElementById("nomeErro").style.display = "none";
-          }
-          if (!telefone.value.match(/^[\d\(\)\-\s]+$/)) {
-            isValid = false;
-            document.getElementById("telefoneErro").style.display = "block";
-          } else {
-            document.getElementById("telefoneErro").style.display = "none";
-          }
-
-          if (!isValid) return;
-        }
-
-        // Mostra a próxima etapa
         currentStepForm.classList.add('hidden');
         currentStep++;
         formSteps[currentStep].classList.remove('hidden');
-
-        if (currentStep === formSteps.length - 1) {
-          document.querySelector('.next').classList.add('hidden');
-        }
       });
     });
 
@@ -421,18 +398,15 @@
 
     document.getElementById('multiStepForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      // Exibe a caixa de carregamento
       loadingOverlay.style.display = 'flex';
 
-      // Simula o envio dos dados
       setTimeout(() => {
         loadingOverlay.style.display = 'none';
-        // Reseta o formulário
         document.getElementById('multiStepForm').reset();
         currentStep = 0;
         formSteps.forEach(step => step.classList.add('hidden'));
         formSteps[0].classList.remove('hidden');
-      }, 3000); // Simulando 3 segundos de espera para envio
+      }, 3000);
     });
   </script>
 </body>
