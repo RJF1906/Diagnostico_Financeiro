@@ -146,6 +146,52 @@
       margin-top: 0.25rem;
       display: none;
     }
+
+    /* Estilo para a Etapa 2 */
+    .dificuldades-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 20px;
+    }
+
+    .dificuldade-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: white;
+    }
+
+    .dificuldade-item input {
+      accent-color: gold;
+    }
+
+    .dificuldade-text {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .dificuldade-item:hover {
+      background-color: rgba(255, 184, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .dificuldade-item {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .dificuldade-text {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
@@ -180,10 +226,24 @@
       <!-- Etapa 2 -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-left">Selecione suas dificuldades:</h2>
-        <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
-        <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
-        <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
-         <label><input type="checkbox" name="dores" value="Tenho outras"> Tenho outras</label><br>
+        <div class="dificuldades-list">
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Alta carga tributária">
+            <span class="dificuldade-text">Alta carga tributária: Descrição detalhada sobre essa dificuldade financeira e como ela afeta o dia a dia.</span>
+          </label>
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Falta de planejamento">
+            <span class="dificuldade-text">Falta de planejamento: Muitos acabam não conseguindo administrar seu orçamento devido à falta de um bom planejamento financeiro.</span>
+          </label>
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Baixa rentabilidade">
+            <span class="dificuldade-text">Baixa rentabilidade: Uma dificuldade comum entre investidores e empresas que buscam aumentar seus lucros.</span>
+          </label>
+          <label class="dificuldade-item">
+            <input type="checkbox" name="dores" value="Tenho outras">
+            <span class="dificuldade-text">Tenho outras: Caso você tenha alguma outra dificuldade financeira que não foi mencionada, sinta-se à vontade para selecionar.</span>
+          </label>
+        </div>
         <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade ou clique em tenho outras.</div>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
@@ -207,114 +267,39 @@
 
       <!-- Etapa 4 -->
       <div class="form-step hidden">
-        <h2 class="step-title text-2xl font-bold text-left">Se houver, escreva metas e dificuldades financeiras que não foram citadas:</h2>
-        <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
+        <h2 class="step-title text-2xl font-bold text-left">Deseja escrever algo a mais sobre suas metas e dificuldades financeiras?</h2>
+        <textarea name="comentarios" placeholder="Escreva aqui..." class="w-full p-2 bg-black border border-white text-white"></textarea>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
-          <button type="submit" class="btn btn-submit submit">Enviar</button>
+          <button type="submit" class="btn btn-submit">Enviar</button>
         </div>
       </div>
     </form>
   </div>
 
-  <div id="modalEnvio" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center hidden z-50">
-    <div class="bg-white text-black p-6 rounded-xl shadow-lg text-center space-y-4">
-      <div class="w-12 h-12 border-4 border-t-transparent rounded-full animate-spin mx-auto" style="border-color: gold; border-top-color: transparent;"></div>
-      <p id="modalText">Por favor, aguarde. Seus dados estão sendo enviados.</p>
-    </div>
-  </div>
-
   <script>
-    const steps = document.querySelectorAll('.form-step');
-    const nextBtns = document.querySelectorAll('.next');
-    const prevBtns = document.querySelectorAll('.prev');
-    const form = document.getElementById('multiStepForm');
-    const modal = document.getElementById('modalEnvio');
-    const modalText = document.getElementById('modalText');
+    // O script de navegação entre as etapas do formulário
+    const nextButtons = document.querySelectorAll('.next');
+    const prevButtons = document.querySelectorAll('.prev');
+    const formSteps = document.querySelectorAll('.form-step');
+
     let currentStep = 0;
 
-    function showStep(index) {
-      steps.forEach((step, i) => {
-        step.classList.toggle('hidden', i !== index);
-      });
-      document.querySelector('.first-step-title').classList.toggle('hidden', index > 0);
-    }
-
-    function validateStep(index) {
-      let isValid = true;
-
-      if (index === 0) {
-        const nome = form.nome;
-        const email = form.email;
-        const telefone = form.telefone;
-
-        document.getElementById("nomeErro").style.display = nome.checkValidity() ? "none" : "block";
-        document.getElementById("emailErro").style.display = email.checkValidity() ? "none" : "block";
-        document.getElementById("telefoneErro").style.display = telefone.checkValidity() ? "none" : "block";
-
-        isValid = nome.checkValidity() && telefone.checkValidity();
-      }
-
-      if (index === 1) {
-        const doresSelecionadas = form.querySelectorAll('input[name="dores"]:checked').length;
-        document.getElementById("erroDores").style.display = doresSelecionadas ? "none" : "block";
-        isValid = doresSelecionadas > 0;
-      }
-
-      if (index === 2) {
-        const metasSelecionadas = form.querySelectorAll('input[name="metas"]:checked').length;
-        document.getElementById("erroMetas").style.display = metasSelecionadas ? "none" : "block";
-        isValid = metasSelecionadas > 0;
-      }
-
-      return isValid;
-    }
-
-    nextBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (validateStep(currentStep)) {
-          currentStep++;
-          showStep(currentStep);
-        }
+    nextButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        formSteps[currentStep].classList.add('hidden');
+        currentStep++;
+        formSteps[currentStep].classList.remove('hidden');
       });
     });
 
-    prevBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
+    prevButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        formSteps[currentStep].classList.add('hidden');
         currentStep--;
-        showStep(currentStep);
+        formSteps[currentStep].classList.remove('hidden');
       });
     });
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      modal.classList.remove('hidden');
-
-      const formData = new FormData(form);
-      const dores = Array.from(form.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value).join(', ');
-      const metas = Array.from(form.querySelectorAll('input[name="metas"]:checked')).map(cb => cb.value).join(', ');
-
-      formData.set('dores', dores);
-      formData.set('metas', metas);
-
-      fetch('https://script.google.com/macros/s/AKfycbxCKVU0TtezySipbQeQqDcVjeEJsL_sO7SsmWSzF7svF5S1IqWSfGa7Jx4g1DMn_vrFGQ/exec', {
-        method: 'POST',
-        body: formData,
-      })
-      .then(() => {
-        modal.classList.add('hidden');
-        alert("Muito obrigado, logo nossa equipe entrará em contato com você.");
-        form.reset();
-        currentStep = 0;
-        showStep(currentStep);
-      })
-      .catch(() => {
-        modalText.innerText = "Erro ao enviar. Tente novamente.";
-        setTimeout(() => modal.classList.add('hidden'), 2500);
-      });
-    });
-
-    showStep(currentStep);
   </script>
 </body>
 </html>
