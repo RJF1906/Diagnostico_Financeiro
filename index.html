@@ -179,15 +179,47 @@
       padding: 10px;
     }
 
+    /* Estilo para a Etapa 3 */
+    .metas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: white;
+    }
+
+    .meta-item input {
+      accent-color: gold;
+    }
+
+    .meta-text {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .meta-item:hover {
+      background-color: rgba(255, 184, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
     /* Responsividade */
     @media (max-width: 768px) {
-      .dificuldade-item {
+      .meta-item {
         font-size: 1rem;
         flex-direction: column;
         align-items: flex-start;
       }
 
-      .dificuldade-text {
+      .meta-text {
         font-size: 1rem;
         line-height: 1.4;
       }
@@ -254,10 +286,24 @@
       <!-- Etapa 3 -->
       <div class="form-step hidden">
         <h2 class="step-title text-2xl font-bold text-left">Selecione suas metas/objetivos:</h2>
-        <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
-        <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
-        <label><input type="checkbox" name="metas" value="Tenho outras"> Tenho outras</label><br>
-        <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
+        <div class="metas-list">
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Aposentadoria">
+            <span class="meta-text">Aposentadoria: Comece a planejar sua aposentadoria de maneira mais eficiente para garantir seu futuro financeiro.</span>
+          </label>
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Compra de imóvel">
+            <span class="meta-text">Compra de imóvel: Realize o sonho da casa própria com planejamento e estratégias financeiras adequadas.</span>
+          </label>
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Tenho outras">
+            <span class="meta-text">Tenho outras: Caso você tenha outras metas que não foram mencionadas, selecione essa opção.</span>
+          </label>
+          <label class="meta-item">
+            <input type="checkbox" name="metas" value="Viagem internacional">
+            <span class="meta-text">Viagem internacional: Planeje suas finanças para viajar para destinos internacionais com conforto e segurança financeira.</span>
+          </label>
+        </div>
         <div id="erroMetas" class="error-message">Selecione pelo menos uma meta ou tenho outras.</div>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
