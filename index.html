@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+v<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -7,7 +7,223 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* Seu estilo permanece igual ao anterior */
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    body {
+      background-image: url('https://raw.githubusercontent.com/RJF1906/Diagnostico_Financeiro/main/veritus.JPG');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      color: white;
+    }
+
+    .animated-lines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .animated-lines span {
+      position: absolute;
+      top: -100%;
+      width: 3px;
+      height: 200%;
+      background: gold;
+      animation: moveLine 12s linear infinite;
+      opacity: 0.25;
+    }
+
+    @keyframes moveLine {
+      0% { top: -100%; }
+      50% { top: 100%; }
+      100% { top: -100%; }
+    }
+
+    .animated-lines span:nth-child(odd) {
+      animation-name: moveUp;
+    }
+
+    @keyframes moveUp {
+      0% { top: 100%; }
+      50% { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    .form-step {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .form-step:not(.hidden) {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 50px;
+      border: 2px solid transparent;
+      background-color: #FFB800;
+      color: #222;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background-color: #f8a200;
+      color: #fff;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:focus {
+      outline: none;
+    }
+
+    .btn-prev {
+      background-color: white;
+      color: black;
+      border-color: white;
+    }
+
+    .btn-prev:hover {
+      background-color: #ddd;
+      color: #222;
+    }
+
+    .btn-submit {
+      background-color: #28a745;
+      color: white;
+      border-color: #28a745;
+    }
+
+    .btn-submit:hover {
+      background-color: #218838;
+      border-color: #218838;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .step-title {
+      display: block;
+      margin-bottom: 2rem;
+      margin-top: -1rem;
+    }
+
+    .step-title.hidden {
+      display: none;
+    }
+
+    .error-message {
+      color: #f87171;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    /* Estilo para a Etapa 2 */
+    .dificuldades-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 20px;
+    }
+
+    .dificuldade-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: white;
+    }
+
+    .dificuldade-item input {
+      accent-color: gold;
+    }
+
+    .dificuldade-text {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .dificuldade-item:hover {
+      background-color: rgba(255, 184, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    /* Estilo para a Etapa 3 */
+    .metas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 20px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: white;
+    }
+
+    .meta-item input {
+      accent-color: gold;
+    }
+
+    .meta-text {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    .meta-item:hover {
+      background-color: rgba(255, 184, 0, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .meta-item {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .meta-text {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 py-10 relative text-white">
@@ -17,6 +233,7 @@
   </div>
 
   <div class="relative z-10 w-full max-w-2xl bg-black/50 p-8 shadow-lg">
+    <!-- O título só aparece na primeira etapa -->
     <h2 id="titulo-primeira-etapa" class="step-title text-2xl font-bold mb-6">Queremos entender melhor sua vida financeira</h2>
 
     <form id="multiStepForm" class="space-y-6">
@@ -24,7 +241,7 @@
       <div class="form-step">
         <div>
           <input type="text" name="nome" id="nome" placeholder="Nome completo" required pattern="^[A-Za-zÀ-ÿ\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente. Não é permitido números.</div>
+          <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente.</div>
         </div>
         <div>
           <input type="email" name="email" id="email" placeholder="E-mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full p-2 bg-black border border-white text-white">
@@ -32,7 +249,7 @@
         </div>
         <div>
           <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="telefoneErro" class="error-message">Informe um telefone válido, sem letras.</div>
+          <div id="telefoneErro" class="error-message">Informe um telefone válido.</div>
         </div>
         <div class="button-container">
           <button type="button" class="btn next">Próximo</button>
@@ -60,7 +277,7 @@
             <span class="dificuldade-text">Tenho outras: Caso você tenha alguma outra dificuldade financeira que não foi mencionada, sinta-se à vontade para selecionar.</span>
           </label>
         </div>
-        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade ou clique em "Tenho outras".</div>
+        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade ou clique em tenho outras.</div>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
           <button type="button" class="btn next">Próximo</button>
@@ -88,7 +305,7 @@
             <span class="meta-text">Viagem internacional: Planeje suas finanças para viajar para destinos internacionais com conforto e segurança financeira.</span>
           </label>
         </div>
-        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta ou clique em "Tenho outras".</div>
+        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta ou tenho outras.</div>
         <div class="button-container">
           <button type="button" class="btn btn-prev prev">Anterior</button>
           <button type="button" class="btn next">Próximo</button>
@@ -108,87 +325,21 @@
   </div>
 
   <script>
-    // Função de validação
+    // O script de navegação entre as etapas do formulário
     const nextButtons = document.querySelectorAll('.next');
     const prevButtons = document.querySelectorAll('.prev');
     const formSteps = document.querySelectorAll('.form-step');
-    const form = document.getElementById('multiStepForm');
 
     let currentStep = 0;
 
-    // Validação do nome
-    function validateNome() {
-      const nome = document.getElementById('nome');
-      const nomeErro = document.getElementById('nomeErro');
-      const regexNome = /^[A-Za-zÀ-ÿ\s]+$/;
-      if (!nome.value || !regexNome.test(nome.value)) {
-        nomeErro.style.display = 'block';
-        return false;
-      } else {
-        nomeErro.style.display = 'none';
-        return true;
-      }
-    }
-
-    // Validação do telefone
-    function validateTelefone() {
-      const telefone = document.getElementById('telefone');
-      const telefoneErro = document.getElementById('telefoneErro');
-      const regexTelefone = /^[\d\(\)\-\s]+$/;
-      if (!telefone.value || !regexTelefone.test(telefone.value)) {
-        telefoneErro.style.display = 'block';
-        return false;
-      } else {
-        telefoneErro.style.display = 'none';
-        return true;
-      }
-    }
-
-    // Validação das dificuldades (Etapa 2)
-    function validateDores() {
-      const dores = document.querySelectorAll('input[name="dores"]:checked');
-      const erroDores = document.getElementById('erroDores');
-      if (dores.length === 0) {
-        erroDores.style.display = 'block';
-        return false;
-      } else {
-        erroDores.style.display = 'none';
-        return true;
-      }
-    }
-
-    // Validação das metas (Etapa 3)
-    function validateMetas() {
-      const metas = document.querySelectorAll('input[name="metas"]:checked');
-      const erroMetas = document.getElementById('erroMetas');
-      if (metas.length === 0) {
-        erroMetas.style.display = 'block';
-        return false;
-      } else {
-        erroMetas.style.display = 'none';
-        return true;
-      }
-    }
-
     nextButtons.forEach(button => {
       button.addEventListener('click', () => {
-        let valid = true;
-
-        if (currentStep === 0) {
-          valid = validateNome() && validateTelefone();
-        } else if (currentStep === 1) {
-          valid = validateDores();
-        } else if (currentStep === 2) {
-          valid = validateMetas();
-        }
-
-        if (valid) {
-          formSteps[currentStep].classList.add('hidden');
-          currentStep++;
-          formSteps[currentStep].classList.remove('hidden');
-          if (currentStep > 0) {
-            document.getElementById("titulo-primeira-etapa").classList.add("hidden");
-          }
+        formSteps[currentStep].classList.add('hidden');
+        currentStep++;
+        formSteps[currentStep].classList.remove('hidden');
+        // Esconde o título na primeira etapa, após avançar
+        if (currentStep > 0) {
+          document.getElementById("titulo-primeira-etapa").classList.add("hidden");
         }
       });
     });
@@ -198,6 +349,7 @@
         formSteps[currentStep].classList.add('hidden');
         currentStep--;
         formSteps[currentStep].classList.remove('hidden');
+        // Exibe o título na primeira etapa, se voltar para ela
         if (currentStep === 0) {
           document.getElementById("titulo-primeira-etapa").classList.remove("hidden");
         }
