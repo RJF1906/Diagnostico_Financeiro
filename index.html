@@ -165,20 +165,53 @@
           <div id="nomeErro" class="error-message">Por favor, preencha seu nome corretamente.</div>
         </div>
         <div>
-          <input type="email" name="email" id="email" placeholder="E-mail" required class="w-full p-2 bg-black border border-white text-white">
-          <div id="emailErro" class="error-message">Informe um e-mail válido.</div>
+          <input type="email" name="email" id="email" placeholder="E-mail" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" class="w-full p-2 bg-black border border-white text-white">
+          <div id="emailErro" class="error-message">Informe um e-mail válido (se preenchido).</div>
         </div>
         <div>
-          <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\.\,\s]+$" class="w-full p-2 bg-black border border-white text-white">
-          <div id="telefoneErro" class="error-message">Informe um telefone válido, usando apenas números, parênteses, hífens, vírgulas, pontos ou espaços.</div>
+          <input type="text" name="telefone" id="telefone" placeholder="Telefone" required pattern="^[\d\(\)\-\s]+$" class="w-full p-2 bg-black border border-white text-white">
+          <div id="telefoneErro" class="error-message">Informe um telefone válido, usando apenas números, parênteses, traços ou espaços.</div>
         </div>
         <div class="button-container">
           <button type="button" class="btn next">Próximo</button>
         </div>
       </div>
 
-      <!-- Etapas seguintes permanecem iguais -->
+      <!-- Etapa 2 -->
+      <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-left">Selecione suas dificuldades:</h2>
+        <label><input type="checkbox" name="dores" value="Alta carga tributária"> Alta carga tributária</label><br>
+        <label><input type="checkbox" name="dores" value="Falta de planejamento"> Falta de planejamento</label><br>
+        <label><input type="checkbox" name="dores" value="Baixa rentabilidade"> Baixa rentabilidade</label><br>
+        <div id="erroDores" class="error-message">Selecione pelo menos uma dificuldade.</div>
+        <div class="button-container">
+          <button type="button" class="btn btn-prev prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+      </div>
 
+      <!-- Etapa 3 -->
+      <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-left">Selecione suas metas/objetivos:</h2>
+        <label><input type="checkbox" name="metas" value="Aposentadoria"> Aposentadoria</label><br>
+        <label><input type="checkbox" name="metas" value="Compra de imóvel"> Compra de imóvel</label><br>
+        <label><input type="checkbox" name="metas" value="Viagem internacional"> Viagem internacional</label><br>
+        <div id="erroMetas" class="error-message">Selecione pelo menos uma meta.</div>
+        <div class="button-container">
+          <button type="button" class="btn btn-prev prev">Anterior</button>
+          <button type="button" class="btn next">Próximo</button>
+        </div>
+      </div>
+
+      <!-- Etapa 4 -->
+      <div class="form-step hidden">
+        <h2 class="step-title text-2xl font-bold text-left">Deseja escrever algo a mais sobre suas metas e dificuldades financeiras?</h2>
+        <textarea name="mensagem" placeholder="Deseja comentar algo mais?" class="w-full p-2 bg-black border border-white text-white"></textarea>
+        <div class="button-container">
+          <button type="button" class="btn btn-prev prev">Anterior</button>
+          <button type="submit" class="btn btn-submit submit">Enviar</button>
+        </div>
+      </div>
     </form>
   </div>
 
@@ -217,7 +250,7 @@
         document.getElementById("emailErro").style.display = email.checkValidity() ? "none" : "block";
         document.getElementById("telefoneErro").style.display = telefone.checkValidity() ? "none" : "block";
 
-        isValid = nome.checkValidity() && email.checkValidity() && telefone.checkValidity();
+        isValid = nome.checkValidity() && telefone.checkValidity();
       }
 
       if (index === 1) {
